@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".CartActivity">
+
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:id="@+id/app_bar_settings"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:background="@color/colorPrimary">-->
+
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar_settings"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/close_settings_btn"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="CheckOut"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:textColor="@android:color/white"-->
+<!--                    android:textSize="17sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    />-->
+
+<!--            </RelativeLayout>-->
+
+<!--        </androidx.appcompat.widget.Toolbar>-->
+
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/r5">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <!-- Scrollable content -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cart_list"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/r5"
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/cart_list"-->
+<!--        tools:context=".MainActivity">-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:id="@+id/product_image_card_view_details"-->
+<!--            >-->
+
+
+<!--            <TextView-->
+<!--                android:id='@+id/total_price'-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Total  "-->
+<!--                android:textSize="18dp"-->
+<!--                android:padding="7dp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_below="@+id/subtotal"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                />-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+
+<!--        <Button-->
+<!--            android:id="@+id/next_process_btn"-->
+<!--            android:layout_height ="wrap_content"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_below="@+id/product_image_card_view_details"-->
+<!--            android:layout_margin="5dp"-->
+<!--            android:background="@drawable/buttons"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:text="Complete your Order"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textSize="20dp"-->
+<!--            />-->
+
+
+<!--    </RelativeLayout>-->
+
+<!--    <include-->
+<!--        layout="@layout/cartlayout_one"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/inclusive"/>-->
+
+<!--    <RelativeLayout-->
+<!--        android:id='@+id/cupcake'-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_margin="1dp">-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:id="@+id/product_image_card_view_details"-->
+<!--            >-->
+
+
+<!--            <TextView-->
+<!--                android:id='@+id/total_price'-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Total  "-->
+<!--                android:textSize="18dp"-->
+<!--                android:padding="7dp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_below="@+id/subtotal"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                />-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+
+<!--        <Button-->
+<!--            android:id="@+id/next_process_btn"-->
+<!--            android:layout_height ="wrap_content"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_below="@+id/inclusive"-->
+<!--            android:layout_margin="5dp"-->
+<!--            android:background="@drawable/buttons"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:text="Complete your Order"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textSize="20dp"-->
+<!--            />-->
+
+
+<!--    </RelativeLayout>-->
+
+
+</LinearLayout>

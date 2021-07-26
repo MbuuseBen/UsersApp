@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/members_group">
+    <item android:id="@+id/one"
+        android:title="One"
+        android:icon="@drawable/ic_shopping_cart_2"/>
+
+    <item android:id="@+id/two"
+        android:title="Two"
+        android:icon="@drawable/ic_shopping_cart_2"/>
+
+    <item android:id="@+id/three"
+        android:title="Three"
+        android:icon="@drawable/ic_shopping_cart_2"/>
+    </group>
+</menu>

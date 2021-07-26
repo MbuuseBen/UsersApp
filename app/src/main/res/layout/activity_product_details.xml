@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProductDetailsActivity"
+    tools:ignore="ExtraText">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/r5">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/r5"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/product_image_card_view_details"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp">
+
+                <ImageView
+                    android:id="@+id/product_image_details"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitCenter"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--                xmlns:tools="http://schemas.android.com/tools"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/product_image_card_view_details"-->
+<!--                xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:id="@+id/product_price_card_view_details"-->
+<!--                app:cardElevation="10dp">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    >-->
+
+
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/product_price_details"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:layout_marginLeft="5dp"-->
+<!--                        android:gravity="left"-->
+<!--                        android:text="Product Price"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textSize="26sp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/product_name_details"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Product Name"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:layout_below="@+id/product_price_details"-->
+<!--                        android:textSize="17sp"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:gravity="left"-->
+<!--                        android:layout_marginTop="5dp"/>-->
+
+
+<!--                </RelativeLayout>-->
+
+
+
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--                xmlns:tools="http://schemas.android.com/tools"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:layout_below="@+id/product_price_card_view_details"-->
+<!--                xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:id="@+id/product_description_card_view_details"-->
+<!--                app:cardElevation="10dp">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/product_image_card_view_details"-->
+<!--                    android:layout_marginTop="10dp"-->
+
+<!--                    >-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/product_description"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Description :"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:gravity="left"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold" />-->
+
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/product_description_details"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/product_description"-->
+<!--                        android:text="Product Description"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:gravity="left"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textSize="16sp" />-->
+
+
+
+<!--                </RelativeLayout>-->
+
+
+
+<!--            </androidx.cardview.widget.CardView>-->
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_description_card_view_details"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Media -->
+<!--                    <ImageView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="194dp"-->
+<!--                        app:srcCompat="@drawable/media"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:contentDescription="@string/content_description_media"-->
+<!--                        />-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- Title, secondary and supporting text -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:id="@+id/product_price_details"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginLeft="0dp"
+                            android:gravity="left"
+                            android:text="Product Price"
+                            android:textSize="20sp"
+                            />
+                            />
+
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:id="@+id/product_name_details"
+                            android:text="Product Name"
+                            android:layout_marginBottom="0dp"
+                            android:layout_below="@+id/product_price_details"
+                            android:textSize="12sp"
+                            android:layout_marginLeft="0dp"
+                            android:gravity="left"
+                            />
+
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="16dp"-->
+<!--                            android:text="Description"-->
+<!--                            android:textAppearance="?attr/textAppearanceBody2"-->
+<!--                            android:textColor="?android:attr/textColorSecondary"-->
+<!--                            />-->
+
+                    </LinearLayout>
+
+                    <!-- Buttons -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+
+<!--                        <com.google.android.material.button.MaterialButton-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="8dp"-->
+<!--                            android:text="Button1"-->
+
+<!--                            />-->
+
+
+                        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+
+                            android:id="@+id/number_btn"
+                            android:layout_height ="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:elevation="1dp"
+                            app:initialNumber="1"
+                            app:finalNumber="10"
+                            android:layout_below="@+id/product_image_card_view_details"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginLeft="0dp"
+
+                            tools:ignore="MissingClass">
+
+                        </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="14dp"
+                            android:id="@+id/pd_add_to_cart_button"
+                            android:layout_marginLeft="40dp"
+                            android:text="Add to Cart"
+                            android:textAllCaps="false"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:text="PRODUCT DETAILS "
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="0dp"
+                android:layout_below="@+id/product_price_details"
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                android:gravity="left"
+                />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/details_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:elevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Media -->
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- Title, secondary and supporting text -->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Description"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="?android:attr/textColorSecondary"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:id="@+id/product_description_details"
+                            android:text="Product Description"
+                            android:layout_marginLeft="0dp"
+                            android:gravity="left"
+                            android:textColor="@android:color/black" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+                        <!--            <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton-->
+
+<!--                android:id="@+id/number_btn"-->
+<!--                android:layout_height ="wrap_content"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:elevation="6dp"-->
+<!--                app:initialNumber="1"-->
+<!--                app:finalNumber="10"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:layout_below="@+id/product_image_card_view_details"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginLeft="90dp"-->
+
+<!--                tools:ignore="MissingClass">-->
+
+<!--            </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>-->
+
+
+            <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+            <!--     android:id="@+id/add_product_to_cart"-->
+            <!--     android:layout_height ="wrap_content"-->
+            <!--     android:layout_width="wrap_content"-->
+            <!--     android:elevation="6dp"-->
+            <!--     android:backgroundTint="@android:color/white"-->
+            <!--     android:src="@drawable/cart"-->
+            <!--     android:layout_alignParentRight="true"-->
+            <!--     android:layout_alignParentBottom="true"-->
+            <!--     android:layout_margin="15dp"-->
+            <!--     >-->
+
+            <!-- </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
+
+
+<!--            <Button-->
+<!--                android:id="@+id/pd_add_to_cart_button"-->
+<!--                android:layout_height ="wrap_content"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:background="@color/colorPrimaryDark"-->
+<!--                android:layout_margin="25dp"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:text="Add to Cart"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="18dp" />-->
+
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+

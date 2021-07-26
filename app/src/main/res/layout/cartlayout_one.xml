@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/product_image_card_view_details"
+            >
+
+
+            <TextView
+                android:id='@+id/total_price'
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total  "
+                android:textSize="18dp"
+                android:padding="7dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/subtotal"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <Button
+            android:id="@+id/next_process_btn"
+            android:layout_height ="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/product_image_card_view_details"
+            android:layout_margin="5dp"
+            android:background="@drawable/buttons"
+            android:textAllCaps="false"
+            android:text="Complete your Order"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            />
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
