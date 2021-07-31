@@ -9,19 +9,28 @@ import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.example.usersapp.Categories.CategoryPencils;
+import com.example.usersapp.Categories.Categorycalculators;
+import com.example.usersapp.Categories.Productcategories;
 import com.example.usersapp.Model.Products;
+import com.example.usersapp.Model.Users;
 import com.example.usersapp.Prevalent.Prevalent;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.appbar.MaterialToolbar;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -33,6 +42,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +52,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -61,19 +72,31 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
     private DatabaseReference ProductsRef;
-    private RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    private RecyclerView searchList,pencils,calculators;
     private FirebaseAuth mAuth;
 //    private Button addToCartButton;
-
     private boolean isMembersVisible= false;
     NavigationView navigationView;
-
     private int initialValue = 1;
     private String productID ="";
-
     private String type = "";
     private  String productPrice, productDescription, productName,imageUrl;
+    private RecyclerView recyclerView,recyclerViewPencils,recyclerViewCalculators;
+    RecyclerView.LayoutManager layoutManager;
+    RecyclerView.LayoutManager layoutPencils;
+    RecyclerView.LayoutManager layoutCalculators;
+
+    private Toolbar topBar;
+   private  AppBarLayout topBar1;
+
+    private ImageView viewCalculators,viewPencils;
+
+    private TextView seeAllProducts,seeAllCategories;
+    private  TextView seeAllPencils,seeAllCalculators;
+
+
+    private String categoryPencils="pencil", categoryCalculators="calculator";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +104,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         productID = getIntent().getStringExtra("pid");
-
 //        getProductDetails(productID);
-
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null){
@@ -92,7 +113,6 @@ public class MainActivity extends AppCompatActivity
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         mAuth = FirebaseAuth.getInstance();
-
 
         Paper.init(this);
 
@@ -105,10 +125,94 @@ public class MainActivity extends AppCompatActivity
 //            }
 //        });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        searchList = findViewById(R.id.search_list1);
+        pencils = findViewById(R.id.category_pencils);
+        calculators = findViewById(R.id.category_calculators);
+
+        recyclerView = findViewById(R.id.search_list1);
+        recyclerViewPencils = findViewById(R.id.category_pencils);
+        recyclerViewCalculators = findViewById(R.id.category_calculators);
+
+        layoutManager = new GridLayoutManager(this,2);
+        //       layoutManager = new GridLayoutManager(this,2,GridLayoutManager.HORIZONTAL,false);
+        //     layoutManager = new GridLayoutManager(this,4,GridLayoutManager.VERTICAL,false);
+        //       layoutManager = new GridLayoutManager(this,4,GridLayoutManager.HORIZONTAL,false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        layoutPencils = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerViewPencils.setLayoutManager(layoutPencils);
+
+        layoutCalculators = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerViewCalculators.setLayoutManager(layoutCalculators);
+
+        loadPencilstoRecyclerView();
+        loadCalculatorstoRecyclerView();
+
+
+
+        seeAllCategories = findViewById(R.id.see_all_categories);
+        seeAllCategories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Productcategories.class);
+                startActivity(intent);
+            }
+        });
+
+
+        seeAllProducts = findViewById(R.id.see_all_products);
+        seeAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AllProductsActivity.class);
+//                intent.putExtra("pid", model.getPid());
+                startActivity(intent);
+            }
+        });
+
+        seeAllPencils = findViewById(R.id.see_all_pencils);
+        seeAllPencils.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CategoryPencils.class);
+                startActivity(intent);
+            }
+        });
+
+        seeAllCalculators = findViewById(R.id.see_all_calculators);
+        seeAllCalculators.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Categorycalculators.class);
+                startActivity(intent);
+            }
+        });
+
+
+        viewPencils = findViewById(R.id.product_image_calculator);
+        viewPencils.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Categorycalculators.class);
+                startActivity(intent);
+            }
+        });
+
+        viewCalculators = findViewById(R.id.product_image_pencil);
+        viewCalculators.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CategoryPencils.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
         toolbar.setTitle("Janzzy Store");
         setSupportActionBar(toolbar);
-
 
 
 
@@ -117,11 +221,11 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                if(!type.equals("Admin")){
+               checkCart();
+//
+//                    Intent intent = new Intent(MainActivity.this, CartActivity.class);
+//                    startActivity(intent);
 
-                    Intent intent = new Intent(MainActivity.this, CartActivity.class);
-                    startActivity(intent);
-                }
 
             }
         });
@@ -136,7 +240,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-       navigationView.getMenu().setGroupVisible(R.id.members_group,false);
+  //     navigationView.getMenu().setGroupVisible(R.id.members_group,false);
 
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
@@ -148,26 +252,32 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        recyclerView = findViewById(R.id.recycler_menu);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+
+
+//        recyclerView = findViewById(R.id.recycler_menu);
+////        recyclerView.setHasFixedSize(true);
+////        layoutManager = new LinearLayoutManager(this);
+//         layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+//        recyclerView.setLayoutManager(layoutManager);
     }
 
+    private void checkCart() {
 
-
-    private void getProductDetails(String productID) {
-
-        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
-        productsRef.child(productID).addValueEventListener(new ValueEventListener() {
+        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView");
+        productsRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    Products products = dataSnapshot.getValue(Products.class);
-                    productName = products.getPname();
-                    productPrice = products.getPrice();
-                    productDescription = products.getDescription();
-                    imageUrl = products.getImage();
+
+                    Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                    startActivity(intent);
+
+
+                }else {
+                    Toast.makeText(MainActivity.this, "Please add some items to your cart.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+
 
                 }
             }
@@ -177,114 +287,213 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+
     }
 
 
-    private void addToCartList() {
+    private void loadCalculatorstoRecyclerView() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
 
-        String saveCurrentTime, saveCurrentDate;
-        Calendar callForDate = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
-        saveCurrentDate = currentDate.format(callForDate.getTime());
+        Query query  =reference.orderByChild("category").equalTo(categoryCalculators);
 
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime = currentDate.format(callForDate.getTime());
+        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
+                .setQuery(query,Products.class)
+                .build();
 
+        FirebaseRecyclerAdapter<Products, ProductViewHolder>
+                adapterCalculators = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder holder, int i, @NonNull @NotNull Products model) {
 
+                holder.txtProductName.setText(model.getPname());
+//                holder.txtProductDescription.setText(model.getDescription());
+                holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
+                Picasso.get().load(model.getImage()).into(holder.imageView);
 
-        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
-
-        //final HashMap<String, object> cartMap = new HashMap<>();
-        final HashMap<String, Object> cartMap = new HashMap<>();
-        cartMap.put("pid", productID);
-        cartMap.put("pname", productName);
-        cartMap.put("price", productPrice);
-        cartMap.put("date", saveCurrentDate);
-        cartMap.put("time", saveCurrentTime);
-        cartMap.put("image",imageUrl);
-        cartMap.put("quantity", initialValue);
-        cartMap.put("discount", "");
-
-        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
-                .child(productID).updateChildren(cartMap)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            cartListRef.child("Admin View").child(mAuth.getCurrentUser().getUid())
-                                    .child("Products").child(productID)
-                                    .updateChildren(cartMap)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(MainActivity.this, "Added to Cart List", Toast.LENGTH_SHORT);
-                                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                                                startActivity(intent);
-                                            }
-                                        }
-                                    });
-                        }
+                    public void onClick(View view) {
+                        Intent intent = new Intent(MainActivity.this, ProductDetailsActivity.class);
+                        intent.putExtra("pid", model.getPid());
+                        startActivity(intent);
                     }
                 });
+            }
+
+            @NonNull
+            @NotNull
+            @Override
+            public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layouthorizontal1, parent, false);
+                ProductViewHolder holder = new ProductViewHolder(view);
+                return holder;
+            }
+        };
+        calculators.setAdapter(adapterCalculators);
+        adapterCalculators.startListening();
+
     }
+
+    private void loadPencilstoRecyclerView() {
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+
+        Query query  =reference.orderByChild("category").equalTo(categoryPencils);
+
+        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
+                .setQuery(query,Products.class)
+                .build();
+
+//        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
+//                .setQuery(reference.orderByChild("pname").startAt(SearchInput),Products.class).build();
+
+        FirebaseRecyclerAdapter<Products, ProductViewHolder>
+                adapterPencils = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder holder, int i, @NonNull @NotNull Products model) {
+
+                holder.txtProductName.setText(model.getPname());
+//                holder.txtProductDescription.setText(model.getDescription());
+                holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
+                Picasso.get().load(model.getImage()).into(holder.imageView);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(MainActivity.this, ProductDetailsActivity.class);
+                        intent.putExtra("pid", model.getPid());
+                        startActivity(intent);
+                    }
+                });
+
+                holder.tapBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String productID = model.getPid();
+                        String prdctName = model.getPname();
+                        String prdctPrice = model.getPrice();
+                        String initQty = "1";
+                        String imageUrl = model.getImage();
+
+                        String saveCurrentTime, saveCurrentDate;
+                        Calendar callForDate = Calendar.getInstance();
+                        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+                        saveCurrentDate = currentDate.format(callForDate.getTime());
+
+                        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+                        saveCurrentTime = currentDate.format(callForDate.getTime());
+
+                        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+
+                        //final HashMap<String, object> cartMap = new HashMap<>();
+                        final HashMap<String, Object> cartMap = new HashMap<>();
+                        cartMap.put("pid", productID);
+                        cartMap.put("pname", prdctName);
+                        cartMap.put("price", prdctPrice);
+                        cartMap.put("date", saveCurrentDate);
+                        cartMap.put("time", saveCurrentTime);
+                        cartMap.put("image",imageUrl);
+                        cartMap.put("quantity",initQty);
+                        cartMap.put("discount", "");
+
+                        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
+                                .child(productID).updateChildren(cartMap)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            cartListRef.child("Admin View").child(mAuth.getCurrentUser().getUid())
+                                                    .child("Products").child(productID)
+                                                    .updateChildren(cartMap)
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                Toast.makeText(MainActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT);
+//                                                Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
+//                                                startActivity(intent);
+                                                            }
+                                                        }
+                                                    });
+                                        }
+                                    }
+                                });
+
+
+                    }
+                });
+
+
+            }
+
+            @NonNull
+            @NotNull
+            @Override
+            public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout1, parent, false);
+                ProductViewHolder holder = new ProductViewHolder(view);
+                return holder;
+            }
+        };
+        pencils.setAdapter(adapterPencils);
+        adapterPencils.startListening();
+    }
+
+
+
+
 
 
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions<Products> options =
-                new FirebaseRecyclerOptions.Builder<Products>()
-                        .setQuery(ProductsRef.orderByChild("productState").equalTo("Approved"), Products.class)
-                        .build();
+        int limit = 10;
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+
+        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
+                .setQuery(reference.orderByChild("pname"),Products.class).build();
+
+        FirebaseRecyclerAdapter<Products, ProductViewHolder>
+                adapter = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder holder, int i, @NonNull @NotNull Products model) {
 
 
-        FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter =
-                new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
+                holder.txtProductName.setText(model.getPname());
+//                holder.txtProductDescription.setText(model.getDescription());
+                holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
+                Picasso.get().load(model.getImage()).into(holder.imageView);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Products model)
-                    {
-                        holder.txtProductName.setText(model.getPname());
-
-                        holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
-                        Picasso.get().load(model.getImage()).into(holder.imageView);
-
-                        holder.itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-
-                                if(type.equals("Admin")){
-
-                                    Intent intent = new Intent(MainActivity.this, MaintainProductsActivity.class);
-                                    intent.putExtra("pid", model.getPid());
-                                    startActivity(intent);
-
-                                }else {
-                                    Intent intent = new Intent(MainActivity.this, ProductDetailsActivity.class);
-                                    intent.putExtra("pid", model.getPid());
-                                    startActivity(intent);
-                                }
-
-
-
-                            }
-                        });
-
+                    public void onClick(View view) {
+                        Intent intent = new Intent(MainActivity.this, ProductDetailsActivity.class);
+                        intent.putExtra("pid", model.getPid());
+                        startActivity(intent);
                     }
+                });
+            }
 
-                    @NonNull
-                    @Override
-                    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-                    {
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout, parent, false);
-                        ProductViewHolder holder = new ProductViewHolder(view);
-                        return holder;
-                    }
-                };
-        recyclerView.setAdapter(adapter);
+            @NonNull
+            @NotNull
+            @Override
+            public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layoutgrid, parent, false);
+                ProductViewHolder holder = new ProductViewHolder(view);
+                return holder;
+            }
+        };
+
+        searchList.setAdapter(adapter);
         adapter.startListening();
+
     }
 
     @Override
@@ -312,15 +521,21 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item)
     {
 
-        navigationView.getMenu().setGroupVisible(R.id.members_group,false);
-        int id = item.getItemId();
 
-//        if (id == R.id.action_settings)
-//        {
-//            return true;
-//        }
+        switch (item.getItemId()){
 
-        return super.onOptionsItemSelected(item);
+            case R.id.Cart:
+                checkCart();
+//                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+//                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+
     }
 
 
@@ -334,43 +549,44 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_cart)
         {
-            if(!type.equals("Admin")){
 
-                Intent intent = new Intent(MainActivity.this, CartActivity.class);
-                startActivity(intent);
-            }
+//
+//                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+//                startActivity(intent);
 
+            checkCart();
 
         }
-//        else if (id == R.id.nav_orders)
+        else if (id == R.id.nav_orders)
+        {
+            Intent intent = new Intent(MainActivity.this, SearchProductActivity.class);
+            startActivity(intent);
+        }
+
+
+//        else if (id == R.id.nav_search)
 //        {
 //
+//                Intent intent = new Intent(MainActivity.this, SearchProductActivity.class);
+//                startActivity(intent);
+//
+//
 //        }
-
-
-        else if (id == R.id.nav_search)
-        {
-            if(!type.equals("Admin")){
-                Intent intent = new Intent(MainActivity.this, SearchProductActivity.class);
-                startActivity(intent);
-
-            }
-
-        }
         else if (id == R.id.nav_categories)
         {
 
-            if(!isMembersVisible){
 
-            }
+                Intent intent = new Intent(MainActivity.this, Productcategories.class);
+                startActivity(intent);
+
+
+
         }
         else if (id == R.id.nav_settings)
         {
-            if(!type.equals("Admin")){
 
                 Intent intent = new Intent(MainActivity.this, ViewSettingsActivity.class);
                 startActivity(intent);
-            }
 
 
         }

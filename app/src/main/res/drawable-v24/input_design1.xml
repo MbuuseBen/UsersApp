@@ -2,11 +2,11 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <stroke
-        android:color="@color/cardview_shadow_start_color"
+        android:color="@color/common_google_signin_btn_text_light_pressed"
         android:width="3dp"
         >
 
-
+<!--        android:color="@color/cardview_shadow_start_color"-->
     </stroke>
 
     <corners

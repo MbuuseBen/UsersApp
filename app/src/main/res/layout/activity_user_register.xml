@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".UserRegisterActivity">
 
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:isScrollContainer="true" >
+
     <ImageView
         android:id="@+id/img_seller"
         android:layout_width="wrap_content"
@@ -38,7 +49,7 @@
         android:hint="First Name"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/input_design"
+        android:background="@drawable/input_design1"
         />
     <EditText
         android:id="@+id/seller_l_name"
@@ -50,7 +61,7 @@
         android:hint="Last Name"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/input_design"
+        android:background="@drawable/input_design1"
         />
 
 
@@ -65,7 +76,7 @@
         android:inputType="number"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/input_design"
+        android:background="@drawable/input_design1"
         />
 
     <EditText
@@ -79,7 +90,7 @@
         android:hint="Email Address"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/input_design"
+        android:background="@drawable/input_design1"
         />
 
     <EditText
@@ -93,7 +104,7 @@
         android:hint="Password"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/input_design"
+        android:background="@drawable/input_design1"
         />
 
 
@@ -121,7 +132,7 @@
         android:id="@+id/login_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already Have Account? Login"
+        android:text="Already registered? Login"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -131,4 +142,7 @@
         android:layout_marginRight="25dp"
         android:layout_marginBottom="15dp"
         />
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

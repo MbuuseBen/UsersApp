@@ -1,11 +1,15 @@
 package com.example.usersapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +42,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private String first_Name,last_Name,userPhone,userAddress,userEmail;
 
 
-    private String totalAmount = "";
+    private String totalAmount = "",address="addresss";
 
     private FirebaseAuth mAuth;
 
@@ -56,7 +60,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         Button confirmOrderBtn = (Button) findViewById(R.id.place_order_btn);
         editDetailsBtn = findViewById(R.id.address_change);
 
-
+//        CheckAddress();
         viewUserDetails();
         getOrderDetails();
 
@@ -82,6 +86,27 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                 ConfirmOrder();
             }
         });
+
+//
+//        confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                CheckAddress();
+//            }
+//        });
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
+        toolbar.showOverflowMenu();
+        setSupportActionBar(toolbar);
+
+
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+
 
     }
 
@@ -145,27 +170,6 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         });
     }
 
-//    private void Check() {
-//        if(TextUtils.isEmpty(nameEditText.getText().toString())){
-//            Toast.makeText(this, "Please Provide your Full Name ", Toast.LENGTH_SHORT).show();
-//
-//        }
-//        else  if(TextUtils.isEmpty(phoneEditText.getText().toString())){
-//            Toast.makeText(this, "Please Provide your phone Number ", Toast.LENGTH_SHORT).show();
-//
-//        }
-//        else  if(TextUtils.isEmpty(addressEditText.getText().toString())){
-//            Toast.makeText(this, "Please Provide your Address ", Toast.LENGTH_SHORT).show();
-//
-//        }
-//        else  if(TextUtils.isEmpty(cityEditText.getText().toString())){
-//            Toast.makeText(this, "Please Provide your City", Toast.LENGTH_SHORT).show();
-//
-//        }
-//        else{
-//            ConfirmOrder();
-//        }
-//    }
 
     private void ConfirmOrder() {
 
@@ -204,7 +208,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull @NotNull Task<Void> task) {
                                 if (task.isSuccessful()){
-                                    Toast.makeText(ConfirmFinalOrderActivity.this, "your Final Order has been placed successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ConfirmFinalOrderActivity.this, "Your Final Order has been placed successfully", Toast.LENGTH_SHORT).show();
 
                                     Intent intent =  new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

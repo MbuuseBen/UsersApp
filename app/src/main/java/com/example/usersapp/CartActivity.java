@@ -1,8 +1,10 @@
 package com.example.usersapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -41,50 +44,96 @@ public class CartActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private Button NextProcessBtn;
+    private Button NextProcessBtn,deleteBtn,checkOutBtn;
     private ImageView productImage1;
     private TextView txtTotalAmount,txtmsg1;
     private int overTotalPrice = 0;
+
+    private RecyclerView searchList;
 
     private String productID = "";
 
     private FirebaseAuth mAuth;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cart_main);
+        setContentView(R.layout.activity_cart);
 
         productID = getIntent().getStringExtra("pid");
 
         txtTotalAmount = findViewById(R.id.total_price);
-        recyclerView = findViewById(R.id.cart_list);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
 
         mAuth = FirebaseAuth.getInstance();
-
+        recyclerView = findViewById(R.id.cart_list1);
+        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
+
+
         productImage1 = (ImageView) findViewById(R.id.cart_product_image);
 
-        NextProcessBtn = (Button) findViewById(R.id.next_process_btn);
+        NextProcessBtn = findViewById(R.id.next_process_btn);
+        NextProcessBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                CheckAddress();
 
 
-//        NextProcessBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//
 //                Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
-//                intent.putExtra("Total Price", String.valueOf(overTotalPrice));
 //                startActivity(intent);
 //                finish();
-//            }
-//        });
+            }
+        });
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.topAppBar);
+        mToolbar.setTitle("Cart");
+        setSupportActionBar(mToolbar);
+
+
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+
+
 
 
     }
+
+    private void CheckAddress() {
+        DatabaseReference RootRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        RootRef.child(mAuth.getCurrentUser().getUid()).child("address").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+//                    viewUserDetails();
+//                    ConfirmOrder();
+                    Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(CartActivity.this, "Address Details Required.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CartActivity.this, SettingsActivity.class);
+                    startActivity(intent);
+ //                   viewUserDetails();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+
+
 
 
     @Override
@@ -104,7 +153,7 @@ public class CartActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NotNull CartViewHolder holder, int position, @NotNull Cart model) {
 
-                holder.txtProductQuantity.setText("Quantity : " + model.getQuantity());
+                holder.txtProductQuantity.setText("Qty : " + model.getQuantity());
                 holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
                 Picasso.get().load(model.getImage()).into(holder.imageView);
 
@@ -186,7 +235,7 @@ totalView();
     }
 
     private void totalView() {
-//                txtTotalAmount.setText("Total :   UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(overTotalPrice)));
+               txtTotalAmount.setText("Total :   UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(overTotalPrice)));
 
 
     }

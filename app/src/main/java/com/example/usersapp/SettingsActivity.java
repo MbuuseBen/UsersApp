@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.usersapp.Model.Users;
 import com.example.usersapp.Prevalent.Prevalent;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +30,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -60,16 +63,19 @@ public class SettingsActivity extends AppCompatActivity {
         storageProfilePictureRef = FirebaseStorage.getInstance().getReference().child("Profile pictures");
 
         profileImageView = (CircleImageView) findViewById(R.id.iv_camera);
+
         firstNameEditText = (EditText) findViewById(R.id.settings_first_name);
         lastNameEditText = (EditText) findViewById(R.id.settings_last_name);
         userEmailAddress = (EditText) findViewById(R.id.settings_email_address);
         userPhoneEditText = (EditText) findViewById(R.id.settings_phone_number);
         addressEditText = (EditText) findViewById(R.id.settings_address);
+
         profileChangeTextBtn = (TextView) findViewById(R.id.profile_image_change_btn);
         closeTextBtn = (TextView) findViewById(R.id.close_settings_btn);
         saveTextButton = (TextView) findViewById(R.id.update_account_settings_btn);
 
 
+        getUserInformation();
 
         userInfoDisplay(profileImageView, firstNameEditText,lastNameEditText, userPhoneEditText, addressEditText,userEmailAddress);
 
@@ -111,6 +117,37 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
+    private void getUserInformation() {
+
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+            userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        Users user = dataSnapshot.getValue(Users.class);
+
+                        firstNameEditText.setText(user.getFirstname());
+                        lastNameEditText.setText(user.getLastname());
+                        userPhoneEditText.setText(user.getPhone());
+                        userEmailAddress.setText(user.getEmail());
+                        addressEditText.setText(user.getAddress());
+
+//                        Picasso.get().load(user.getImage()).into(profileImageView);
+
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+        }
 
 
 
@@ -160,11 +197,11 @@ public class SettingsActivity extends AppCompatActivity {
     {
         if (TextUtils.isEmpty(firstNameEditText.getText().toString()))
         {
-            Toast.makeText(this, "Name is mandatory.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Firts Name is mandatory.", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(lastNameEditText.getText().toString()))
         {
-            Toast.makeText(this, "Name is mandatory.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Last Name is mandatory.", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(addressEditText.getText().toString()))
         {

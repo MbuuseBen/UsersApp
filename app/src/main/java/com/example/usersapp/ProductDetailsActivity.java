@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -44,6 +46,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private  String productPrice, productDescription, productName;
     private Button addToCartButton;
     private Toolbar mToolbar;
+    private DatabaseReference ProductsRef;
 
     private FirebaseAuth mAuth;
 
@@ -52,6 +55,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+
+
 
         productID = getIntent().getStringExtra("pid");
 
@@ -71,11 +76,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         toolbar.setTitle("Details");
         setSupportActionBar(toolbar);
 
-//        mToolbar = (Toolbar) findViewById(R.id.topAppBar);
-//        mToolbar.setTitle("Details");
-//        setSupportActionBar(mToolbar);
-//
-//
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
 
@@ -123,7 +123,70 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.top_app_bar,menu);
+        return super.onPrepareOptionsMenu(menu);
+    }
 
+    private void checkCart() {
+
+        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView");
+        productsRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+                    Intent intent = new Intent(ProductDetailsActivity.this, CartActivity.class);
+                    startActivity(intent);
+                    finish();
+
+
+                }else {
+                    Toast.makeText(ProductDetailsActivity.this, "Please add some items to your cart.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
+                    startActivity(intent);
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+//        navigationView.getMenu().setGroupVisible(R.id.members_group,false);
+//        int id = item.getItemId();
+//
+////        if (id == R.id.action_settings)
+////        {
+////            return true;
+////        }
+
+        switch (item.getItemId()){
+
+            case R.id.Cart:
+                checkCart();
+//                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+//                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+
+    }
 
 
     @Override

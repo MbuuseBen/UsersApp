@@ -80,7 +80,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
         if(!email.equals("") && (!password.equals(""))){
             loadingBar.setTitle(("Logging In"));
-            loadingBar.setMessage("Please wait while we check your Credentials");
+            loadingBar.setMessage("Please wait while we verify your Credentials");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
 

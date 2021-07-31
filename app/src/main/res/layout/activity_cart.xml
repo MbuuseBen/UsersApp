@@ -1,16 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CartActivity">
+    tools:context=".CartActivity"
+    >
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/r5">
 
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:menu="@menu/top_app_bar1"
+                    style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                    />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cart_list"
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_below="@+id/r5"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </androidx.recyclerview.widget.RecyclerView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:isScrollContainer="true" >
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/cart_list1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scrollbars="vertical">
+                        </androidx.recyclerview.widget.RecyclerView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_below="@+id/cart_list1"
+                            android:id="@+id/product_image_card_view_details"
+                            >
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                <TextView
+                                    android:id='@+id/total_price'
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Total"
+                                    android:gravity="center"
+                                    android:textSize="18dp"
+                                    android:padding="17dp"
+                                    android:textStyle="bold"
+                                    android:layout_marginTop="0dp"
+                                    android:textColor="@color/black"
+                                    />
+                                        <Button
+                                            android:id="@+id/next_process_btn"
+                                            android:layout_height ="wrap_content"
+                                            android:layout_width="match_parent"
+                                            android:layout_below="@+id/product_image_card_view_details"
+                                            android:layout_margin="5dp"
+                                            android:background="@drawable/buttons"
+                                            android:textAllCaps="true"
+                                            android:text="CheckOut"
+                                            android:textColor="@android:color/white"
+                                            android:textSize="20dp"
+                                            />
+
+                                </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
+                </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

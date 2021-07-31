@@ -72,6 +72,8 @@ public class ViewSettingsActivity extends AppCompatActivity {
 
     }
 
+
+
     private void getUserInfo() {
 
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -85,6 +87,7 @@ public class ViewSettingsActivity extends AppCompatActivity {
                     lName.setText("Last Name : "+ user.getLastname());
                     Phone.setText("Phone : "+user.getPhone());
                     Email.setText("Email : "+user.getEmail());
+                    Address.setText(user.getAddress());
                     Picasso.get().load(user.getImage()).into(profileImageView);
 
 

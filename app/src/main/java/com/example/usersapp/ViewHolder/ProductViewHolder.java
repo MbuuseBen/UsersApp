@@ -1,6 +1,7 @@
 package com.example.usersapp.ViewHolder;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
     public TextView txtProductName, txtProductDescription, txtProductPrice;
     public ImageView imageView;
     public ItemClickListner listner;
+    public Button tapBtn;
 
 
     public ProductViewHolder(View itemView)
@@ -21,6 +23,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         super(itemView);
 
 
+        tapBtn = (Button) itemView.findViewById(R.id.add_to_cart_btn1);
         imageView = (ImageView) itemView.findViewById(R.id.product_image);
         txtProductName = (TextView) itemView.findViewById(R.id.product_name);
         txtProductDescription = (TextView) itemView.findViewById(R.id.product_short_description);
