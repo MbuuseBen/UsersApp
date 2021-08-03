@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.usersapp.Model.CartList;
+import com.example.usersapp.Model.CartTotal;
 import com.example.usersapp.Model.Products;
 import com.example.usersapp.Model.Users;
 import com.example.usersapp.Prevalent.Prevalent;
@@ -31,6 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -38,9 +41,9 @@ import java.util.HashMap;
 public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     private EditText nameEditText,phoneEditText, addressEditText, cityEditText;
-    private TextView f_Name,lName,userphone,useraddress,useremail ,editDetailsBtn;
+    private TextView f_Name,lName,userphone,useraddress,useremail ,editDetailsBtn,viewTotal;
     private String first_Name,last_Name,userPhone,userAddress,userEmail;
-
+    private String cartItems;
 
     private String totalAmount = "",address="addresss";
 
@@ -52,7 +55,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_final_order);
 
-        totalAmount = getIntent().getStringExtra("Total Price");
+     //   totalAmount = getIntent().getStringExtra("Total Price");
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -60,9 +63,12 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         Button confirmOrderBtn = (Button) findViewById(R.id.place_order_btn);
         editDetailsBtn = findViewById(R.id.address_change);
 
+        viewSum();
 //        CheckAddress();
         viewUserDetails();
         getOrderDetails();
+        viewTotal = (TextView) findViewById(R.id.total_price);
+      //  getCartItems();
 
         f_Name = findViewById(R.id.first_name);
         lName = findViewById(R.id.last_name);
@@ -78,6 +84,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                 finish();
             }
         });
+
 
 
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +117,30 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     }
 
+    private void viewSum() {
+        DatabaseReference CartTotal = FirebaseDatabase.getInstance().getReference().child("Cart List");
+                CartTotal.child("UserView").child(mAuth.getCurrentUser().getUid()).child("CartTotal")
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    CartTotal cart = dataSnapshot.getValue(CartTotal.class);
+
+                    viewTotal.setText("Total :   UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(cart.getTotal())));
+
+                  //  Picasso.get().load(products.getImage()).into(productImage1);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
     private void getOrderDetails() {
 
         DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -136,7 +167,32 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         });
 
 
+
     }
+
+    private void getCartItems() {
+        DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List")
+                .child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products");
+
+        cartListRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                CartList cart = snapshot.getValue(CartList.class);
+                cartItems = cart.toString();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+
+
 
     private void viewUserDetails() {
 
@@ -179,7 +235,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         saveCurrentDate = currentDate.format(callForDate.getTime());
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime = currentDate.format(callForDate.getTime());
+        saveCurrentTime = currentTime.format(callForDate.getTime());
 
 
         final DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference().child("Orders")
@@ -196,6 +252,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("date",saveCurrentDate);
         ordersMap.put("time",saveCurrentTime);
         ordersMap.put("State", "not Shipped");
+      //  ordersMap.put("Items",cartItems);
+
 
         orderRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

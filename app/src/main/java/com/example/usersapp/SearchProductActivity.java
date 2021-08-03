@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usersapp.Model.Products;
@@ -37,7 +38,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class SearchProductActivity extends AppCompatActivity {
 
-    private ImageView SearchBtn;
+//    private ImageView SearchBtn;
+    private TextView SearchBtn;
     private EditText inputText;
     private RecyclerView searchList;
     private String SearchInput;
@@ -58,20 +60,20 @@ public class SearchProductActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_search_product);
 
-//        inputText = findViewById(R.id.search_product_name);
-//        SearchBtn = findViewById(R.id.search_iv_icon);
+        inputText = findViewById(R.id.search_product_name);
+       SearchBtn = findViewById(R.id.search_product_btn);
         searchList = findViewById(R.id.search_list);
         searchList.setLayoutManager(new LinearLayoutManager(SearchProductActivity.this));
 
 
-//
-//        SearchBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                SearchInput = inputText.getText().toString();
-//                onStart();
-//            }
-//        });
+
+        SearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SearchInput = inputText.getText().toString();
+                onStart();
+            }
+        });
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar1);
@@ -123,21 +125,21 @@ public class SearchProductActivity extends AppCompatActivity {
 
 
     }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.top_app_bar, menu);
+//        return true;
+//    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.top_app_bar, menu);
-        return true;
-    }
 
 
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.top_app_bar,menu);
-        return super.onPrepareOptionsMenu(menu);
-    }
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.top_app_bar,menu);
+//        return super.onPrepareOptionsMenu(menu);
+//    }
 
     private void checkCart() {
 

@@ -53,6 +53,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity
     private DatabaseReference ProductsRef;
     private RecyclerView searchList,pencils,calculators;
     private FirebaseAuth mAuth;
+   // private ImageView profileImageView;
 //    private Button addToCartButton;
     private boolean isMembersVisible= false;
     NavigationView navigationView;
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.LayoutManager layoutPencils;
     RecyclerView.LayoutManager layoutCalculators;
+    private ServerValue add;
 
     private Toolbar topBar;
    private  AppBarLayout topBar1;
@@ -113,6 +116,8 @@ public class MainActivity extends AppCompatActivity
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         mAuth = FirebaseAuth.getInstance();
+
+    //    profileImageView = (ImageView) findViewById(R.id.user_profile_image);
 
         Paper.init(this);
 
@@ -237,6 +242,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+    //    getUserInfo();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -248,9 +254,26 @@ public class MainActivity extends AppCompatActivity
 
 
             userNameTextView.setText(mAuth.getCurrentUser().getEmail());
-           Picasso.get().load(mAuth.getCurrentUser().getPhotoUrl()).placeholder(R.drawable.profile).into(profileImageView);
+
+        Picasso.get().load(mAuth.getCurrentUser().getPhotoUrl()).into(profileImageView);
+
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Users user = snapshot.getValue(Users.class);
 
 
+                    Picasso.get().load(user.getImage()).placeholder(R.drawable.profile).into(profileImageView);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
 
 
 
@@ -261,7 +284,28 @@ public class MainActivity extends AppCompatActivity
 //        recyclerView.setLayoutManager(layoutManager);
     }
 
-    private void checkCart() {
+//    private void getUserInfo() {
+//        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+//        userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    Users user = snapshot.getValue(Users.class);
+//
+//                    //Picasso.get().load(user.getImage()).into(profileImageView);
+//                    Picasso.get().load(user.getImage()).placeholder(R.drawable.profile).into(profileImageView);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
+
+
+        private void checkCart() {
 
         DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView");
         productsRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
@@ -295,7 +339,7 @@ public class MainActivity extends AppCompatActivity
     private void loadCalculatorstoRecyclerView() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
 
-        Query query  =reference.orderByChild("category").equalTo(categoryCalculators);
+        Query query  =reference.orderByChild("category").equalTo(categoryCalculators).limitToFirst(5);
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(query,Products.class)
@@ -340,14 +384,12 @@ public class MainActivity extends AppCompatActivity
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
 
-        Query query  =reference.orderByChild("category").equalTo(categoryPencils);
+        Query query  =reference.orderByChild("category").equalTo(categoryPencils).limitToFirst(6);
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(query,Products.class)
                 .build();
 
-//        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
-//                .setQuery(reference.orderByChild("pname").startAt(SearchInput),Products.class).build();
 
         FirebaseRecyclerAdapter<Products, ProductViewHolder>
                 adapterPencils = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
@@ -374,8 +416,8 @@ public class MainActivity extends AppCompatActivity
 
                         String productID = model.getPid();
                         String prdctName = model.getPname();
-                        String prdctPrice = model.getPrice();
-                        String initQty = "1";
+                        int prdctPrice = model.getPrice();
+                      //  String initQty = "1";
                         String imageUrl = model.getImage();
 
                         String saveCurrentTime, saveCurrentDate;
@@ -396,7 +438,7 @@ public class MainActivity extends AppCompatActivity
                         cartMap.put("date", saveCurrentDate);
                         cartMap.put("time", saveCurrentTime);
                         cartMap.put("image",imageUrl);
-                        cartMap.put("quantity",initQty);
+                        cartMap.put("quantity",add.increment(1));
                         cartMap.put("discount", "");
 
                         cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
@@ -404,25 +446,10 @@ public class MainActivity extends AppCompatActivity
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            cartListRef.child("Admin View").child(mAuth.getCurrentUser().getUid())
-                                                    .child("Products").child(productID)
-                                                    .updateChildren(cartMap)
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                                            if (task.isSuccessful()) {
-                                                                Toast.makeText(MainActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT);
-//                                                Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
-//                                                startActivity(intent);
-                                                            }
-                                                        }
-                                                    });
-                                        }
+                                        Toast.makeText(MainActivity.this, " Item Added to Cart Successfully", Toast.LENGTH_SHORT).show();
+
                                     }
                                 });
-
-
                     }
                 });
 
@@ -457,7 +484,7 @@ public class MainActivity extends AppCompatActivity
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(reference.orderByChild("pname"),Products.class).build();
+                .setQuery(reference.orderByChild("pname").limitToFirst(4),Products.class).build();
 
         FirebaseRecyclerAdapter<Products, ProductViewHolder>
                 adapter = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
@@ -529,6 +556,10 @@ public class MainActivity extends AppCompatActivity
 //                Intent intent = new Intent(MainActivity.this, CartActivity.class);
 //                startActivity(intent);
                 return true;
+
+            case R.id.app_bar_search:
+                Intent intent = new Intent(MainActivity.this, SearchProductActivity.class);
+                startActivity(intent);
 
             default:
                 return super.onOptionsItemSelected(item);

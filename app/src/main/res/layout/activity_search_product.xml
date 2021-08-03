@@ -18,10 +18,42 @@
             android:id="@+id/topAppBar1"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/top_app_bar"
             android:visibility="visible"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
-            />
+            >
+
+            <EditText
+                android:id="@+id/search_product_name"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
+                android:hint="Search for Products,Brands....."
+                android:textSize="14dp"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/input_design"
+                android:padding="10dp"
+                android:textColorHint="@android:color/white"/>
+
+
+            <TextView
+                android:id="@+id/search_product_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:textSize="18dp"
+                android:textAllCaps="true"
+                android:layout_marginLeft="5dp"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+
+                />
+
+
+
+
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 

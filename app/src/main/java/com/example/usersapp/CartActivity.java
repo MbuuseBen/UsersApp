@@ -39,6 +39,7 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -82,6 +83,7 @@ public class CartActivity extends AppCompatActivity {
                 CheckAddress();
 
 
+
 //                Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
 //                startActivity(intent);
 //                finish();
@@ -100,8 +102,33 @@ public class CartActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
 
+       // addTotaltoCart();
 
+    }
 
+    private void addTotaltoCart() {
+        final DatabaseReference preOrderRef = FirebaseDatabase.getInstance().getReference().child("Cart List")
+                .child("UserView").child(mAuth.getCurrentUser().getUid());
+
+        //final HashMap<String, object> cartMap = new HashMap<>();
+        final HashMap<String, Object> cartMap = new HashMap<>();
+      //  cartMap.put("pid", productID);
+        cartMap.put("total", overTotalPrice);
+//        cartMap.put("price", prdctPrice);
+//        cartMap.put("date", saveCurrentDate);
+//        cartMap.put("time", saveCurrentTime);
+//        cartMap.put("image",imageUrl);
+//        cartMap.put("quantity",add.increment(1));
+//        cartMap.put("discount", "");
+
+        preOrderRef.child("CartTotal")
+                .updateChildren(cartMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                      //  Toast.makeText(CartActivity.this, "Total Added Successfully", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void CheckAddress() {
@@ -112,7 +139,10 @@ public class CartActivity extends AppCompatActivity {
                 if (snapshot.exists()){
 //                    viewUserDetails();
 //                    ConfirmOrder();
+
+                    addTotaltoCart();
                     Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
+                    intent.putExtra("TotalAmount", overTotalPrice);
                     startActivity(intent);
                 }else {
                     Toast.makeText(CartActivity.this, "Address Details Required.", Toast.LENGTH_SHORT).show();
@@ -139,7 +169,7 @@ public class CartActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        CheckOrderState();
+   //     CheckOrderState();
 
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
         FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions
@@ -230,7 +260,7 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.startListening();
 
-totalView();
+//totalView();
 
     }
 
@@ -243,44 +273,44 @@ totalView();
 
 
 
-    private void CheckOrderState() {
-        DatabaseReference ordersRef;
-        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
-                .child(mAuth.getCurrentUser().getUid());
-        ordersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    String shippingState = snapshot.child("State").getValue().toString();
-                    String userName = snapshot.child("firstname").getValue().toString();
-
-                    if (shippingState.equals("shipped")){
-                        txtTotalAmount.setText("Dear " + userName+ "\n Your Order has been Shipped successfully.");
-                        recyclerView.setVisibility(View.GONE);
-                        txtmsg1.setVisibility(View.VISIBLE);
-                        txtmsg1.setText("Congratulations,Your Order was shipped successfully,Soon To be verified");
-                        NextProcessBtn.setVisibility(View.GONE);
-
-                        Toast.makeText(CartActivity.this, "You can Purchase more Products",Toast.LENGTH_SHORT);
-
-
-                    }else  if(shippingState.equals("not shipped")){
-
-                        txtTotalAmount.setText("Shipping State = Not Shipped");
-                        recyclerView.setVisibility(View.GONE);
-                        txtmsg1.setVisibility(View.VISIBLE);
-                        NextProcessBtn.setVisibility(View.GONE);
-
-                        Toast.makeText(CartActivity.this, "You can Purchase more Products",Toast.LENGTH_SHORT);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-
-    }
+//    private void CheckOrderState() {
+//        DatabaseReference ordersRef;
+//        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+//                .child(mAuth.getCurrentUser().getUid());
+//        ordersRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                if (snapshot.exists()){
+//                    String shippingState = snapshot.child("State").getValue().toString();
+//                    String userName = snapshot.child("firstname").getValue().toString();
+//
+//                    if (shippingState.equals("shipped")){
+//                        txtTotalAmount.setText("Dear " + userName+ "\n Your Order has been Shipped successfully.");
+//                        recyclerView.setVisibility(View.GONE);
+//                        txtmsg1.setVisibility(View.VISIBLE);
+//                        txtmsg1.setText("Congratulations,Your Order was shipped successfully,Soon To be verified");
+//                        NextProcessBtn.setVisibility(View.GONE);
+//
+//                        Toast.makeText(CartActivity.this, "You can Purchase more Products",Toast.LENGTH_SHORT);
+//
+//
+//                    }else  if(shippingState.equals("not shipped")){
+//
+//                        txtTotalAmount.setText("Shipping State = Not Shipped");
+//                        recyclerView.setVisibility(View.GONE);
+//                        txtmsg1.setVisibility(View.VISIBLE);
+//                        NextProcessBtn.setVisibility(View.GONE);
+//
+//                        Toast.makeText(CartActivity.this, "You can Purchase more Products",Toast.LENGTH_SHORT);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//    }
 }

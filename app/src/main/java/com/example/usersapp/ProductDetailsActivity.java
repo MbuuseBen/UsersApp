@@ -43,10 +43,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //    private TextView productPrice, productDescription, productName;
     private TextView productPrice1, productDescription1, productName1;
     private String productID = "", state = "Normal",imageUrl;
-    private  String productPrice, productDescription, productName;
+    private int productPrice;
+    private String productDescription;
+    private String productName;
     private Button addToCartButton;
     private Toolbar mToolbar;
     private DatabaseReference ProductsRef;
+
 
     private FirebaseAuth mAuth;
 
@@ -164,21 +167,17 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item)
     {
 
-//        navigationView.getMenu().setGroupVisible(R.id.members_group,false);
-//        int id = item.getItemId();
-//
-////        if (id == R.id.action_settings)
-////        {
-////            return true;
-////        }
 
         switch (item.getItemId()){
 
             case R.id.Cart:
                 checkCart();
-//                Intent intent = new Intent(MainActivity.this, CartActivity.class);
-//                startActivity(intent);
+
                 return true;
+
+            case R.id.app_bar_search:
+                Intent intent = new Intent(ProductDetailsActivity.this, SearchProductActivity.class);
+                startActivity(intent);
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -218,7 +217,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);
         cartMap.put("image",imageUrl);
-        cartMap.put("quantity", numberButton.getNumber());
+        cartMap.put("quantity", Integer.valueOf(numberButton.getNumber()));
         cartMap.put("discount", "");
 
         cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
@@ -234,11 +233,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull @NotNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(ProductDetailsActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT);
+                                                Toast.makeText(ProductDetailsActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
 //                                                Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
 //                                                startActivity(intent);
                                             }
-                                        }
+                                         }
                                     });
                         }
                     }

@@ -38,7 +38,6 @@ public class ViewSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_settings);
 
         mAuth = FirebaseAuth.getInstance();
-
         profileImageView = findViewById(R.id.profilePic);
         fName = findViewById(R.id.settings_first_name);
         lName= findViewById(R.id.settings_last_name);

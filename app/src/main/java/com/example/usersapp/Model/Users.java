@@ -1,5 +1,16 @@
 package com.example.usersapp.Model;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
+
 public class Users {
     private String firstname, lastname, email, Phone, password, image, address;
 
@@ -73,3 +84,26 @@ public class Users {
         this.address = address;
     }
 }
+
+
+
+
+//    private void getUserInfo() {
+//        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+//        userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    Users user = snapshot.getValue(Users.class);
+//
+//                    //Picasso.get().load(user.getImage()).into(profileImageView);
+//                    Picasso.get().load(user.getImage()).into(profileImageView);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
+//    }

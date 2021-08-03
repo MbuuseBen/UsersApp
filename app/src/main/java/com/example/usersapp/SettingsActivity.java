@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -33,22 +35,26 @@ import com.theartofdev.edmodo.cropper.CropImage;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private CircleImageView profileImageView;
+    private CircleImageView profileImageView,addImageBtn;
     private EditText firstNameEditText,lastNameEditText, userPhoneEditText,userEmailAddress, addressEditText;
     private TextView profileChangeTextBtn,  closeTextBtn, saveTextButton;
     private Button securityQuestionsBtn;
-
+    private static final int GalleryPick = 1;
     private Uri imageUri;
     private String myUrl = "";
     private StorageTask uploadTask;
     private StorageReference storageProfilePictureRef;
     private String checker = "";
+
+    private static int RESULT_LOAD_IMAGE = 1;
 
     private FirebaseAuth mAuth;
 
@@ -60,9 +66,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+
+
         storageProfilePictureRef = FirebaseStorage.getInstance().getReference().child("Profile pictures");
 
-        profileImageView = (CircleImageView) findViewById(R.id.iv_camera);
+        profileImageView = (CircleImageView) findViewById(R.id.profilePic);
+        addImageBtn = (CircleImageView)findViewById(R.id.iv_camera);
+
 
         firstNameEditText = (EditText) findViewById(R.id.settings_first_name);
         lastNameEditText = (EditText) findViewById(R.id.settings_last_name);
@@ -105,20 +115,33 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-        profileImageView.setOnClickListener(new View.OnClickListener() {
+        addImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                checker = "clicked";
+               checker = "clicked";
+                OpenGallery();
 
-                CropImage.activity(imageUri)
-                        .setAspectRatio(1, 1)
-                        .start(SettingsActivity.this);
+//
+//                CropImage.activity(imageUri)
+//                      .setAspectRatio(1, 1)
+//                      .start(SettingsActivity.this);
+//                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+//                photoPickerIntent.setType("image/*");
+//                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMAGE);
+
+                
             }
         });
     }
 
+    private void OpenGallery() {
 
+        Intent galleryIntent = new Intent();
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent, GalleryPick);
+    }
 
 
     private void getUserInformation() {
@@ -164,7 +187,7 @@ public class SettingsActivity extends AppCompatActivity {
         ref.child(mAuth.getCurrentUser().getUid()).updateChildren(userMap);
 
         startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
-        Toast.makeText(SettingsActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SettingsActivity.this, "Profile Info updated successfully.", Toast.LENGTH_SHORT).show();
         finish();
     }
 
@@ -174,30 +197,59 @@ public class SettingsActivity extends AppCompatActivity {
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE  &&  resultCode==RESULT_OK  &&  data!=null)
-        {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            imageUri = result.getUri();
+//        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE  &&  resultCode==RESULT_OK  &&  data!=null)
+//        {
+//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+//            imageUri = result.getUri();
 
+//
+//            addImageBtn.setImageURI(imageUri);
+//        }
+
+        if (requestCode==GalleryPick  &&  resultCode==RESULT_OK  &&  data!=null)
+        {
+            imageUri = data.getData();
             profileImageView.setImageURI(imageUri);
         }
         else
         {
             Toast.makeText(this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
-            finish();
+            Intent intent = new Intent(SettingsActivity.this,SettingsActivity.class);
+               startActivity(intent);
+                finish();
         }
     }
 
 
+//    @Override
+//    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
+//        super.onActivityResult(reqCode, resultCode, data);
+//
+//
+//        if (resultCode == RESULT_OK) {
+//            try {
+//                final Uri imageUri = data.getData();
+//                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+//                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+//                profileImageView.setImageBitmap(selectedImage);
+//                profileImageView.setImageURI(imageUri);
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//                Toast.makeText(SettingsActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+//            }
+//
+//        }else {
+//            Toast.makeText(SettingsActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+//        }
+//    }
 
 
     private void userInfoSaved()
     {
         if (TextUtils.isEmpty(firstNameEditText.getText().toString()))
         {
-            Toast.makeText(this, "Firts Name is mandatory.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "First Name is mandatory.", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(lastNameEditText.getText().toString()))
         {

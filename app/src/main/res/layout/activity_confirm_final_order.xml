@@ -96,10 +96,10 @@
                     android:layout_height="wrap_content"
                     android:text="FIRST NAME "
                     android:textColor="@color/black"
-                    android:textStyle="bold"
+                    android:textSize="17dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="1dp"
                     android:padding="10dp"
                     />
 
@@ -110,11 +110,12 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/first_name"
                     android:text="LAST NAME "
-                    android:textStyle="bold"
+
+                    android:textSize="15dp"
                     android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="1dp"
                     android:padding="10dp"
                     />
 
@@ -126,10 +127,11 @@
                     android:textStyle="bold"
                     android:layout_below="@+id/last_name"
                     android:text="PHONE"
+                    android:textSize="15dp"
                     android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="1dp"
                     android:padding="10dp"
                     />
 
@@ -141,10 +143,11 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/phone_number"
                     android:text="ADDRESS"
+                    android:textSize="15dp"
                     android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="1dp"
                     android:padding="10dp"
                     />
 
@@ -155,10 +158,11 @@
                     android:textStyle="bold"
                     android:layout_below="@+id/address"
                     android:text="EMAIL ADDRESS"
+                    android:textSize="15dp"
                     android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="1dp"
                     android:padding="10dp"
                     />
 
