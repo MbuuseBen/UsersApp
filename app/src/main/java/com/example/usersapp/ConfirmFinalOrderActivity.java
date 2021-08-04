@@ -1,4 +1,4 @@
-package com.example.usersapp;
+ package com.example.usersapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -44,6 +44,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private TextView f_Name,lName,userphone,useraddress,useremail ,editDetailsBtn,viewTotal;
     private String first_Name,last_Name,userPhone,userAddress,userEmail;
     private String cartItems;
+    private int productTotal;
+    private String productRandomKey;
 
     private String totalAmount = "",address="addresss";
 
@@ -54,8 +56,6 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_final_order);
-
-     //   totalAmount = getIntent().getStringExtra("Total Price");
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -68,7 +68,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         viewUserDetails();
         getOrderDetails();
         viewTotal = (TextView) findViewById(R.id.total_price);
-      //  getCartItems();
+     //   getCartItems();
 
         f_Name = findViewById(R.id.first_name);
         lName = findViewById(R.id.last_name);
@@ -128,6 +128,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
                     viewTotal.setText("Total :   UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(cart.getTotal())));
 
+                    productTotal = cart.getTotal();
                   //  Picasso.get().load(products.getImage()).into(productImage1);
 
                 }
@@ -170,26 +171,26 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     }
 
-    private void getCartItems() {
-        DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List")
-                .child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products");
-
-        cartListRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                CartList cart = snapshot.getValue(CartList.class);
-                cartItems = cart.toString();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-
-
-    }
+//    private void getCartItems() {
+//        DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List")
+//                .child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products");
+//
+//        cartListRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                CartList cart = snapshot.getValue(CartList.class);
+//                cartItems = cart.getProducts();
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//
+//    }
 
 
 
@@ -238,12 +239,15 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         saveCurrentTime = currentTime.format(callForDate.getTime());
 
 
+        productRandomKey = saveCurrentDate + saveCurrentTime;
+
+
         final DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference().child("Orders")
-                .child(mAuth.getCurrentUser().getUid());
+                .child(mAuth.getCurrentUser().getUid()).child(productRandomKey);
 
 
         HashMap<String, Object> ordersMap = new HashMap<>();
-        ordersMap.put("totalAmount",totalAmount);
+        ordersMap.put("totalAmount",productTotal);
         ordersMap.put("firstname",first_Name);
         ordersMap.put("lastname",last_Name);
         ordersMap.put("phone",userPhone);
@@ -252,7 +256,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("date",saveCurrentDate);
         ordersMap.put("time",saveCurrentTime);
         ordersMap.put("State", "not Shipped");
-      //  ordersMap.put("Items",cartItems);
+        ordersMap.put("orderid", productRandomKey);
 
 
         orderRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -192,7 +192,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        CheckOrderState();
+       // CheckOrderState();
     }
 
 
@@ -203,7 +203,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         saveCurrentDate = currentDate.format(callForDate.getTime());
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime = currentDate.format(callForDate.getTime());
+        saveCurrentTime = currentTime.format(callForDate.getTime());
 
 
 
@@ -226,7 +226,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            cartListRef.child("Admin View").child(mAuth.getCurrentUser().getUid())
+                            cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
                                     .child("Products").child(productID)
                                     .updateChildren(cartMap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -268,35 +268,35 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void CheckOrderState() {
-        DatabaseReference ordersRef;
-        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
-                .child(mAuth.getCurrentUser().getUid());
-        ordersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String shippingState = snapshot.child("State").getValue().toString();
-                    String userName = snapshot.child("name").getKey().toString();
-
-                    if (shippingState.equals("shipped")) {
-
-                        state = "Order Shipped";
-
-                    } else if (shippingState.equals("not shipped")) {
-
-                        state = "Order Placed";
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-
-
-    }
+//
+//    private void CheckOrderState() {
+//        DatabaseReference ordersRef;
+//        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+//                .child(mAuth.getCurrentUser().getUid());
+//        ordersRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    String shippingState = snapshot.child("State").getValue().toString();
+//                    String userName = snapshot.child("name").getKey().toString();
+//
+//                    if (shippingState.equals("shipped")) {
+//
+//                        state = "Order Shipped";
+//
+//                    } else if (shippingState.equals("not shipped")) {
+//
+//                        state = "Order Placed";
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//
+//    }
 }

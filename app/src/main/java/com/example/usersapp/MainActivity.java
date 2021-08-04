@@ -75,8 +75,6 @@ public class MainActivity extends AppCompatActivity
     private DatabaseReference ProductsRef;
     private RecyclerView searchList,pencils,calculators;
     private FirebaseAuth mAuth;
-   // private ImageView profileImageView;
-//    private Button addToCartButton;
     private boolean isMembersVisible= false;
     NavigationView navigationView;
     private int initialValue = 1;
@@ -284,25 +282,6 @@ public class MainActivity extends AppCompatActivity
 //        recyclerView.setLayoutManager(layoutManager);
     }
 
-//    private void getUserInfo() {
-//        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
-//        userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    Users user = snapshot.getValue(Users.class);
-//
-//                    //Picasso.get().load(user.getImage()).into(profileImageView);
-//                    Picasso.get().load(user.getImage()).placeholder(R.drawable.profile).into(profileImageView);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
 
 
         private void checkCart() {
@@ -319,8 +298,8 @@ public class MainActivity extends AppCompatActivity
 
                 }else {
                     Toast.makeText(MainActivity.this, "Please add some items to your cart.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//                    startActivity(intent);
 
 
                 }
@@ -446,8 +425,21 @@ public class MainActivity extends AppCompatActivity
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                        Toast.makeText(MainActivity.this, " Item Added to Cart Successfully", Toast.LENGTH_SHORT).show();
-
+                                        if (task.isSuccessful()) {
+                                            cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
+                                                    .child("Products").child(productID)
+                                                    .updateChildren(cartMap)
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                Toast.makeText(MainActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
+//                                                Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
+//                                                startActivity(intent);
+                                                            }
+                                                        }
+                                                    });
+                                        }
                                     }
                                 });
                     }
@@ -578,19 +570,20 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_cart)
-        {
-
+//        if (id == R.id.nav_cart)
+//        {
 //
-//                Intent intent = new Intent(MainActivity.this, CartActivity.class);
-//                startActivity(intent);
-
-            checkCart();
-
-        }
-        else if (id == R.id.nav_orders)
+////
+////                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+////                startActivity(intent);
+//
+//            checkCart();
+//
+//        }
+//        else
+            if (id == R.id.nav_orders)
         {
-            Intent intent = new Intent(MainActivity.this, SearchProductActivity.class);
+            Intent intent = new Intent(MainActivity.this, OrdersActivity.class);
             startActivity(intent);
         }
 

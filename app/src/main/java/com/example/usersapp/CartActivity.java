@@ -235,6 +235,23 @@ public class CartActivity extends AppCompatActivity {
                                                 }
                                             });
 
+                                    cartListRef.child("Admin View")
+                                            .child(mAuth.getCurrentUser().getUid())
+                                            .child("Products")
+                                            .child(model.getPid())
+                                            .removeValue()
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                                    if (task.isSuccessful()){
+                                                        Toast.makeText(CartActivity.this, "Please Add Items To Cart.",Toast.LENGTH_SHORT).show();
+//                                                        Intent intent = new Intent(CartActivity.this,CartActivity.class);
+//                                                        startActivity(intent);
+//                                                        finish();
+                                                    }
+                                                }
+                                            });
+
                                 }
                             }
                         });

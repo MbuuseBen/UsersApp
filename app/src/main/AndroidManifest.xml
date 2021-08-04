@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UsersApp.NoActionBar"
         tools:replace="android:theme">
+        <activity android:name=".OrderProductsActivity"
+            android:parentActivityName=".OrdersActivity"            />
+        <activity android:name=".OrdersActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".Categories.Categorycalculators"
             android:parentActivityName=".MainActivity" />
@@ -43,12 +47,10 @@
         <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".ViewSettingsActivity" />
-
         <activity
             android:name=".ProductDetailsActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity" />
-<!--        android:theme="@style/Base.Theme.AppCompat"-->
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity" /> <!-- android:theme="@style/Base.Theme.AppCompat" -->
         <activity
             android:name=".ConfirmFinalOrderActivity"
             android:parentActivityName=".CartActivity" />
