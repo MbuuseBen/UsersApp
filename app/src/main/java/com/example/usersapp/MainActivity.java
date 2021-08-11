@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
 
                checkCart();
-//
+               
 //                    Intent intent = new Intent(MainActivity.this, CartActivity.class);
 //                    startActivity(intent);
 
@@ -471,7 +471,6 @@ public class MainActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
-        int limit = 10;
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
 

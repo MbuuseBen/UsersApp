@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProductCategoryActivity">
+
+
+    <TextView
+        android:id="@+id/slogan_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Add New Product"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal" />
+
+
+
+    <LinearLayout
+        android:id="@+id/linear1_category_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/slogan_category"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <ImageView
+            android:id="@+id/calculator"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/calculator"
+            />
+
+        <ImageView
+            android:id="@+id/pencil"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/pencil"
+            />
+
+        <ImageView
+            android:id="@+id/notebook"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/notebooks"
+            />
+
+        <ImageView
+            android:id="@+id/stapler"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/stapler"
+            />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linear2_category_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear1_category_layout"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/paper_clip"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/paper_clip_icon"
+            />
+
+        <ImageView
+            android:id="@+id/ruler"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/ruler"
+            />
+
+        <ImageView
+            android:id="@+id/scissor"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/scissors_color"
+            />
+
+        <ImageView
+            android:id="@+id/glue"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/glue_icon"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linear3_category_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear2_category_layout"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/pushpin"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/pushpin"
+            />
+
+        <ImageView
+            android:id="@+id/punching_machine"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/punching_machine"
+            />
+
+        <ImageView
+            android:id="@+id/tape"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/tape"
+            />
+
+        <ImageView
+            android:id="@+id/danger_cutter"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/danger_cutter"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linear4_category_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear3_category_layout"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/office_paper_clip"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/paper_clip"
+            />
+
+        <ImageView
+            android:id="@+id/shapener"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/hand_sharpener"
+            />
+
+        <ImageView
+            android:id="@+id/quill_ink"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/quill_ink"
+            />
+
+        <ImageView
+            android:id="@+id/pen"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/calligraphy_pen"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

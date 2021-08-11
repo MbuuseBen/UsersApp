@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="3"
+    android:rowCount="3"
+    android:orientation="horizontal">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/alpha"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="40dp"
+        android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/one"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/product_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/calculator"
+            android:gravity="left"
+            android:layout_marginTop="2dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:id="@+id/product_price_details"
+            android:layout_below="@+id/product_image"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:text="Calculators"
+            android:textSize="20sp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/two"
+        android:layout_width="wrap_content"
+        android:layout_toEndOf="@+id/one"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/one"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/product_image1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/pencil"
+            android:layout_marginTop="2dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:id="@+id/product_price_details1"
+            android:layout_below="@+id/product_image1"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:text="Pencils"
+            android:textSize="20sp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/three"
+        android:layout_width="wrap_content"
+        android:layout_toEndOf="@+id/two"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/two"
+        android:layout_height="wrap_content">
+
+
+    <ImageView
+            android:id="@+id/product_image3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/notebooks"
+            android:layout_marginTop="2dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:id="@+id/product_price_details3"
+            android:layout_below="@+id/product_image3"
+            android:gravity="left"
+            android:layout_centerHorizontal="true"
+            android:text="Notebooks"
+            android:textSize="20sp"
+            />
+
+            </RelativeLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/omega"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@+id/alpha"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/once"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/once_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/stapler"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/once_price_details"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/once_image"
+                android:gravity="left"
+                android:text="Staplers"
+                android:textSize="20sp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/more"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@+id/once"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/once"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/twice_image1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ruler"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/twice_price_details1"
+                android:layout_below="@+id/twice_image1"
+                android:gravity="left"
+                android:layout_centerHorizontal="true"
+                android:text="Rulers"
+                android:textSize="20sp"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/thrice"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@+id/more"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/more"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/more_image3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/scissors_color"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/more_price_details3"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/more_image3"
+                android:gravity="left"
+                android:text="Scissors"
+                />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

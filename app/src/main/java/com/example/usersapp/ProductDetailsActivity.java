@@ -25,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -49,6 +50,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private Button addToCartButton;
     private Toolbar mToolbar;
     private DatabaseReference ProductsRef;
+
+    private ServerValue add;
 
 
     private FirebaseAuth mAuth;
@@ -217,8 +220,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);
         cartMap.put("image",imageUrl);
-        cartMap.put("quantity", Integer.valueOf(numberButton.getNumber()));
+        cartMap.put("quantity",add.increment((Integer.parseInt(numberButton.getNumber()))-1));
         cartMap.put("discount", "");
+
+       // add.increment(1)
+
+//        Integer.valueOf(numberButton.getNumber())
 
         cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
                 .child(productID).updateChildren(cartMap)

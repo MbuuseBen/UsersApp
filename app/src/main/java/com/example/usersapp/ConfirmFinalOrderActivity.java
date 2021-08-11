@@ -4,12 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,9 +15,7 @@ import android.widget.Toast;
 
 import com.example.usersapp.Model.CartList;
 import com.example.usersapp.Model.CartTotal;
-import com.example.usersapp.Model.Products;
 import com.example.usersapp.Model.Users;
-import com.example.usersapp.Prevalent.Prevalent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +24,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -67,6 +61,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 //        CheckAddress();
         viewUserDetails();
         getOrderDetails();
+        getDetails();
         viewTotal = (TextView) findViewById(R.id.total_price);
      //   getCartItems();
 
@@ -192,6 +187,30 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 //
 //    }
 
+    private void getDetails() {
+
+        DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child(mAuth.getCurrentUser().getUid());
+        ordersRef.child("Products").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    CartList items = dataSnapshot.getValue(CartList.class);
+                    cartItems = items.getProducts();
+//                    productName = products.getPname();
+//                    productPrice = products.getPrice();
+//                    productDescription = products.getDescription();
+//                    imageUrl = products.getImage();
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
 
 
 
@@ -256,7 +275,9 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("date",saveCurrentDate);
         ordersMap.put("time",saveCurrentTime);
         ordersMap.put("State", "not Shipped");
+        ordersMap.put("products",cartItems);
         ordersMap.put("orderid", productRandomKey);
+
 
 
         orderRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {

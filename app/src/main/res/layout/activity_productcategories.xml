@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Categories.Productcategories">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/r5">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/row_one"
+        android:layout_below="@+id/r5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/calculator_category"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/product_image_calculator"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/calculator"
+                android:gravity="left"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/category_txt_calculator"
+                android:layout_below="@+id/product_image_calculator"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:text="Calculators"
+                android:textSize="20sp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/pencil_category"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@+id/calculator_category"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/product_image_pencil"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/pencil"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/category_txt_pencil"
+                android:layout_below="@+id/product_image_pencil"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:text="Pencils"
+                android:textSize="20sp"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/three"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@+id/pencil_category"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/product_image_notebooks"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/notebooks"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/category_txt_notebooks"
+                android:layout_below="@+id/product_image_notebooks"
+                android:gravity="left"
+                android:layout_centerHorizontal="true"
+                android:text="Notebooks"
+                android:textSize="20sp"
+                />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/row_two"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@+id/row_one"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/category_glue"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/product_image_glue"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/glue_icon"
+                android:gravity="left"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/category_txt_glue"
+                android:layout_below="@+id/product_image_glue"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:text="Glue"
+                android:textSize="20sp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/category_clips"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@+id/category_glue"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/product_image_clips"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/paper_clip_icon"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/category_txt_clips"
+                android:layout_below="@+id/product_image_clips"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:text="Clips"
+                android:textSize="20sp"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/category_pins"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@+id/category_clips"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/product_image_pins"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/pushpin"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/category_txt_pins"
+                android:layout_below="@+id/product_image_pins"
+                android:gravity="left"
+                android:layout_centerHorizontal="true"
+                android:text="PushPin"
+                android:textSize="20sp"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/row_three"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@+id/row_two"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/category_stapler"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/product_image_stapler"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/stapler"
+                android:gravity="left"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/category_txt_stapler"
+                android:layout_below="@+id/product_image_stapler"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:text="Staplers"
+                android:textSize="20sp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rulers_category"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@+id/category_stapler"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/product_image_rulers"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ruler"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/category_txt_rulers"
+                android:layout_below="@+id/product_image_rulers"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:text="Rulers"
+                android:textSize="20sp"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/category_scissors"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@+id/rulers_category"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/product_image_scissors"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/scissors_color"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/category_txt_scissors"
+                android:layout_below="@+id/product_image_scissors"
+                android:gravity="left"
+                android:layout_centerHorizontal="true"
+                android:text="Scissors"
+                android:textSize="20sp"
+                />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/row_four"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@+id/row_three"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/category_punch"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/product_image_punch"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/punching_machine"
+                android:gravity="left"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/category_txt_punch"
+                android:layout_below="@+id/product_image_punch"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:text="Punch"
+                android:textSize="20sp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/category_tape"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@+id/category_punch"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/product_image_tape"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/tape"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/category_txt_tape"
+                android:layout_below="@+id/product_image_tape"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:text="Tape"
+                android:textSize="20sp"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/category_cutter"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@+id/category_tape"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/product_image_cutter"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/danger_cutter"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:id="@+id/category_txt_cutter"
+                android:layout_below="@+id/product_image_cutter"
+                android:gravity="left"
+                android:layout_centerHorizontal="true"
+                android:text="Cutter"
+                android:textSize="20sp"
+                />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

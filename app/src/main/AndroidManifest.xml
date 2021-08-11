@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UsersApp.NoActionBar"
         tools:replace="android:theme">
-        <activity android:name=".OrderProductsActivity"
-            android:parentActivityName=".OrdersActivity"            />
+<!--        <activity android:name=".OrderProductsActivity"-->
+<!--            android:parentActivityName=".OrdersActivity"            />-->
         <activity android:name=".OrdersActivity"
             android:parentActivityName=".MainActivity"/>
         <activity
@@ -27,6 +27,9 @@
         <activity
             android:name=".AllProductsActivity"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".OrderProductsActivity"
+            android:parentActivityName=".OrdersActivity" />
         <activity
             android:name=".Categories.Productcategories"
             android:parentActivityName=".MainActivity" />

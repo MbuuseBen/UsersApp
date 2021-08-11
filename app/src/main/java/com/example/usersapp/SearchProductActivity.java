@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -180,8 +181,8 @@ public class SearchProductActivity extends AppCompatActivity {
 
             case R.id.Cart:
                 checkCart();
-//                Intent intent = new Intent(MainActivity.this, CartActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(SearchProductActivity.this, Activity.class);
+                startActivity(intent);
                 return true;
 
             case R.id.app_bar_search:
