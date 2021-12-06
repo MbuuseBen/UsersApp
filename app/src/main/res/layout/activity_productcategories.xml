@@ -38,25 +38,24 @@
 
             <ImageView
                 android:id="@+id/product_image_calculator"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/calculator"
-                android:gravity="left"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:gravity="left"
+                android:scaleType="fitCenter"
+                android:src="@drawable/calculator" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_calculator"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/product_image_calculator"
-                android:gravity="center"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:text="Calculators"
-                android:textSize="20sp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
@@ -69,24 +68,23 @@
 
             <ImageView
                 android:id="@+id/product_image_pencil"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:src="@drawable/pencil"
                 android:layout_marginTop="2dp"
                 android:scaleType="fitCenter" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_pencil"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/product_image_pencil"
-                android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:text="Pencils"
-                android:textSize="20sp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -99,23 +97,22 @@
 
             <ImageView
                 android:id="@+id/product_image_notebooks"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/notebooks"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/notebooks" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_notebooks"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/product_image_notebooks"
-                android:gravity="left"
                 android:layout_centerHorizontal="true"
+                android:gravity="left"
                 android:text="Notebooks"
-                android:textSize="20sp"
-                />
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
 
         </RelativeLayout>
     </RelativeLayout>
@@ -138,25 +135,24 @@
 
             <ImageView
                 android:id="@+id/product_image_glue"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/glue_icon"
-                android:gravity="left"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:gravity="left"
+                android:scaleType="fitCenter"
+                android:src="@drawable/books" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_glue"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/product_image_glue"
-                android:gravity="center"
                 android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="TextBooks"
                 android:textAlignment="center"
-                android:text="Glue"
-                android:textSize="20sp"
-                />
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
@@ -169,24 +165,23 @@
 
             <ImageView
                 android:id="@+id/product_image_clips"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/paper_clip_icon"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/paper_clip_icon" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_clips"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/product_image_clips"
-                android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:text="Clips"
-                android:textSize="20sp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -199,23 +194,22 @@
 
             <ImageView
                 android:id="@+id/product_image_pins"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/pushpin"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/pushpin" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_pins"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/product_image_pins"
-                android:gravity="left"
                 android:layout_centerHorizontal="true"
+                android:gravity="left"
                 android:text="PushPin"
-                android:textSize="20sp"
-                />
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
@@ -239,25 +233,24 @@
 
             <ImageView
                 android:id="@+id/product_image_stapler"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/stapler"
-                android:gravity="left"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:gravity="left"
+                android:scaleType="fitCenter"
+                android:src="@drawable/stapler" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_stapler"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/product_image_stapler"
-                android:gravity="center"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:text="Staplers"
-                android:textSize="20sp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
@@ -270,24 +263,23 @@
 
             <ImageView
                 android:id="@+id/product_image_rulers"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ruler"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/ruler" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_rulers"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/product_image_rulers"
-                android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:text="Rulers"
-                android:textSize="20sp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -300,23 +292,22 @@
 
             <ImageView
                 android:id="@+id/product_image_scissors"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/scissors_color"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/scissors_color" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_scissors"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/product_image_scissors"
-                android:gravity="left"
                 android:layout_centerHorizontal="true"
+                android:gravity="left"
                 android:text="Scissors"
-                android:textSize="20sp"
-                />
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
@@ -341,25 +332,24 @@
 
             <ImageView
                 android:id="@+id/product_image_punch"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/punching_machine"
-                android:gravity="left"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:gravity="left"
+                android:scaleType="fitCenter"
+                android:src="@drawable/punching_machine" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_punch"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/product_image_punch"
-                android:gravity="center"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:text="Punch"
-                android:textSize="20sp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
@@ -372,24 +362,23 @@
 
             <ImageView
                 android:id="@+id/product_image_tape"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/tape"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/tape" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_tape"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/product_image_tape"
-                android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:text="Tape"
-                android:textSize="20sp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -402,29 +391,48 @@
 
             <ImageView
                 android:id="@+id/product_image_cutter"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/danger_cutter"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/danger_cutter" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_cutter"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/product_image_cutter"
-                android:gravity="left"
                 android:layout_centerHorizontal="true"
+                android:gravity="left"
                 android:text="Cutter"
-                android:textSize="20sp"
-                />
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
 
     </RelativeLayout>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/cardviewad4"
+        android:layout_below="@+id/row_four"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="5dp">
+
+        <ImageView
+            android:id="@+id/ad1_img4"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/picture_frame"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/eight"
+            />
+
+    </androidx.cardview.widget.CardView>
 
 
 </RelativeLayout>

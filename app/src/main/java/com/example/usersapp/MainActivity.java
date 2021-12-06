@@ -2,24 +2,24 @@ package com.example.usersapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.usersapp.Categories.CategoryNotebooks;
 import com.example.usersapp.Categories.CategoryPencils;
+import com.example.usersapp.Categories.CategorySets;
+import com.example.usersapp.Categories.CategoryTextbooks;
 import com.example.usersapp.Categories.Categorycalculators;
 import com.example.usersapp.Categories.Productcategories;
 import com.example.usersapp.Model.Products;
 import com.example.usersapp.Model.Users;
-import com.example.usersapp.Prevalent.Prevalent;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -27,19 +27,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.appbar.MaterialToolbar;
 
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -47,7 +41,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,8 +60,6 @@ import java.util.HashMap;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
-import static android.content.ContentValues.TAG;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -81,22 +72,24 @@ public class MainActivity extends AppCompatActivity
     private String productID ="";
     private String type = "";
     private  String productPrice, productDescription, productName,imageUrl;
-    private RecyclerView recyclerView,recyclerViewPencils,recyclerViewCalculators;
+    private RecyclerView recyclerView,recyclerViewPencils,recyclerViewCalculators,recyclerViewNotebooks,recyclerViewSets,recyclerViewTextbooks;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.LayoutManager layoutPencils;
+    RecyclerView.LayoutManager layoutNovels;
+    RecyclerView.LayoutManager layoutSets;
     RecyclerView.LayoutManager layoutCalculators;
     private ServerValue add;
 
     private Toolbar topBar;
    private  AppBarLayout topBar1;
 
-    private ImageView viewCalculators,viewPencils;
+    private ImageView viewCalculators,viewPencils,viewNotebooks,viewTextbooks,viewSets;
 
     private TextView seeAllProducts,seeAllCategories;
-    private  TextView seeAllPencils,seeAllCalculators;
+    private  TextView seeAllPencils,seeAllCalculators,seeAllNovels;
 
 
-    private String categoryPencils="pencil", categoryCalculators="calculator";
+    private String categoryPencils="pencil", categoryCalculators="calculator",categoryNovels="novels";
 
 
     @Override
@@ -135,6 +128,8 @@ public class MainActivity extends AppCompatActivity
         recyclerView = findViewById(R.id.search_list1);
         recyclerViewPencils = findViewById(R.id.category_pencils);
         recyclerViewCalculators = findViewById(R.id.category_calculators);
+        recyclerViewNotebooks = findViewById(R.id.category_novels);
+       // recyclerViewSets = findViewById(R.id.category_sets);
 
         layoutManager = new GridLayoutManager(this,2);
         //       layoutManager = new GridLayoutManager(this,2,GridLayoutManager.HORIZONTAL,false);
@@ -206,6 +201,33 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CategoryPencils.class);
+                startActivity(intent);
+            }
+        });
+
+        viewNotebooks = findViewById(R.id.product_image_notebooks);
+        viewNotebooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CategoryNotebooks.class);
+                startActivity(intent);
+            }
+        });
+
+        viewTextbooks = findViewById(R.id.product_image_glue);
+        viewTextbooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CategoryTextbooks.class);
+                startActivity(intent);
+            }
+        });
+
+        viewSets = findViewById(R.id.product_image_pens);
+        viewSets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CategorySets.class);
                 startActivity(intent);
             }
         });
@@ -434,6 +456,7 @@ public class MainActivity extends AppCompatActivity
                                                         public void onComplete(@NonNull @NotNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
                                                                 Toast.makeText(MainActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
+
 //                                                Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
 //                                                startActivity(intent);
                                                             }
@@ -576,7 +599,7 @@ public class MainActivity extends AppCompatActivity
 ////                Intent intent = new Intent(MainActivity.this, CartActivity.class);
 ////                startActivity(intent);
 //
-//            checkCart();
+            checkCart();
 //
 //        }
 //        else

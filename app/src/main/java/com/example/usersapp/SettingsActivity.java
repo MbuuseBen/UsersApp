@@ -122,15 +122,6 @@ public class SettingsActivity extends AppCompatActivity {
                checker = "clicked";
                 OpenGallery();
 
-//
-//                CropImage.activity(imageUri)
-//                      .setAspectRatio(1, 1)
-//                      .start(SettingsActivity.this);
-//                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-//                photoPickerIntent.setType("image/*");
-//                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMAGE);
-
-                
             }
         });
     }
@@ -197,14 +188,6 @@ public class SettingsActivity extends AppCompatActivity {
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-//        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE  &&  resultCode==RESULT_OK  &&  data!=null)
-//        {
-//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-//            imageUri = result.getUri();
-
-//
-//            addImageBtn.setImageURI(imageUri);
-//        }
 
         if (requestCode==GalleryPick  &&  resultCode==RESULT_OK  &&  data!=null)
         {

@@ -14,7 +14,7 @@ import com.example.usersapp.MainActivity;
 import com.example.usersapp.R;
 
 public class Productcategories extends AppCompatActivity {
-    private ImageView viewCalculators,viewPencils;
+    private ImageView viewCalculators,viewPencils,viewNotebooks,viewTextBooks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,24 @@ public class Productcategories extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Productcategories.this, CategoryPencils.class);
+                startActivity(intent);
+            }
+        });
+
+        viewNotebooks = findViewById(R.id.product_image_notebooks);
+        viewNotebooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Productcategories.this, CategoryNotebooks.class);
+                startActivity(intent);
+            }
+        });
+
+        viewTextBooks = findViewById(R.id.product_image_glue);
+        viewTextBooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Productcategories.this, CategoryTextbooks.class);
                 startActivity(intent);
             }
         });

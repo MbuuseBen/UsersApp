@@ -24,69 +24,97 @@
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_view"
-            android:layout_below="@+id/r5"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/r5">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:isScrollContainer="true" >
+                    android:isScrollContainer="true">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/cart_list1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scrollbars="vertical">
+
                         </androidx.recyclerview.widget.RecyclerView>
 
                         <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/product_image_card_view_details"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
                             android:layout_below="@+id/cart_list1"
-                            android:id="@+id/product_image_card_view_details"
-                            >
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
 
-                                <TextView
-                                    android:id='@+id/total_price'
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Total"
-                                    android:gravity="center"
-                                    android:textSize="18dp"
-                                    android:padding="17dp"
-                                    android:textStyle="bold"
-                                    android:layout_marginTop="0dp"
-                                    android:textColor="@color/black"
-                                    />
+                                        <TextView
+                                            android:id='@+id/total_price'
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="0dp"
+                                            android:gravity="center"
+                                            android:padding="17dp"
+                                            android:text="Total"
+                                            android:textColor="@color/black"
+                                            android:textSize="18dp"
+                                            android:textStyle="bold" />
+
                                         <Button
                                             android:id="@+id/next_process_btn"
-                                            android:layout_height ="wrap_content"
                                             android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
                                             android:layout_below="@+id/product_image_card_view_details"
                                             android:layout_margin="5dp"
                                             android:background="@drawable/buttons"
-                                            android:textAllCaps="true"
                                             android:text="CheckOut"
+                                            android:textAllCaps="true"
                                             android:textColor="@android:color/white"
-                                            android:textSize="20dp"
-                                            />
+                                            android:textSize="20dp" />
 
                                 </LinearLayout>
 
                         </com.google.android.material.card.MaterialCardView>
 
+                        <TextView
+                            android:id="@+id/txtallproducts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/product_image_card_view_details"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="left"
+                            android:text="More To Love"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+
+                            />
 
 
-
-
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/cardview1"
+                            android:layout_below="@+id/txtallproducts"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp">
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/search_list1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scrollbars="vertical">
+                                </androidx.recyclerview.widget.RecyclerView>
+                        </androidx.cardview.widget.CardView>
 
                 </RelativeLayout>
         </androidx.core.widget.NestedScrollView>

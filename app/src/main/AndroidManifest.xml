@@ -22,6 +22,15 @@
             android:name=".Categories.Categorycalculators"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".Categories.CategoryNotebooks"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Categories.CategoryTextbooks"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Categories.CategorySets"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".Categories.CategoryPencils"
             android:parentActivityName=".MainActivity" />
         <activity

@@ -41,7 +41,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private int productTotal;
     private String productRandomKey;
 
-    private String totalAmount = "",address="addresss";
+    private String totalAmount = "",address="address";
 
     private FirebaseAuth mAuth;
 
@@ -188,6 +188,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 //    }
 
     private void getDetails() {
+
 
         DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child(mAuth.getCurrentUser().getUid());
         ordersRef.child("Products").addValueEventListener(new ValueEventListener() {

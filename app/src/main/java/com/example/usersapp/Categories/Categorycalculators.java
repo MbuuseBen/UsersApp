@@ -27,16 +27,24 @@ import com.example.usersapp.R;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class Categorycalculators extends AppCompatActivity {
 
@@ -51,6 +59,7 @@ public class Categorycalculators extends AppCompatActivity {
     private String productID = "";
 
     private String categoryCalculators="calculator";
+    private ServerValue add;
 
 
 
@@ -170,15 +179,60 @@ public class Categorycalculators extends AppCompatActivity {
     }
 
 
+//    private void loadCalculatorstoRecyclerView() {
+//
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+//
+//        Query query  =reference.orderByChild("category").equalTo(categoryCalculators);
+//
+//        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
+//                .setQuery(query,Products.class)
+//                .build();
+//
+//        FirebaseRecyclerAdapter<Products, ProductViewHolder>
+//                adapterPencils = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
+//            @Override
+//            protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder holder, int i, @NonNull @NotNull Products model) {
+//
+//                holder.txtProductName.setText(model.getPname());
+////                holder.txtProductDescription.setText(model.getDescription());
+//                holder.txtProductPrice.setText("UGX " + model.getPrice());
+//                Picasso.get().load(model.getImage()).into(holder.imageView);
+//
+//                holder.itemView.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Intent intent = new Intent(Categorycalculators.this, ProductDetailsActivity.class);
+//                        intent.putExtra("pid", model.getPid());
+//                        startActivity(intent);
+//                    }
+//                });
+//            }
+//
+//            @NonNull
+//            @NotNull
+//            @Override
+//            public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+//
+//                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout1, parent, false);
+//                ProductViewHolder holder = new ProductViewHolder(view);
+//                return holder;
+//            }
+//        };
+//        calculators.setAdapter(adapterPencils);
+//        adapterPencils.startListening();
+//    }
+
     private void loadCalculatorstoRecyclerView() {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
 
-        Query query  =reference.orderByChild("category").equalTo(categoryCalculators);
+        Query query  =reference.orderByChild("category").equalTo(categoryCalculators).limitToFirst(6);
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(query,Products.class)
                 .build();
+
 
         FirebaseRecyclerAdapter<Products, ProductViewHolder>
                 adapterPencils = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
@@ -187,7 +241,7 @@ public class Categorycalculators extends AppCompatActivity {
 
                 holder.txtProductName.setText(model.getPname());
 //                holder.txtProductDescription.setText(model.getDescription());
-                holder.txtProductPrice.setText("UGX " + model.getPrice());
+                holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
                 Picasso.get().load(model.getImage()).into(holder.imageView);
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -198,6 +252,65 @@ public class Categorycalculators extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+                holder.tapBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String productID = model.getPid();
+                        String prdctName = model.getPname();
+                        int prdctPrice = model.getPrice();
+                        //  String initQty = "1";
+                        String imageUrl = model.getImage();
+
+                        String saveCurrentTime, saveCurrentDate;
+                        Calendar callForDate = Calendar.getInstance();
+                        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+                        saveCurrentDate = currentDate.format(callForDate.getTime());
+
+                        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+                        saveCurrentTime = currentDate.format(callForDate.getTime());
+
+                        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+
+                        //final HashMap<String, object> cartMap = new HashMap<>();
+                        final HashMap<String, Object> cartMap = new HashMap<>();
+                        cartMap.put("pid", productID);
+                        cartMap.put("pname", prdctName);
+                        cartMap.put("price", prdctPrice);
+                        cartMap.put("date", saveCurrentDate);
+                        cartMap.put("time", saveCurrentTime);
+                        cartMap.put("image",imageUrl);
+                        cartMap.put("quantity",add.increment(1));
+                        cartMap.put("discount", "");
+
+                        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
+                                .child(productID).updateChildren(cartMap)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
+                                                    .child("Products").child(productID)
+                                                    .updateChildren(cartMap)
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                Toast.makeText(Categorycalculators.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
+
+//                                                Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
+//                                                startActivity(intent);
+                                                            }
+                                                        }
+                                                    });
+                                        }
+                                    }
+                                });
+                    }
+                });
+
+
             }
 
             @NonNull

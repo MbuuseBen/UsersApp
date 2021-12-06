@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +25,7 @@ import com.example.usersapp.Model.Cart;
 import com.example.usersapp.Model.Products;
 import com.example.usersapp.Prevalent.Prevalent;
 import com.example.usersapp.ViewHolder.CartViewHolder;
+import com.example.usersapp.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,14 +45,15 @@ import java.util.HashMap;
 
 public class CartActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView,recyclerView1;
     private RecyclerView.LayoutManager layoutManager;
-    private Button NextProcessBtn,deleteBtn,checkOutBtn;
-    private ImageView productImage1;
+    private Button NextProcessBtn,checkOutBtn;
+    private ImageView productImage1,deleteBtn;
     private TextView txtTotalAmount,txtmsg1;
     private int overTotalPrice = 0;
 
     private RecyclerView searchList;
+    RecyclerView.LayoutManager layoutManager1;
 
     private String productID = "";
 
@@ -67,10 +70,14 @@ public class CartActivity extends AppCompatActivity {
 
         txtTotalAmount = findViewById(R.id.total_price);
 
+        deleteBtn = findViewById(R.id.deleteBtn1);
         mAuth = FirebaseAuth.getInstance();
         recyclerView = findViewById(R.id.cart_list1);
         layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
+
+        layoutManager1 = new GridLayoutManager(this,2);
+        recyclerView1.setLayoutManager(layoutManager1);
 
 
         productImage1 = (ImageView) findViewById(R.id.cart_product_image);
@@ -103,8 +110,53 @@ public class CartActivity extends AppCompatActivity {
 
 
        // addTotaltoCart();
+        viewMoreProducts();
 
     }
+
+    private void viewMoreProducts() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+
+        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
+                .setQuery(reference.orderByChild("pname").limitToFirst(4),Products.class).build();
+
+        FirebaseRecyclerAdapter<Products, ProductViewHolder>
+                adapter = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder holder, int i, @NonNull @NotNull Products model) {
+
+
+                holder.txtProductName.setText(model.getPname());
+//                holder.txtProductDescription.setText(model.getDescription());
+                holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
+                Picasso.get().load(model.getImage()).into(holder.imageView);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(CartActivity.this, ProductDetailsActivity.class);
+                        intent.putExtra("pid", model.getPid());
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            @NonNull
+            @NotNull
+            @Override
+            public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layoutgrid, parent, false);
+                ProductViewHolder holder = new ProductViewHolder(view);
+                return holder;
+            }
+        };
+
+        searchList.setAdapter(adapter);
+        adapter.startListening();
+
+    }
+
 
     private void addTotaltoCart() {
         final DatabaseReference preOrderRef = FirebaseDatabase.getInstance().getReference().child("Cart List")
@@ -197,7 +249,7 @@ public class CartActivity extends AppCompatActivity {
 
                 totalView();
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                holder.imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         CharSequence options[] = new  CharSequence[]{
@@ -266,7 +318,7 @@ public class CartActivity extends AppCompatActivity {
             @NotNull
             @Override
             public CartViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout1,parent,false);
                 CartViewHolder holder = new CartViewHolder(view);
                 return holder;
 

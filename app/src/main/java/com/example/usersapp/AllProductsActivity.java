@@ -61,7 +61,7 @@ import io.paperdb.Paper;
     private boolean isMembersVisible= false;
     private int initialValue = 1,newQty=0;
     private String productID="";
-
+     private String productRandomKey;
     private ServerValue add;
 //    private String initialQty = "1";
 
@@ -227,7 +227,13 @@ import io.paperdb.Paper;
                         holder.tapBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                checkCartStatus();
+                                DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView").child(mAuth.getCurrentUser().getUid());
+                                productsRef.child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()) {
+                                            // Toast.makeText(AllProductsActivity.this, "Adding To cart", Toast.LENGTH_SHORT).show();
+
                                             String productID = model.getPid();
                                             String prdctName = model.getPname();
                                             int prdctPrice = model.getPrice();
@@ -243,6 +249,7 @@ import io.paperdb.Paper;
                                             saveCurrentTime = currentTime.format(callForDate.getTime());
 
 
+                                          //  productRandomKey = saveCurrentDate + saveCurrentTime;
                                             // String newQty = productQty;
 
                                             final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
@@ -281,10 +288,136 @@ import io.paperdb.Paper;
                                                             }
                                                         }
                                                     });
+//                                            Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
+//                                            startActivity(intent);
+//                                            finish();
+                                        } else {
+
+                                            String productID = model.getPid();
+                                            String prdctName = model.getPname();
+                                            int prdctPrice = model.getPrice();
+                                            //  String initQty ="1";
+                                            String imageUrl = model.getImage();
+
+                                            String saveCurrentTime, saveCurrentDate;
+                                            Calendar callForDate = Calendar.getInstance();
+                                            SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+                                            saveCurrentDate = currentDate.format(callForDate.getTime());
+
+                                            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+                                            saveCurrentTime = currentTime.format(callForDate.getTime());
+
+
+                                            productRandomKey = saveCurrentDate + saveCurrentTime;
+                                            // String newQty = productQty;
+
+                                            final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+
+                                            //final HashMap<String, object> cartMap = new HashMap<>();
+                                            final HashMap<String, Object> cartMap = new HashMap<>();
+                                            cartMap.put("pid", productID);
+                                            cartMap.put("pname", prdctName);
+                                            cartMap.put("price", prdctPrice);
+                                            cartMap.put("date", saveCurrentDate);
+                                            cartMap.put("time", saveCurrentTime);
+                                            cartMap.put("image",imageUrl);
+                                            cartMap.put("quantity",add.increment(1));
+                                            cartMap.put("discount", "");
+
+                                            cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
+                                                    .child(productID).updateChildren(cartMap)
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid()).child(productRandomKey)
+                                                                        .child("Products").child(productID)
+                                                                        .updateChildren(cartMap)
+                                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                            @Override
+                                                                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                                                                if (task.isSuccessful()) {
+                                                                                    Toast.makeText(AllProductsActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
+//                                                                                    Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
+//                                                                                    startActivity(intent);
+//                                                                                    finish();
+                                                                                }
+                                                                            }
+                                                                        });
+                                                            }
+                                                        }
+                                                    });
                                             Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
                                             startActivity(intent);
                                             finish();
+                                          //  Toast.makeText(AllProductsActivity.this, "Nothing to Show", Toast.LENGTH_SHORT).show();
 
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                              //  checkCartStatus();
+//                                            String productID = model.getPid();
+//                                            String prdctName = model.getPname();
+//                                            int prdctPrice = model.getPrice();
+//                                            //  String initQty ="1";
+//                                            String imageUrl = model.getImage();
+//
+//                                            String saveCurrentTime, saveCurrentDate;
+//                                            Calendar callForDate = Calendar.getInstance();
+//                                            SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+//                                            saveCurrentDate = currentDate.format(callForDate.getTime());
+//
+//                                            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+//                                            saveCurrentTime = currentTime.format(callForDate.getTime());
+//
+//
+//                                            // String newQty = productQty;
+//
+//                                            final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+//
+//                                            //final HashMap<String, object> cartMap = new HashMap<>();
+//                                            final HashMap<String, Object> cartMap = new HashMap<>();
+//                                            cartMap.put("pid", productID);
+//                                            cartMap.put("pname", prdctName);
+//                                            cartMap.put("price", prdctPrice);
+//                                            cartMap.put("date", saveCurrentDate);
+//                                            cartMap.put("time", saveCurrentTime);
+//                                            cartMap.put("image",imageUrl);
+//                                            cartMap.put("quantity",add.increment(1));
+//                                            cartMap.put("discount", "");
+//
+//                                            cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
+//                                                    .child(productID).updateChildren(cartMap)
+//                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                        @Override
+//                                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                                                            if (task.isSuccessful()) {
+//                                                                cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
+//                                                                        .child("Products").child(productID)
+//                                                                        .updateChildren(cartMap)
+//                                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                                            @Override
+//                                                                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                                                                                if (task.isSuccessful()) {
+//                                                                                    Toast.makeText(AllProductsActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
+////                                                                                    Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
+////                                                                                    startActivity(intent);
+////                                                                                    finish();
+//                                                                                }
+//                                                                            }
+//                                                                        });
+//                                                            }
+//                                                        }
+//                                                    });
+//                                            Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
+//                                            startActivity(intent);
+//                                            finish();
+//
 
 
                             }
@@ -306,10 +439,11 @@ import io.paperdb.Paper;
 
      private void checkCartStatus() {
          DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView").child(mAuth.getCurrentUser().getUid());
-         productsRef.child("Products").addValueEventListener(new ValueEventListener() {
+         productsRef.child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
              @Override
-             public void onDataChange(@NonNull DataSnapshot snapshot) {
+             public void onDataChange(DataSnapshot snapshot) {
                  if (snapshot.exists()) {
+
                      Toast.makeText(AllProductsActivity.this, "Adding To cart", Toast.LENGTH_SHORT).show();
                  } else {
                      Toast.makeText(AllProductsActivity.this, "Nothing to Show", Toast.LENGTH_SHORT).show();
@@ -318,7 +452,7 @@ import io.paperdb.Paper;
              }
 
              @Override
-             public void onCancelled(@NonNull DatabaseError error) {
+             public void onCancelled( DatabaseError error) {
 
              }
          });

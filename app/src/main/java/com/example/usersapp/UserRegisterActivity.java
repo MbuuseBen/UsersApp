@@ -110,7 +110,7 @@ public class UserRegisterActivity extends AppCompatActivity {
                                                 loadingBar.dismiss();
                                                 Toast.makeText(UserRegisterActivity.this, "You are Registered Successfully , Please Login",Toast.LENGTH_SHORT).show();
 
-                                                Intent intent = new Intent(UserRegisterActivity.this, UserLoginActivity.class);
+                                                Intent intent = new Intent(UserRegisterActivity.this, MainActivity.class);
 
                                                 startActivity(intent);
 

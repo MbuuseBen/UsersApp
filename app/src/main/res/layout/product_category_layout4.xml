@@ -28,23 +28,22 @@
                 android:id="@+id/product_image_calculator"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/calculator"
-                android:gravity="left"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:gravity="left"
+                android:scaleType="fitCenter"
+                android:src="@drawable/calculator" />
 
             <TextView
-                android:layout_width="70dp"
-                android:layout_height="20dp"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/category_txt_calculator"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
                 android:layout_below="@+id/product_image_calculator"
-                android:gravity="center"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:text="Calculators"
-                android:textSize="15dp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="15dp" />
 
         </RelativeLayout>
 
@@ -124,16 +123,15 @@
                 android:scaleType="fitCenter" />
 
             <TextView
+                android:id="@+id/category_txt_pens"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:id="@+id/category_txt_pens"
                 android:layout_below="@+id/product_image_pens"
-                android:gravity="left"
                 android:layout_centerHorizontal="true"
-                android:text="Pens"
-                android:textSize="15dp"
-                />
+                android:gravity="left"
+                android:text="Sets"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="15dp" />
 
         </RelativeLayout>
 
@@ -160,23 +158,22 @@
                 android:id="@+id/product_image_glue"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/glue_icon"
-                android:gravity="left"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:gravity="left"
+                android:scaleType="fitCenter"
+                android:src="@drawable/books" />
 
             <TextView
+                android:id="@+id/category_txt_glue"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:id="@+id/category_txt_glue"
                 android:layout_below="@+id/product_image_glue"
-                android:gravity="center"
                 android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="TextBooks"
                 android:textAlignment="center"
-                android:text="Glue"
-                android:textSize="15dp"
-                />
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="15dp" />
 
         </RelativeLayout>
 
@@ -191,22 +188,21 @@
                 android:id="@+id/product_image_clips"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/paper_clip_icon"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/paper_clip_icon" />
 
             <TextView
+                android:id="@+id/category_txt_clips"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:id="@+id/category_txt_clips"
                 android:layout_below="@+id/product_image_clips"
-                android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:text="Clips"
-                android:textSize="15dp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="15dp" />
         </RelativeLayout>
 
         <RelativeLayout
