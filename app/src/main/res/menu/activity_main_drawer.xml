@@ -25,10 +25,7 @@
             android:id="@+id/nav_categories"
             android:icon="@drawable/ic_baseline_list_24"
             android:title="Categories" />
-        <item
-            android:id="@+id/nav_pdfs"
-            android:icon="@drawable/ic_baseline_cloud_download_24"
-            android:title="Download Books in  Pdf" />
+
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_icon1"

@@ -200,7 +200,7 @@ public class CategoryPencils extends AppCompatActivity {
             @Override
             public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout1, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout2, parent, false);
                 ProductViewHolder holder = new ProductViewHolder(view);
                 return holder;
             }
@@ -245,7 +245,7 @@ public class CategoryPencils extends AppCompatActivity {
             @Override
             public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layoutgrid, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layouthorizontal1, parent, false);
                 ProductViewHolder holder = new ProductViewHolder(view);
                 return holder;
             }

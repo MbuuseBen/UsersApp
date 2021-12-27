@@ -21,36 +21,94 @@
             android:visibility="visible"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/search_product_name"
-                android:layout_width="220dp"
-                android:layout_height="40dp"
-                android:hint="Search for Products,Brands....."
-                android:textSize="14dp"
-                android:textColor="@android:color/white"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/input_design"
-                android:padding="10dp"
-                android:textColorHint="@android:color/white"/>
-
-
-            <TextView
-                android:id="@+id/search_product_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search"
-                android:textSize="18dp"
-                android:textAllCaps="true"
-                android:layout_marginLeft="5dp"
-                android:padding="10dp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-
-                />
+                <EditText
+                    android:id="@+id/search_product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/input_design"
+                    android:hint="Search for Products,Brands....."
+                    android:padding="10dp"
+                    android:layout_marginTop="7dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:textSize="14dp" />
 
 
+<!--            <TextView-->
+<!--                android:id="@+id/search_product_btn"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Search"-->
+<!--                android:textSize="18dp"-->
+<!--                android:textAllCaps="true"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:padding="10dp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="@android:color/white"-->
 
+<!--                />-->
+<!--                <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                    android:id="@+id/logoAppBarHome"-->
+<!--                    android:layout_width="35dp"-->
+<!--                    android:layout_height="35dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:layout_marginBottom="5dp" />-->
+
+
+
+            <!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent">-->
+
+<!--                <androidx.appcompat.widget.AppCompatCheckedTextView-->
+<!--                    android:id="@+id/goToSearch"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="32dp"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:layout_marginEnd="7dp"-->
+<!--                    android:layout_marginBottom="4dp"-->
+<!--                    android:layout_toStartOf="@id/logoAppBarHome"-->
+<!--                    android:background="@drawable/buttons"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    android:drawableStart="@drawable/search_icon"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:paddingStart="10dp"-->
+<!--                    android:text="  Search for Products,Brands"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:drawableTint="@color/black" />-->
+
+<!--                <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                    android:id="@+id/search_product_btn"-->
+<!--                    android:layout_width="35dp"-->
+<!--                    android:layout_height="35dp"-->
+<!--                    android:layout_margin="5dp"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:layout_alignParentEnd="true"/>-->
+
+                <ImageView
+                    android:id="@+id/search_product_btn"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    app:drawableTint="@color/white"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/search_product_name"
+                    android:src="@drawable/search_icon" />
+
+            </RelativeLayout>
 
 
         </com.google.android.material.appbar.MaterialToolbar>

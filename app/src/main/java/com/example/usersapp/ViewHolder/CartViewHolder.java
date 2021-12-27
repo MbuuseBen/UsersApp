@@ -11,9 +11,9 @@ import com.example.usersapp.R;
 
 public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView txtProductName, txtProductPrice,txtProductQuantity, txtTotal,txtSubTotal;
+    public TextView txtProductName, txtProductPrice,txtProductQuantity, txtTotal,txtSubTotal,txtSellerName;
     private ItemClickListner itemClickListner;
-    public ImageView imageView;
+    public ImageView imageView,deleteBtn1;
 
     public CartViewHolder(View itemView) {
         super(itemView);
@@ -23,6 +23,11 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         txtProductPrice = itemView.findViewById(R.id.cart_product_price);
         txtProductQuantity = itemView.findViewById(R.id.cart_product_quantity);
         txtSubTotal=itemView.findViewById(R.id.cart_product_subtotal);
+        deleteBtn1=(ImageView) itemView.findViewById(R.id.deleteBtn1);
+        txtSellerName = itemView.findViewById(R.id.seller_name);
+
+
+
 
     }
 
@@ -30,10 +35,6 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public void onClick(View view) {
 
         itemClickListner.onClick(view, getAdapterPosition(), false);
-    }
-
-    public void setItemClickListner(ItemClickListner itemClickListner){
-        this.itemClickListner = itemClickListner;
     }
 
 }

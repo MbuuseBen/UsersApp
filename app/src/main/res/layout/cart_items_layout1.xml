@@ -22,8 +22,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:gravity="left"
                 android:layout_marginTop="2dp"
+                android:gravity="left"
                 android:scaleType="fitCenter" />
 
             <TextView
@@ -96,7 +96,7 @@
                 android:textSize="12dp" />
 
             <TextView
-                android:id='@+id/shipping_detail'
+                android:id='@+id/seller_name'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cart_product_subtotal"

@@ -10,19 +10,19 @@
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
         android:id="@+id/row_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:layout_marginBottom="5dp"
         android:layout_marginLeft="30dp"
-        android:layout_height="wrap_content">
+        android:layout_marginBottom="5dp"
+        android:gravity="center">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
             android:id="@+id/calculator_category"
-            android:layout_margin="7dp"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp">
 
             <ImageView
                 android:id="@+id/product_image_calculator"
@@ -50,77 +50,75 @@
         <RelativeLayout
             android:id="@+id/pencil_category"
             android:layout_width="wrap_content"
-            android:layout_toEndOf="@+id/calculator_category"
+            android:layout_height="wrap_content"
             android:layout_margin="7dp"
-            android:layout_height="wrap_content">
+            android:layout_toEndOf="@+id/calculator_category">
 
             <ImageView
                 android:id="@+id/product_image_pencil"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/pencil"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/pencil" />
 
             <TextView
+                android:id="@+id/category_txt_pencil"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:id="@+id/category_txt_pencil"
                 android:layout_below="@+id/product_image_pencil"
-                android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:text="Pencils"
-                android:textSize="15dp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="15dp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/category_notebooks"
             android:layout_width="wrap_content"
-            android:layout_toEndOf="@+id/pencil_category"
+            android:layout_height="wrap_content"
             android:layout_margin="7dp"
-            android:layout_height="wrap_content">
+            android:layout_toEndOf="@+id/pencil_category">
 
 
             <ImageView
                 android:id="@+id/product_image_notebooks"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/notebooks"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/notebooks" />
 
             <TextView
+                android:id="@+id/category_txt_notebooks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:id="@+id/category_txt_notebooks"
                 android:layout_below="@+id/product_image_notebooks"
-                android:gravity="left"
                 android:layout_centerHorizontal="true"
+                android:gravity="left"
                 android:text="Notebooks"
-                android:textSize="15dp"
-                />
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="15dp" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/category_pens"
             android:layout_width="wrap_content"
-            android:layout_toEndOf="@+id/category_notebooks"
+            android:layout_height="wrap_content"
             android:layout_margin="7dp"
-            android:layout_height="wrap_content">
+            android:layout_toEndOf="@+id/category_notebooks">
 
 
             <ImageView
                 android:id="@+id/product_image_pens"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/calligraphy_pen"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/calligraphy_pen" />
 
             <TextView
                 android:id="@+id/category_txt_pens"
@@ -217,9 +215,9 @@
                 android:id="@+id/product_image_pins"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/pushpin"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/pushpin" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -246,10 +244,10 @@
                 android:id="@+id/product_image_stapler"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/stapler"
-                android:gravity="left"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:gravity="left"
+                android:scaleType="fitCenter"
+                android:src="@drawable/stapler" />
 
             <TextView
                 android:layout_width="wrap_content"

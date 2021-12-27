@@ -4,20 +4,28 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.example.usersapp.Categories.CategorySets;
 import com.example.usersapp.Model.Products;
 import com.example.usersapp.Prevalent.Prevalent;
+import com.example.usersapp.ViewHolder.ProductViewHolder;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,8 +60,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private DatabaseReference ProductsRef;
 
     private ServerValue add;
-
-
+    private RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
+    private RecyclerView searchList;
     private FirebaseAuth mAuth;
 
 
@@ -62,8 +71,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
 
+        recyclerView = findViewById(R.id.search_list1);
+        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerView.setLayoutManager(layoutManager);
 
-
+        searchList = findViewById(R.id.search_list1);
         productID = getIntent().getStringExtra("pid");
 
         addToCartButton = (Button) findViewById(R.id.pd_add_to_cart_button);
@@ -74,6 +86,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productPrice1 = (TextView) findViewById(R.id.product_price_details);
 
         getProductDetails(productID);
+        loadAllProductstoRecyclerview();
 
         viewProductDetails(productID);
         mAuth = FirebaseAuth.getInstance();
@@ -306,4 +319,51 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //
 //
 //    }
+
+    protected void loadAllProductstoRecyclerview() {
+
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+
+        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
+                .setQuery(reference.orderByChild("pname"),Products.class).build();
+
+        FirebaseRecyclerAdapter<Products, ProductViewHolder>
+                adapter = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder holder, int i, @NonNull @NotNull Products model) {
+
+
+                holder.txtProductName.setText(model.getPname());
+//                holder.txtProductDescription.setText(model.getDescription());
+                holder.txtProductPrice.setText("UGX " + model.getPrice());
+                Picasso.get().load(model.getImage()).into(holder.imageView);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(ProductDetailsActivity.this, ProductDetailsActivity.class);
+                        intent.putExtra("pid", model.getPid());
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            @NonNull
+            @NotNull
+            @Override
+            public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layouthorizontal1, parent, false);
+                ProductViewHolder holder = new ProductViewHolder(view);
+                return holder;
+            }
+        };
+
+        searchList.setAdapter(adapter);
+        adapter.startListening();
+
+
+
+    }
 }

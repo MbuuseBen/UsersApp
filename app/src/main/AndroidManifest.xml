@@ -24,6 +24,28 @@
         <activity
             android:name=".Categories.CategoryNotebooks"
             android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".Categories.CategoryClips"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Categories.CategoryCutters"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Categories.CategoryPushPins"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Categories.CategoryPunch"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Categories.CategoryStapler"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Categories.CategoryTape"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Categories.CategoryRulers"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Categories.CategoryTextbooks"
             android:parentActivityName=".MainActivity" />

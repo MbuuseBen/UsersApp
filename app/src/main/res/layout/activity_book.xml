@@ -116,7 +116,7 @@
                 android:layout_below="@+id/picture_frame"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/three"
+                android:src="@drawable/x"
                 />
 
         </androidx.cardview.widget.CardView>
@@ -260,7 +260,7 @@
                 android:layout_below="@+id/picture_frame"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/one"
+                android:src="@drawable/offer"
                 />
 
         </androidx.cardview.widget.CardView>

@@ -12,10 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.usersapp.Categories.CategoryClips;
 import com.example.usersapp.Categories.CategoryNotebooks;
-import com.example.usersapp.Categories.CategoryPencils;
+import com.example.usersapp.Categories.CategoryPushPins;
 import com.example.usersapp.Categories.CategorySets;
+import com.example.usersapp.Categories.CategoryStapler;
 import com.example.usersapp.Categories.CategoryTextbooks;
+import com.example.usersapp.Categories.CategoryPencils;
 import com.example.usersapp.Categories.Categorycalculators;
 import com.example.usersapp.Categories.Productcategories;
 import com.example.usersapp.Model.Products;
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity
    private  AppBarLayout topBar1;
 
     private ImageView viewCalculators,viewPencils,viewNotebooks,viewTextbooks,viewSets;
+    private ImageView viewClips,viewPushpins,viewStaplers;
 
     private TextView seeAllProducts,seeAllCategories;
     private  TextView seeAllPencils,seeAllCalculators,seeAllNovels;
@@ -219,6 +223,33 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CategoryTextbooks.class);
+                startActivity(intent);
+            }
+        });
+
+        viewClips = findViewById(R.id.product_image_clips);
+        viewClips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CategoryClips.class);
+                startActivity(intent);
+            }
+        });
+
+        viewPushpins = findViewById(R.id.product_image_pins);
+        viewPushpins.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CategoryPushPins.class);
+                startActivity(intent);
+            }
+        });
+
+        viewStaplers = findViewById(R.id.product_image_stapler);
+        viewStaplers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CategoryStapler.class);
                 startActivity(intent);
             }
         });
@@ -599,7 +630,7 @@ public class MainActivity extends AppCompatActivity
 ////                Intent intent = new Intent(MainActivity.this, CartActivity.class);
 ////                startActivity(intent);
 //
-            checkCart();
+//            checkCart();
 //
 //        }
 //        else

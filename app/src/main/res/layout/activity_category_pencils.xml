@@ -48,7 +48,7 @@
                     android:layout_below="@+id/picture_frame"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/eight"
+                    android:src="@drawable/y"
                     />
 
             </androidx.cardview.widget.CardView>

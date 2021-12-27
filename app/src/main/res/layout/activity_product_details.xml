@@ -390,8 +390,60 @@
 <!--                android:text="Add to Cart"-->
 <!--                android:textColor="@android:color/white"-->
 <!--                android:textSize="18dp" />-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:isScrollContainer="true" >
+            <TextView
+                android:id="@+id/txtcalculators"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="0dp"
+                android:gravity="left"
+                android:text="CUSTOMERS ALSO BOUGHT"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
 
+            <TextView
+                android:id="@+id/see_all_products"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="10dp"
+                android:layout_toEndOf="@+id/txtcalculators"
+                android:gravity="right"
+                android:text="SEE MORE"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/cardview1"
+                android:layout_below="@+id/see_all_products"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/search_list1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical">
+                </androidx.recyclerview.widget.RecyclerView>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
 
         </LinearLayout>
 

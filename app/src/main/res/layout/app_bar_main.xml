@@ -24,6 +24,8 @@
 
     <include layout="@layout/activity_book" />
 
+
+
 <!--    <include layout="@layout/activity_book" />-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

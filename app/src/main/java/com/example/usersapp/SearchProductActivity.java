@@ -40,7 +40,7 @@ import org.jetbrains.annotations.NotNull;
 public class SearchProductActivity extends AppCompatActivity {
 
 //    private ImageView SearchBtn;
-    private TextView SearchBtn;
+    private ImageView SearchBtn;
     private EditText inputText;
     private RecyclerView searchList;
     private String SearchInput;
@@ -237,7 +237,7 @@ public class SearchProductActivity extends AppCompatActivity {
             @Override
             public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout1, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout2, parent, false);
                 ProductViewHolder holder = new ProductViewHolder(view);
                 return holder;
             }

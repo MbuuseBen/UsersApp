@@ -46,14 +46,15 @@ import java.util.HashMap;
 public class CartActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView,recyclerView1;
+    private RecyclerView moreView;
     private RecyclerView.LayoutManager layoutManager;
     private Button NextProcessBtn,checkOutBtn;
     private ImageView productImage1,deleteBtn;
-    private TextView txtTotalAmount,txtmsg1;
+    private TextView txtTotalAmount,txtmsg1,sellername;
     private int overTotalPrice = 0;
 
     private RecyclerView searchList;
-    RecyclerView.LayoutManager layoutManager1;
+    private RecyclerView.LayoutManager layoutManager1;
 
     private String productID = "";
 
@@ -72,13 +73,16 @@ public class CartActivity extends AppCompatActivity {
 
         deleteBtn = findViewById(R.id.deleteBtn1);
         mAuth = FirebaseAuth.getInstance();
+
         recyclerView = findViewById(R.id.cart_list1);
         layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
 
+        moreView =findViewById(R.id.search_list1);
         layoutManager1 = new GridLayoutManager(this,2);
-        recyclerView1.setLayoutManager(layoutManager1);
+        moreView.setLayoutManager(layoutManager1);
 
+        sellername  = findViewById(R.id.seller_name);
 
         productImage1 = (ImageView) findViewById(R.id.cart_product_image);
 
@@ -152,7 +156,7 @@ public class CartActivity extends AppCompatActivity {
             }
         };
 
-        searchList.setAdapter(adapter);
+        moreView.setAdapter(adapter);
         adapter.startListening();
 
     }
@@ -244,12 +248,13 @@ public class CartActivity extends AppCompatActivity {
                 overTotalPrice = overTotalPrice + oneTypeProductTPrice;
 
                 holder.txtProductName.setText(model.getPname());
+                holder.txtSellerName.setText(model.getSeller());
                 holder.txtSubTotal.setText("Sub Total : UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(subTotal)));
 
 
                 totalView();
 
-                holder.imageView.setOnClickListener(new View.OnClickListener() {
+                holder.deleteBtn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         CharSequence options[] = new  CharSequence[]{
@@ -338,8 +343,6 @@ public class CartActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
 //    private void CheckOrderState() {

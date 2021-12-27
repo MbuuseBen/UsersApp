@@ -1,7 +1,7 @@
 package com.example.usersapp.Model;
 
 public class Cart {
-    public String pid, pname, image,discount;
+    public String pid, pname, image,discount,seller;
     public int price, quantity;
 
 
@@ -9,13 +9,15 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(String pid, String pname, String image, String discount, int price, int quantity) {
+    public Cart(String pid, String pname, String image, String discount, int price, int quantity,String seller) {
         this.pid = pid;
         this.pname = pname;
         this.image = image;
         this.discount = discount;
         this.price = price;
+        this.seller = seller;
         this.quantity = quantity;
+
     }
 
     public String getPid() {
@@ -48,6 +50,14 @@ public class Cart {
 
     public void setDiscount(String discount) {
         this.discount = discount;
+    }
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
     }
 
     public int getPrice() {
