@@ -2,7 +2,7 @@ package com.example.usersapp.Model;
 
 public class Products
 {
-    private String pname, description, image, category, pid, date, time, productState;
+    private String pname, description, image, category, pid, date, time, productState,sellerName,sellerEmail,sellerAddress;
     private int price,quantity;
 
     public Products()
@@ -10,7 +10,7 @@ public class Products
 
     }
 
-    public Products(String pname, String description, String image, String category, String pid, String date, String time, String productState, int price, int quantity) {
+    public Products(String pname, String description, String image, String category, String pid, String date, String time, String productState, String sellerName, String sellerEmail, String sellerAddress, int price, int quantity) {
         this.pname = pname;
         this.description = description;
         this.image = image;
@@ -19,6 +19,9 @@ public class Products
         this.date = date;
         this.time = time;
         this.productState = productState;
+        this.sellerName = sellerName;
+        this.sellerEmail = sellerEmail;
+        this.sellerAddress = sellerAddress;
         this.price = price;
         this.quantity = quantity;
     }
@@ -85,6 +88,30 @@ public class Products
 
     public void setProductState(String productState) {
         this.productState = productState;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
+
+    public String getSellerEmail() {
+        return sellerEmail;
+    }
+
+    public void setSellerEmail(String sellerEmail) {
+        this.sellerEmail = sellerEmail;
+    }
+
+    public String getSellerAddress() {
+        return sellerAddress;
+    }
+
+    public void setSellerAddress(String sellerAddress) {
+        this.sellerAddress = sellerAddress;
     }
 
     public int getPrice() {

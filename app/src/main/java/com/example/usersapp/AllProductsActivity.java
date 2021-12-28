@@ -236,6 +236,7 @@ import io.paperdb.Paper;
 
                                             String productID = model.getPid();
                                             String prdctName = model.getPname();
+                                            String sellerName= model.getSellerName();
                                             int prdctPrice = model.getPrice();
                                             //  String initQty ="1";
                                             String imageUrl = model.getImage();
@@ -262,6 +263,7 @@ import io.paperdb.Paper;
                                             cartMap.put("date", saveCurrentDate);
                                             cartMap.put("time", saveCurrentTime);
                                             cartMap.put("image",imageUrl);
+                                            cartMap.put("sellerName",sellerName);
                                             cartMap.put("quantity",add.increment(1));
                                             cartMap.put("discount", "");
 
@@ -297,6 +299,7 @@ import io.paperdb.Paper;
                                             String prdctName = model.getPname();
                                             int prdctPrice = model.getPrice();
                                             //  String initQty ="1";
+                                            String sellerName= model.getSellerName();
                                             String imageUrl = model.getImage();
 
                                             String saveCurrentTime, saveCurrentDate;
@@ -321,6 +324,7 @@ import io.paperdb.Paper;
                                             cartMap.put("date", saveCurrentDate);
                                             cartMap.put("time", saveCurrentTime);
                                             cartMap.put("image",imageUrl);
+                                            cartMap.put("sellerName",sellerName);
                                             cartMap.put("quantity",add.increment(1));
                                             cartMap.put("discount", "");
 

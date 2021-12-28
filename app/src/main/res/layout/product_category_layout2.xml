@@ -127,10 +127,10 @@
                 android:id="@+id/product_image_glue"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/glue_icon"
-                android:gravity="left"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:gravity="left"
+                android:scaleType="fitCenter"
+                android:src="@drawable/glue_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -158,9 +158,9 @@
                 android:id="@+id/product_image_clips"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/paper_clip_icon"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/paper_clip_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -210,100 +210,97 @@
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
         android:id="@+id/row_three"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/row_two"
         android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content">
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
             android:id="@+id/category_stapler"
-            android:layout_margin="5dp"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
             <ImageView
                 android:id="@+id/product_image_stapler"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/stapler"
-                android:gravity="left"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:gravity="left"
+                android:scaleType="fitCenter"
+                android:src="@drawable/stapler" />
 
             <TextView
+                android:id="@+id/category_txt_stapler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:id="@+id/category_txt_stapler"
                 android:layout_below="@+id/product_image_stapler"
-                android:gravity="center"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:text="Staplers"
-                android:textSize="20sp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rulers_category"
             android:layout_width="wrap_content"
-            android:layout_toEndOf="@+id/category_stapler"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_height="wrap_content">
+            android:layout_toEndOf="@+id/category_stapler">
 
             <ImageView
                 android:id="@+id/product_image_rulers"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/ruler"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/ruler" />
 
             <TextView
+                android:id="@+id/category_txt_rulers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:id="@+id/category_txt_rulers"
                 android:layout_below="@+id/product_image_rulers"
-                android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:text="Rulers"
-                android:textSize="20sp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/category_scissors"
             android:layout_width="wrap_content"
-            android:layout_toEndOf="@+id/rulers_category"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_height="wrap_content">
+            android:layout_toEndOf="@+id/rulers_category">
 
 
             <ImageView
                 android:id="@+id/product_image_scissors"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/scissors_color"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/scissors_color" />
 
             <TextView
+                android:id="@+id/category_txt_scissors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:id="@+id/category_txt_scissors"
                 android:layout_below="@+id/product_image_scissors"
-                android:gravity="left"
                 android:layout_centerHorizontal="true"
+                android:gravity="left"
                 android:text="Scissors"
-                android:textSize="20sp"
-                />
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
@@ -361,22 +358,21 @@
                 android:id="@+id/product_image_tape"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/tape"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/tape" />
 
             <TextView
+                android:id="@+id/category_txt_tape"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:id="@+id/category_txt_tape"
                 android:layout_below="@+id/product_image_tape"
-                android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:text="Tape"
-                android:textSize="20sp"
-                />
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -391,9 +387,9 @@
                 android:id="@+id/product_image_cutter"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/danger_cutter"
                 android:layout_marginTop="2dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/danger_cutter" />
 
             <TextView
                 android:layout_width="wrap_content"

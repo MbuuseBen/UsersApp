@@ -183,6 +183,9 @@ public class CartActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                       //  Toast.makeText(CartActivity.this, "Total Added Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
+                        intent.putExtra("TotalAmount", overTotalPrice);
+                        startActivity(intent);
                     }
                 });
     }
@@ -197,9 +200,9 @@ public class CartActivity extends AppCompatActivity {
 //                    ConfirmOrder();
 
                     addTotaltoCart();
-                    Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
-                    intent.putExtra("TotalAmount", overTotalPrice);
-                    startActivity(intent);
+//                    Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
+//                    intent.putExtra("TotalAmount", overTotalPrice);
+//                    startActivity(intent);
                 }else {
                     Toast.makeText(CartActivity.this, "Address Details Required.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(CartActivity.this, SettingsActivity.class);
@@ -248,9 +251,20 @@ public class CartActivity extends AppCompatActivity {
                 overTotalPrice = overTotalPrice + oneTypeProductTPrice;
 
                 holder.txtProductName.setText(model.getPname());
-                holder.txtSellerName.setText(model.getSeller());
+                holder.txtSellerName.setText("Seller : " +model.getSellerName());
                 holder.txtSubTotal.setText("Sub Total : UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(subTotal)));
 
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = new Intent(CartActivity.this, ProductDetailsActivity.class);
+                        intent.putExtra("pid", model.getPid());
+                        startActivity(intent);
+                    }
+
+
+                });
 
                 totalView();
 
@@ -274,7 +288,7 @@ public class CartActivity extends AppCompatActivity {
                                     startActivity(intent);
 
                                 }
-                                if (i==1){
+                                 if (i==1){
                                     cartListRef.child("UserView")
                                             .child(mAuth.getCurrentUser().getUid())
                                             .child("Products")

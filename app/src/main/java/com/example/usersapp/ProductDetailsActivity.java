@@ -51,6 +51,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private ElegantNumberButton numberButton;
 //    private TextView productPrice, productDescription, productName;
     private TextView productPrice1, productDescription1, productName1;
+    private TextView sellerName,sellerEmail,sellerAddress;
     private String productID = "", state = "Normal",imageUrl;
     private int productPrice;
     private String productDescription;
@@ -84,6 +85,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productName1 = (TextView) findViewById(R.id.product_name_details);
         productDescription1 = (TextView) findViewById(R.id.product_description_details);
         productPrice1 = (TextView) findViewById(R.id.product_price_details);
+
+        sellerName = (TextView) findViewById(R.id.sellers_name);
+        sellerEmail = (TextView) findViewById(R.id.sellers_email);
+        sellerAddress = (TextView) findViewById(R.id.sellers_address);
 
         getProductDetails(productID);
         loadAllProductstoRecyclerview();
@@ -130,6 +135,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productPrice1.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(products.getPrice())));
                     productDescription1.setText(products.getDescription());
                     Picasso.get().load(products.getImage()).into(productImage1);
+
+                    sellerName.setText("Seller Name : " +products.getSellerName());
+                    sellerEmail.setText("Email : " +products.getSellerEmail());
+                    sellerAddress.setText("Address : " +products.getSellerAddress());
 
                 }
             }
