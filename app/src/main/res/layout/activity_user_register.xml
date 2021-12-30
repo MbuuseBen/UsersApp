@@ -39,73 +39,74 @@
         android:textStyle="bold"
         android:gravity="center" />
 
-    <EditText
-        android:id="@+id/seller_f_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title_seller"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:hint="First Name"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/input_design1"
-        />
-    <EditText
-        android:id="@+id/seller_l_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/seller_f_name"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:hint="Last Name"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/input_design1"
-        />
+            <EditText
+                android:id="@+id/seller_f_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_seller"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/input_design1"
+                android:drawableStart="@drawable/ic_baseline_account_circle_24"
+                android:hint="First Name"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/seller_l_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seller_f_name"
+                android:layout_marginLeft="15dp"
+                android:drawableStart="@drawable/ic_baseline_account_circle_24"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/input_design1"
+                android:hint="Last Name"
+                android:padding="10dp" />
 
 
-    <EditText
-        android:id="@+id/seller_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/seller_l_name"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:hint="PhoneNumber..."
-        android:inputType="number"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/input_design1"
-        />
+            <EditText
+                android:id="@+id/seller_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seller_l_name"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/input_design1"
+                android:drawableStart="@drawable/ic_baseline_phone_iphone_24"
+                android:hint="PhoneNumber"
+                android:inputType="number"
+                android:padding="10dp" />
 
-    <EditText
-        android:id="@+id/seller_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/seller_phone"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:inputType="textEmailAddress"
-        android:hint="Email Address"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/input_design1"
-        />
+            <EditText
+                android:id="@+id/seller_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seller_phone"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/input_design1"
+                android:drawableStart="@drawable/ic_baseline_email_icon1"
+                android:hint="Email Address"
+                android:inputType="textEmailAddress"
+                android:padding="10dp" />
 
-    <EditText
-        android:id="@+id/seller_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/seller_email"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/input_design1"
-        />
+            <EditText
+                android:id="@+id/seller_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seller_email"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/input_design1"
+                android:drawableStart="@drawable/ic_baseline_lock_open_24"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="10dp" />
 
 
 
@@ -127,21 +128,19 @@
         />
 
 
-
-    <TextView
-        android:id="@+id/login_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Already registered? Login"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/seller_register_btn"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="15dp"
-        />
+            <TextView
+                android:id="@+id/login_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seller_register_btn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="15dp"
+                android:text="Already registered? Login"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20dp"
+                 />
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>

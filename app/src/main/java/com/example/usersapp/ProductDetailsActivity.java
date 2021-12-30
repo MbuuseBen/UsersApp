@@ -111,12 +111,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 addingToCartList();
 
-                if (state.equals("Order Placed") || state.equals("order Shipped")) {
-
-                    Toast.makeText(ProductDetailsActivity.this, "You can continue Shopping with us ",Toast.LENGTH_LONG ).show();
-                }else {
-                    addingToCartList();
-                }
+//                if (state.equals("Order Placed") || state.equals("order Shipped")) {
+//
+//                    Toast.makeText(ProductDetailsActivity.this, "You can continue Shopping with us ",Toast.LENGTH_LONG ).show();
+//                }else {
+//                    addingToCartList();
+//                }
             }
         });
 
@@ -242,7 +242,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);
         cartMap.put("image",imageUrl);
-        cartMap.put("quantity",add.increment((Integer.parseInt(numberButton.getNumber()))-1));
+        cartMap.put("quantity",add.increment((Integer.parseInt(numberButton.getNumber()))));
         cartMap.put("discount", "");
 
        // add.increment(1)

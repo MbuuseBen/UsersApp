@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.usersapp.AllProductsActivity;
 import com.example.usersapp.CartActivity;
 import com.example.usersapp.MainActivity;
 import com.example.usersapp.Model.Products;
@@ -25,16 +26,23 @@ import com.example.usersapp.R;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class CategoryNotebooks extends AppCompatActivity {
 
@@ -50,7 +58,8 @@ public class CategoryNotebooks extends AppCompatActivity {
 
     private String categoryNotebook="notebook";
 
-
+    private String productRandomKey;
+    private ServerValue add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,13 +201,157 @@ public class CategoryNotebooks extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+                holder.tapBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView").child(mAuth.getCurrentUser().getUid());
+                        productsRef.child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    // Toast.makeText(AllProductsActivity.this, "Adding To cart", Toast.LENGTH_SHORT).show();
+
+                                    String productID = model.getPid();
+                                    String prdctName = model.getPname();
+                                    String sellerName= model.getSellerName();
+                                    int prdctPrice = model.getPrice();
+                                    //  String initQty ="1";
+                                    String imageUrl = model.getImage();
+
+                                    String saveCurrentTime, saveCurrentDate;
+                                    Calendar callForDate = Calendar.getInstance();
+                                    SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+                                    saveCurrentDate = currentDate.format(callForDate.getTime());
+
+                                    SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+                                    saveCurrentTime = currentTime.format(callForDate.getTime());
+
+
+                                    //  productRandomKey = saveCurrentDate + saveCurrentTime;
+                                    // String newQty = productQty;
+
+                                    final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+
+                                    //final HashMap<String, object> cartMap = new HashMap<>();
+                                    final HashMap<String, Object> cartMap = new HashMap<>();
+                                    cartMap.put("pid", productID);
+                                    cartMap.put("pname", prdctName);
+                                    cartMap.put("price", prdctPrice);
+                                    cartMap.put("date", saveCurrentDate);
+                                    cartMap.put("time", saveCurrentTime);
+                                    cartMap.put("image",imageUrl);
+                                    cartMap.put("sellerName",sellerName);
+                                    cartMap.put("quantity",add.increment(1));
+                                    cartMap.put("discount", "");
+
+                                    cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
+                                            .child(productID).updateChildren(cartMap)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
+                                                                .child("Products").child(productID)
+                                                                .updateChildren(cartMap)
+                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            Toast.makeText(CategoryNotebooks.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
+//                                                                                    Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
+//                                                                                    startActivity(intent);
+//                                                                                    finish();
+                                                                        }
+                                                                    }
+                                                                });
+                                                    }
+                                                }
+                                            });
+//                                            Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
+//                                            startActivity(intent);
+//                                            finish();
+                                } else {
+
+                                    String productID = model.getPid();
+                                    String prdctName = model.getPname();
+                                    int prdctPrice = model.getPrice();
+                                    //  String initQty ="1";
+                                    String sellerName= model.getSellerName();
+                                    String imageUrl = model.getImage();
+
+                                    String saveCurrentTime, saveCurrentDate;
+                                    Calendar callForDate = Calendar.getInstance();
+                                    SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+                                    saveCurrentDate = currentDate.format(callForDate.getTime());
+
+                                    SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+                                    saveCurrentTime = currentTime.format(callForDate.getTime());
+
+
+                                    productRandomKey = saveCurrentDate + saveCurrentTime;
+                                    // String newQty = productQty;
+
+                                    final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+
+                                    //final HashMap<String, object> cartMap = new HashMap<>();
+                                    final HashMap<String, Object> cartMap = new HashMap<>();
+                                    cartMap.put("pid", productID);
+                                    cartMap.put("pname", prdctName);
+                                    cartMap.put("price", prdctPrice);
+                                    cartMap.put("date", saveCurrentDate);
+                                    cartMap.put("time", saveCurrentTime);
+                                    cartMap.put("image",imageUrl);
+                                    cartMap.put("sellerName",sellerName);
+                                    cartMap.put("quantity",add.increment(1));
+                                    cartMap.put("discount", "");
+
+                                    cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
+                                            .child(productID).updateChildren(cartMap)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid()).child(productRandomKey)
+                                                                .child("Products").child(productID)
+                                                                .updateChildren(cartMap)
+                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            Toast.makeText(CategoryNotebooks.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
+//                                                                                    Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
+//                                                                                    startActivity(intent);
+//                                                                                    finish();
+                                                                        }
+                                                                    }
+                                                                });
+                                                    }
+                                                }
+                                            });
+                                    Intent intent = new Intent(CategoryNotebooks.this, AllProductsActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                    //  Toast.makeText(AllProductsActivity.this, "Nothing to Show", Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+
+                    }
+                });
             }
 
             @NonNull
-            @NotNull
             @Override
-            public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-
+            public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+            {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout2, parent, false);
                 ProductViewHolder holder = new ProductViewHolder(view);
                 return holder;
