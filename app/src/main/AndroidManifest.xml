@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.usersapp">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -14,17 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UsersApp.NoActionBar"
         tools:replace="android:theme">
-<!--        <activity android:name=".OrderProductsActivity"-->
-<!--            android:parentActivityName=".OrdersActivity"            />-->
-        <activity android:name=".OrdersActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <!-- <activity android:name=".OrderProductsActivity" -->
+        <!-- android:parentActivityName=".OrdersActivity"            /> -->
+        <activity
+            android:name=".OrdersActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Categories.Categorycalculators"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Categories.CategoryNotebooks"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".Categories.CategoryClips"
             android:parentActivityName=".MainActivity" />
@@ -95,7 +97,7 @@
         <activity android:name=".UserRegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".SplashScreenActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.UsersApp.NoActionBar">
             <meta-data

@@ -1,4 +1,4 @@
- package com.example.usersapp;
+package com.example.usersapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.usersapp.Model.CartList;
 import com.example.usersapp.Model.CartTotal;
 import com.example.usersapp.Model.Users;
+import com.flutterwave.raveandroid.rave_presentation.RavePayManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,7 +64,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         getOrderDetails();
         getDetails();
         viewTotal = (TextView) findViewById(R.id.total_price);
-     //   getCartItems();
+        //   getCartItems();
 
         f_Name = findViewById(R.id.first_name);
         lName = findViewById(R.id.last_name);
@@ -114,26 +115,26 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     private void viewSum() {
         DatabaseReference CartTotal = FirebaseDatabase.getInstance().getReference().child("Cart List");
-                CartTotal.child("UserView").child(mAuth.getCurrentUser().getUid()).child("CartTotal")
+        CartTotal.child("UserView").child(mAuth.getCurrentUser().getUid()).child("CartTotal")
                 .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    CartTotal cart = dataSnapshot.getValue(CartTotal.class);
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            CartTotal cart = dataSnapshot.getValue(CartTotal.class);
 
-                    viewTotal.setText("Total :   UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(cart.getTotal())));
+                            viewTotal.setText("Total :   UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(cart.getTotal())));
 
-                    productTotal = cart.getTotal();
-                  //  Picasso.get().load(products.getImage()).into(productImage1);
+                            productTotal = cart.getTotal();
+                            //  Picasso.get().load(products.getImage()).into(productImage1);
 
-                }
-            }
+                        }
+                    }
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-            }
-        });
+                    }
+                });
     }
 
 
@@ -225,19 +226,19 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             {
                 if (dataSnapshot.exists())
                 {
-                        String firstname = dataSnapshot.child("firstname").getValue().toString();
-                        String lastname = dataSnapshot.child("lastname").getValue().toString();
-                        String phone = dataSnapshot.child("Phone").getValue().toString();
-                        String address = dataSnapshot.child("address").getValue().toString();
-                        String email = dataSnapshot.child("email").getValue().toString();
+                    String firstname = dataSnapshot.child("firstname").getValue().toString();
+                    String lastname = dataSnapshot.child("lastname").getValue().toString();
+                    String phone = dataSnapshot.child("Phone").getValue().toString();
+                    String address = dataSnapshot.child("address").getValue().toString();
+                    String email = dataSnapshot.child("email").getValue().toString();
 
-                        f_Name.setText(firstname);
-                        lName.setText(lastname);
-                        userphone.setText(phone);
-                        useraddress.setText(address);
-                        useremail.setText(email);
-                    }
+                    f_Name.setText(firstname);
+                    lName.setText(lastname);
+                    userphone.setText(phone);
+                    useraddress.setText(address);
+                    useremail.setText(email);
                 }
+            }
 
 
             @Override
@@ -246,6 +247,10 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             }
         });
     }
+
+//    private void checkout(){
+//        RavePayManager ravePayManager = new RavePayManager(ConfirmFinalOrderActivity.this);
+//    }
 
 
     private void ConfirmOrder() {
