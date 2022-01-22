@@ -1,6 +1,7 @@
 package com.example.usersapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,7 +17,9 @@ import android.widget.Toast;
 import com.example.usersapp.Model.CartList;
 import com.example.usersapp.Model.CartTotal;
 import com.example.usersapp.Model.Users;
-import com.flutterwave.raveandroid.rave_presentation.RavePayManager;
+import com.flutterwave.raveandroid.RaveConstants;
+import com.flutterwave.raveandroid.RavePayActivity;
+import com.flutterwave.raveandroid.RavePayManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +35,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
@@ -42,8 +46,9 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private int productTotal;
     private String productRandomKey;
 
-    private String totalAmount = "",address="address";
+    private String address="address";
 
+    private int totalAmount;
     private FirebaseAuth mAuth;
 
 
@@ -62,9 +67,11 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 //        CheckAddress();
         viewUserDetails();
         getOrderDetails();
-        getDetails();
+   //     getDetails();
         viewTotal = (TextView) findViewById(R.id.total_price);
         //   getCartItems();
+
+        totalAmount = getIntent().getIntExtra("TotalAmount",0);
 
         f_Name = findViewById(R.id.first_name);
         lName = findViewById(R.id.last_name);
@@ -86,17 +93,11 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConfirmOrder();
+               // ConfirmOrder();
+                makePayment();
             }
         });
 
-//
-//        confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                CheckAddress();
-//            }
-//        });
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
@@ -167,54 +168,55 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     }
 
-//    private void getCartItems() {
-//        DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List")
-//                .child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products");
-//
-//        cartListRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                CartList cart = snapshot.getValue(CartList.class);
-//                cartItems = cart.getProducts();
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//
-//    }
 
-    private void getDetails() {
+    private void makePayment() {
 
+        UUID uuid = UUID.randomUUID();
 
-        DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child(mAuth.getCurrentUser().getUid());
-        ordersRef.child("Products").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    CartList items = dataSnapshot.getValue(CartList.class);
-                    cartItems = items.getProducts();
-//                    productName = products.getPname();
-//                    productPrice = products.getPrice();
-//                    productDescription = products.getDescription();
-//                    imageUrl = products.getImage();
+        // txRef =  UUID.randomUUID().toString();
+        new RavePayManager(this)
+                //.setAmount(Double.parseDouble("500"))
+                .setAmount(Double.valueOf(totalAmount))
+                .setEmail("mbuusebeng@gmail.com")
+                .setCountry("KE")
+                //.setCountry("UG")
+                .setCurrency("KES")
+                // .setCurrency("UGX")
+                .setfName(first_Name)
+                .setlName(last_Name)
+                .setNarration("Purchase Goods")
+                .setPublicKey("FLWPUBK_TEST-4fe17da3cf824a6c097c8c2fccc54899-X")
+                .setEncryptionKey("FLWSECK_TEST6cbcb474d3f7")
+                .setTxRef(uuid.toString())
+                .acceptAccountPayments(true)
+                .acceptCardPayments(true)
+                .acceptMpesaPayments(true)
+                .acceptUgMobileMoneyPayments(true)
+                .onStagingEnv(false)
+                .shouldDisplayFee(true)
+                .showStagingLabel(true)
+                .initialize();
 
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == RaveConstants.RAVE_REQUEST_CODE && data != null) {
+            String message = data.getStringExtra("response");
+            if (resultCode == RavePayActivity.RESULT_SUCCESS) {
+                Toast.makeText(this, "PAYMENT SUCCESSFUL " , Toast.LENGTH_LONG).show();
+                ConfirmOrder();
+            }
+            else if (resultCode == RavePayActivity.RESULT_ERROR) {
+                Toast.makeText(this, "ERROR " + message, Toast.LENGTH_LONG).show();
+            }
+            else if (resultCode == RavePayActivity.RESULT_CANCELLED) {
+                Toast.makeText(this, "CANCELLED " + message, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
     private void viewUserDetails() {
 
@@ -247,10 +249,6 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             }
         });
     }
-
-//    private void checkout(){
-//        RavePayManager ravePayManager = new RavePayManager(ConfirmFinalOrderActivity.this);
-//    }
 
 
     private void ConfirmOrder() {

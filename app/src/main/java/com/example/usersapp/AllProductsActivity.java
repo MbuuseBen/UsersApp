@@ -342,9 +342,7 @@ import io.paperdb.Paper;
                                                                             public void onComplete(@NonNull @NotNull Task<Void> task) {
                                                                                 if (task.isSuccessful()) {
                                                                                     Toast.makeText(AllProductsActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
-//                                                                                    Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
-//                                                                                    startActivity(intent);
-//                                                                                    finish();
+
                                                                                 }
                                                                             }
                                                                         });

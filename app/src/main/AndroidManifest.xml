@@ -3,7 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.usersapp">
 
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.Manifest.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,9 +18,20 @@
         android:theme="@style/Theme.UsersApp.NoActionBar"
         tools:replace="android:theme">
         <activity
+            android:name=".Terms"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".Privacy"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".WishListActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".HomeActivity"
-            android:exported="false" />
-        <!-- <activity android:name=".OrderProductsActivity" -->
+            android:exported="false" /> <!-- <activity android:name=".OrderProductsActivity" -->
         <!-- android:parentActivityName=".OrdersActivity"            /> -->
         <activity
             android:name=".OrdersActivity"

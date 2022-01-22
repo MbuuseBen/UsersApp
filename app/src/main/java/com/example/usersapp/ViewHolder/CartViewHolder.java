@@ -13,7 +13,7 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     public TextView txtProductName, txtProductPrice,txtProductQuantity, txtTotal,txtSubTotal,txtSellerName;
     private ItemClickListner itemClickListner;
-    public ImageView imageView,deleteBtn1;
+    public ImageView imageView,deleteBtn1,wishlistBtn;
 
     public CartViewHolder(View itemView) {
         super(itemView);
@@ -24,6 +24,7 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         txtProductQuantity = itemView.findViewById(R.id.cart_product_quantity);
         txtSubTotal=itemView.findViewById(R.id.cart_product_subtotal);
         deleteBtn1=(ImageView) itemView.findViewById(R.id.deleteBtn1);
+        wishlistBtn=(ImageView) itemView.findViewById(R.id.wishlist);
        // txtSellerName = itemView.findViewById(R.id.seller_name);
         txtSellerName = itemView.findViewById(R.id.seller_name);
 

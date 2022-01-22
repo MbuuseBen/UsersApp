@@ -327,12 +327,6 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-
-//        recyclerView = findViewById(R.id.recycler_menu);
-////        recyclerView.setHasFixedSize(true);
-////        layoutManager = new LinearLayoutManager(this);
-//         layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-//        recyclerView.setLayoutManager(layoutManager);
     }
 
 
@@ -351,9 +345,6 @@ public class MainActivity extends AppCompatActivity
 
                 }else {
                     Toast.makeText(MainActivity.this, "Please add some items to your cart.", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
-//                    startActivity(intent);
-
 
                 }
             }
@@ -517,10 +508,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -605,6 +592,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.app_bar_search:
                 Intent intent = new Intent(MainActivity.this, SearchProductActivity.class);
                 startActivity(intent);
+//
+//            case R.id.wishlist:
+//                Intent intent1 = new Intent(MainActivity.this, WishListActivity.class);
+//                startActivity(intent1);
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -623,17 +614,6 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-//        if (id == R.id.nav_cart)
-//        {
-//
-////
-////                Intent intent = new Intent(MainActivity.this, CartActivity.class);
-////                startActivity(intent);
-//
-//            checkCart();
-//
-//        }
-//        else
             if (id == R.id.nav_orders)
         {
             Intent intent = new Intent(MainActivity.this, OrdersActivity.class);
@@ -641,21 +621,37 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-//        else if (id == R.id.nav_search)
-//        {
-//
-//                Intent intent = new Intent(MainActivity.this, SearchProductActivity.class);
-//                startActivity(intent);
-//
-//
-//        }
+        else if (id == R.id.nav_wishlist)
+        {
+
+                Intent intent = new Intent(MainActivity.this, WishListActivity.class);
+                startActivity(intent);
+
+
+        }
+            else if (id == R.id.nav_privacy)
+            {
+
+                Intent intent = new Intent(MainActivity.this, Privacy.class);
+                startActivity(intent);
+
+
+            }
+
+            else if (id == R.id.nav_terms)
+            {
+
+                Intent intent = new Intent(MainActivity.this, Terms.class);
+                startActivity(intent);
+
+
+            }
         else if (id == R.id.nav_categories)
         {
 
 
                 Intent intent = new Intent(MainActivity.this, Productcategories.class);
                 startActivity(intent);
-
 
 
         }

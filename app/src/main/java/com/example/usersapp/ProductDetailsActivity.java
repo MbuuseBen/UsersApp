@@ -47,7 +47,7 @@ import java.util.HashMap;
 public class ProductDetailsActivity extends AppCompatActivity {
 
     //private FloatingActionButton addToCartBtn;
-    private ImageView productImage,productImage1;
+    private ImageView productImage,productImage1,wishlistBtn;
     private ElegantNumberButton numberButton;
 //    private TextView productPrice, productDescription, productName;
     private TextView productPrice1, productDescription1, productName1;
@@ -55,7 +55,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private String productID = "", state = "Normal",imageUrl;
     private int productPrice;
     private String productDescription;
-    private String productName;
+    private String productName,itemID;
     private Button addToCartButton;
     private Toolbar mToolbar;
     private DatabaseReference ProductsRef;
@@ -86,6 +86,16 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productDescription1 = (TextView) findViewById(R.id.product_description_details);
         productPrice1 = (TextView) findViewById(R.id.product_price_details);
 
+
+        wishlistBtn = (ImageView)findViewById(R.id.wishlist);
+//        wishlistBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                addToWishList();
+//            }
+//        });
+
+
         sellerName = (TextView) findViewById(R.id.sellers_name);
         sellerEmail = (TextView) findViewById(R.id.sellers_email);
         sellerAddress = (TextView) findViewById(R.id.sellers_address);
@@ -111,16 +121,94 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 addingToCartList();
 
-//                if (state.equals("Order Placed") || state.equals("order Shipped")) {
-//
-//                    Toast.makeText(ProductDetailsActivity.this, "You can continue Shopping with us ",Toast.LENGTH_LONG ).show();
-//                }else {
-//                    addingToCartList();
-//                }
             }
         });
 
     }
+
+//    private void addToWishList() {
+//        String saveCurrentTime, saveCurrentDate;
+//        Calendar callForDate = Calendar.getInstance();
+//        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+//        saveCurrentDate = currentDate.format(callForDate.getTime());
+//
+//        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+//        saveCurrentTime = currentTime.format(callForDate.getTime());
+//
+//
+//                DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("WishList").child(mAuth.getCurrentUser().getUid());
+//                productsRef.child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        if (snapshot.exists()) {
+//                            // Toast.makeText(AllProductsActivity.this, "Adding To cart", Toast.LENGTH_SHORT).show();
+//
+//                            final HashMap<String, Object> cartMap = new HashMap<>();
+//                            cartMap.put("pid", productID);
+//                            cartMap.put("pname", productName);
+//                            cartMap.put("price", productPrice);
+//                            cartMap.put("date", saveCurrentDate);
+//                            cartMap.put("time", saveCurrentTime);
+//                            cartMap.put("image",imageUrl);
+//                            cartMap.put("discount", "");
+//
+//                            productsRef.child("Products")
+//                                    .child(productID).updateChildren(cartMap)
+//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                                            Toast.makeText(ProductDetailsActivity.this, "Added to Wishlist ", Toast.LENGTH_SHORT).show();
+//
+//                                        }
+//
+//                                    });
+//
+//                        } else {
+//
+//  //                          Toast.makeText(ProductDetailsActivity.this, "Already added to wishlist ", Toast.LENGTH_SHORT).show();
+//                            String saveCurrentTime, saveCurrentDate;
+//                            Calendar callForDate = Calendar.getInstance();
+//                            SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+//                            saveCurrentDate = currentDate.format(callForDate.getTime());
+//
+//                            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+//                            saveCurrentTime = currentTime.format(callForDate.getTime());
+//
+//
+//                            final DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("WishList");
+//
+//                            final HashMap<String, Object> cartMap = new HashMap<>();
+//                            cartMap.put("pid", productID);
+//                            cartMap.put("pname", productName);
+//                            cartMap.put("price", productPrice);
+//                            cartMap.put("date", saveCurrentDate);
+//                            cartMap.put("time", saveCurrentTime);
+//                            cartMap.put("image",imageUrl);
+//                            cartMap.put("sellerName",sellerName);
+//                            cartMap.put("discount", "");
+//
+//                            productsRef.child(mAuth.getCurrentUser().getUid()).child("Products")
+//                                    .child(productID).updateChildren(cartMap)
+//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                                            Toast.makeText(ProductDetailsActivity.this, "Added to Wishlist", Toast.LENGTH_SHORT).show();
+//
+//                                        }
+//
+//                                    });
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+//
+//            }
+
 
     private void viewProductDetails(String productID) {
 
@@ -149,6 +237,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
     @Override
@@ -283,6 +372,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Products products = dataSnapshot.getValue(Products.class);
+                    itemID = products.getPid();
                     productName = products.getPname();
                     productPrice = products.getPrice();
                     productDescription = products.getDescription();
@@ -297,37 +387,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
     }
-//
-//    private void CheckOrderState() {
-//        DatabaseReference ordersRef;
-//        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
-//                .child(mAuth.getCurrentUser().getUid());
-//        ordersRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    String shippingState = snapshot.child("State").getValue().toString();
-//                    String userName = snapshot.child("name").getKey().toString();
-//
-//                    if (shippingState.equals("shipped")) {
-//
-//                        state = "Order Shipped";
-//
-//                    } else if (shippingState.equals("not shipped")) {
-//
-//                        state = "Order Placed";
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//
-//    }
+
 
     protected void loadAllProductstoRecyclerview() {
 
