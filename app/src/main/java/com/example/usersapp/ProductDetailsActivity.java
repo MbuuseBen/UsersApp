@@ -55,7 +55,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private String productID = "", state = "Normal",imageUrl;
     private int productPrice;
     private String productDescription;
-    private String productName,itemID;
+    private String productName,sellerName1,itemID;
     private Button addToCartButton;
     private Toolbar mToolbar;
     private DatabaseReference ProductsRef;
@@ -333,6 +333,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("image",imageUrl);
         cartMap.put("quantity",add.increment((Integer.parseInt(numberButton.getNumber()))));
         cartMap.put("discount", "");
+        cartMap.put("sellerName",sellerName1);
 
        // add.increment(1)
 
@@ -378,6 +379,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productDescription = products.getDescription();
                     imageUrl = products.getImage();
 
+                    sellerName1 = products.getSellerName();
                 }
             }
 

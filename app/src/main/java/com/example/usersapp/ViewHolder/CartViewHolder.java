@@ -26,7 +26,7 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         deleteBtn1=(ImageView) itemView.findViewById(R.id.deleteBtn1);
         wishlistBtn=(ImageView) itemView.findViewById(R.id.wishlist);
        // txtSellerName = itemView.findViewById(R.id.seller_name);
-        txtSellerName = itemView.findViewById(R.id.seller_name);
+        txtSellerName = itemView.findViewById(R.id.seller_name1);
 
 
 

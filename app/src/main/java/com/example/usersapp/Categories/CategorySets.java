@@ -57,7 +57,7 @@ public class CategorySets extends AppCompatActivity {
 
     private String productID = "";
 
-    private String categorySets="quillInk";
+    private String categorySets="sets";
     private ServerValue add;
 
 

@@ -18,9 +18,12 @@
         android:theme="@style/Theme.UsersApp.NoActionBar"
         tools:replace="android:theme">
         <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".Terms"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Privacy"
             android:exported="false"

@@ -193,9 +193,6 @@ import io.paperdb.Paper;
     {
         super.onStart();
 
- //       productID = getIntent().getStringExtra("pid");
-
-  //      DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
 
         FirebaseRecyclerOptions<Products> options =
                 new FirebaseRecyclerOptions.Builder<Products>()

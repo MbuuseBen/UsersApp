@@ -29,7 +29,7 @@ public class UserLoginActivity extends AppCompatActivity {
     private Button loginUserBtn;
     private EditText emailInput, passwordInput;
     private ProgressDialog loadingBar;
-    private TextView UserRegisterLink;
+    private TextView UserRegisterLink,PasswordResetLink;
     private FirebaseAuth mAuth;
     boolean isEmailValid, isPasswordValid;
 
@@ -47,6 +47,7 @@ public class UserLoginActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.user_login_email);
         passwordInput = findViewById(R.id.user_login_password);
         loadingBar = new ProgressDialog(this);
+        PasswordResetLink = (TextView)findViewById(R.id.forgot_password_link);
 
 
         UserRegisterLink.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +58,17 @@ public class UserLoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
+
+        });
+
+
+        PasswordResetLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(UserLoginActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
+            }
 
         });
 
