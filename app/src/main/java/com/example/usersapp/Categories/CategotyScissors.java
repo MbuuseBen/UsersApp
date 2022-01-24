@@ -1,5 +1,12 @@
 package com.example.usersapp.Categories;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,13 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.usersapp.AllProductsActivity;
 import com.example.usersapp.CartActivity;
@@ -44,53 +44,53 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class CategoryRulers extends AppCompatActivity {
+public class CategotyScissors extends AppCompatActivity {
 
     private SearchView SearchBtn;
-    private RecyclerView searchList,rulers;
-    private RecyclerView recyclerView,recyclerViewRulers;
+    private RecyclerView searchList,scissors;
+    private RecyclerView recyclerView,recyclerViewPunch;
     RecyclerView.LayoutManager layoutManager;
-    RecyclerView.LayoutManager layoutRulers;
+    RecyclerView.LayoutManager layoutScissors;
     private FirebaseAuth mAuth;
 
 
     private String productID = "";
 
-    private String categoryRulers="ruler";
-
+    private String categoryPunch="scissors";
     private String productRandomKey;
     private ServerValue add;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category_rulers);
+        setContentView(R.layout.activity_categoty_scissors);
         mAuth = FirebaseAuth.getInstance();
 
         searchList = findViewById(R.id.search_list1);
-        rulers = findViewById(R.id.category_rulers);
+        scissors = findViewById(R.id.category_scissors);
 
 
         recyclerView = findViewById(R.id.search_list1);
-        recyclerViewRulers = findViewById(R.id.category_rulers);
+        recyclerViewPunch = findViewById(R.id.category_scissors);
 
 
 
         productID = getIntent().getStringExtra("pid");
 
-        layoutRulers = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        recyclerViewRulers.setLayoutManager(layoutRulers);
+        layoutScissors = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        recyclerViewPunch.setLayoutManager(layoutScissors);
 
         layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
 
 
-        loadRulerstoRecyclerView();
+        loadTextbookstoRecyclerView();
         loadAllProductstoRecyclerview();
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
-        toolbar.setTitle("Rulers");
+        toolbar.setTitle("Scissors");
         toolbar.showOverflowMenu();
         setSupportActionBar(toolbar);
 
@@ -121,13 +121,13 @@ public class CategoryRulers extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
-                    Intent intent = new Intent(CategoryRulers.this, CartActivity.class);
+                    Intent intent = new Intent(CategotyScissors.this, CartActivity.class);
                     startActivity(intent);
 
 
                 }else {
-                    Toast.makeText(CategoryRulers.this, "Please add some items to your cart.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(CategoryRulers.this, MainActivity.class);
+                    Toast.makeText(CategotyScissors.this, "Please add some items to your cart.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CategotyScissors.this, MainActivity.class);
                     startActivity(intent);
 
 
@@ -173,18 +173,18 @@ public class CategoryRulers extends AppCompatActivity {
 
 
 
-    private void loadRulerstoRecyclerView() {
+    private void loadTextbookstoRecyclerView() {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
 
-        Query query  =reference.orderByChild("category").equalTo(categoryRulers);
+        Query query  =reference.orderByChild("category").equalTo(categoryPunch);
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(query,Products.class)
                 .build();
 
         FirebaseRecyclerAdapter<Products, ProductViewHolder>
-                adapterRulers = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
+                adapterPunch = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder holder, int i, @NonNull @NotNull Products model) {
 
@@ -196,7 +196,7 @@ public class CategoryRulers extends AppCompatActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(CategoryRulers.this, ProductDetailsActivity.class);
+                        Intent intent = new Intent(CategotyScissors.this, ProductDetailsActivity.class);
                         intent.putExtra("pid", model.getPid());
                         startActivity(intent);
                     }
@@ -257,7 +257,7 @@ public class CategoryRulers extends AppCompatActivity {
                                                                     @Override
                                                                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                                                                         if (task.isSuccessful()) {
-                                                                            Toast.makeText(CategoryRulers.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
+                                                                            Toast.makeText(CategotyScissors.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
 //                                                                                    Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
 //                                                                                    startActivity(intent);
 //                                                                                    finish();
@@ -318,7 +318,7 @@ public class CategoryRulers extends AppCompatActivity {
                                                                     @Override
                                                                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                                                                         if (task.isSuccessful()) {
-                                                                            Toast.makeText(CategoryRulers.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
+                                                                            Toast.makeText(CategotyScissors.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
 //                                                                                    Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
 //                                                                                    startActivity(intent);
 //                                                                                    finish();
@@ -328,7 +328,7 @@ public class CategoryRulers extends AppCompatActivity {
                                                     }
                                                 }
                                             });
-                                    Intent intent = new Intent(CategoryRulers.this, AllProductsActivity.class);
+                                    Intent intent = new Intent(CategotyScissors.this, AllProductsActivity.class);
                                     startActivity(intent);
                                     finish();
                                     //  Toast.makeText(AllProductsActivity.this, "Nothing to Show", Toast.LENGTH_SHORT).show();
@@ -357,8 +357,8 @@ public class CategoryRulers extends AppCompatActivity {
                 return holder;
             }
         };
-        rulers.setAdapter(adapterRulers);
-        adapterRulers.startListening();
+        scissors.setAdapter(adapterPunch);
+        adapterPunch.startListening();
     }
 
 
@@ -385,7 +385,7 @@ public class CategoryRulers extends AppCompatActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(CategoryRulers.this, ProductDetailsActivity.class);
+                        Intent intent = new Intent(CategotyScissors.this, ProductDetailsActivity.class);
                         intent.putExtra("pid", model.getPid());
                         startActivity(intent);
                     }

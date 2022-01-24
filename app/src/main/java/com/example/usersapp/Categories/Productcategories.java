@@ -36,7 +36,7 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 public class Productcategories extends AppCompatActivity {
-    private ImageView viewCalculators,viewPencils,viewNotebooks,viewTextBooks;
+    private ImageView viewCalculators,viewPencils,viewNotebooks,viewTextBooks,viewScissors;
     private ImageView viewClips,viewPushpins,viewStaplers,viewRulers,viewPunch,viewTape,viewCutters;
     private RecyclerView searchList,recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -82,6 +82,16 @@ public class Productcategories extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        viewScissors = findViewById(R.id.product_image_scissors);
+        viewScissors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Productcategories.this, CategotyScissors.class);
+                startActivity(intent);
+            }
+        });
+
 
         viewNotebooks = findViewById(R.id.product_image_notebooks);
         viewNotebooks.setOnClickListener(new View.OnClickListener() {

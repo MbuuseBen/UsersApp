@@ -57,7 +57,7 @@ public class CategoryClips extends AppCompatActivity {
 
     private String productID = "";
 
-    private String categoryClips="clips";
+    private String categoryClips="paperClip";
     private ServerValue add;
 
 

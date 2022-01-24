@@ -81,7 +81,7 @@ public class WishListActivity extends AppCompatActivity {
                 holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
                 Picasso.get().load(model.getImage()).into(holder.imageView);
                 holder.txtProductName.setText(model.getPname());
-                holder.txtSellerName.setText("Seller : " +model.getSellerName());
+               // holder.txtSellerName.setText("Seller : " +model.getSellerName());
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

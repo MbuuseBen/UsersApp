@@ -56,7 +56,7 @@ public class CategoryPunch extends AppCompatActivity {
 
     private String productID = "";
 
-    private String categoryPunch="punch";
+    private String categoryPunch="punchingMachine";
     private String productRandomKey;
     private ServerValue add;
 

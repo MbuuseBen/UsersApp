@@ -48,7 +48,7 @@ public class CategoryCutters extends AppCompatActivity {
 
     private String productID = "";
 
-    private String categoryCutters="cutters";
+    private String categoryCutters="dangerCutter";
 
 
 
