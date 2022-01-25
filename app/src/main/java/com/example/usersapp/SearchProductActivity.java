@@ -119,13 +119,13 @@ public class SearchProductActivity extends AppCompatActivity {
 
     }
 
-    private void performSearch() {
+  //  private void performSearch() {
 //
 //        SearchInput = inputText.getText().toString();
 //        onStart();
 
 
-    }
+   // }
 //
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -214,7 +214,6 @@ public class SearchProductActivity extends AppCompatActivity {
                 adapter = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder holder, int i, @NonNull @NotNull Products model) {
-
 
 
                 holder.txtProductName.setText(model.getPname());

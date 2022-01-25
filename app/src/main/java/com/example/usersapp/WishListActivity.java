@@ -67,95 +67,108 @@ public class WishListActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("WishList");
-        FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions
-                .Builder<Cart>()
-                .setQuery(cartListRef.child(mAuth.getCurrentUser().getUid()).child("Products"), Cart.class)
-                .build();
-
-        FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
-                =  new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
+        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("WishList").child(mAuth.getCurrentUser().getUid());
+        productsRef.child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            protected void onBindViewHolder(@NotNull CartViewHolder holder, int position, @NotNull Cart model) {
+            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
 
-                holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
-                Picasso.get().load(model.getImage()).into(holder.imageView);
-                holder.txtProductName.setText(model.getPname());
-               // holder.txtSellerName.setText("Seller : " +model.getSellerName());
+                    final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("WishList");
+                    FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions
+                            .Builder<Cart>()
+                            .setQuery(cartListRef.child(mAuth.getCurrentUser().getUid()).child("Products"), Cart.class)
+                            .build();
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                    FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
+                            = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
+                        @Override
+                        protected void onBindViewHolder(@NotNull CartViewHolder holder, int position, @NotNull Cart model) {
 
-                        Intent intent = new Intent(WishListActivity.this, ProductDetailsActivity.class);
-                        intent.putExtra("pid", model.getPid());
-                        startActivity(intent);
-                    }
+                            holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
+                            Picasso.get().load(model.getImage()).into(holder.imageView);
+                            holder.txtProductName.setText(model.getPname());
+                            // holder.txtSellerName.setText("Seller : " +model.getSellerName());
+
+                            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                    Intent intent = new Intent(WishListActivity.this, ProductDetailsActivity.class);
+                                    intent.putExtra("pid", model.getPid());
+                                    startActivity(intent);
+                                }
 
 
-                });
+                            });
 
-                holder.deleteBtn1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        CharSequence options[] = new  CharSequence[]{
-                                "Remove"
+                            holder.deleteBtn1.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    CharSequence options[] = new CharSequence[]{
+                                            "Remove"
 
-                        };
-                        AlertDialog.Builder builder = new AlertDialog.Builder(WishListActivity.this);
-                        builder.setTitle("Options:");
+                                    };
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(WishListActivity.this);
+                                    builder.setTitle("Options:");
 
-                        builder.setItems(options, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                if (i == 0){
-//                                    Intent intent= new Intent(WishListActivity.this, ProductDetailsActivity.class);
-//                                    intent.putExtra("pid", model.getPid());
-//                                    startActivity(intent);
-//
-//                                }
-                                if (i==0){
-                                    cartListRef.child(mAuth.getCurrentUser().getUid())
-                                            .child("Products")
-                                            .child(model.getPid())
-                                            .removeValue()
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                                    if (task.isSuccessful()){
-                                                        Toast.makeText(WishListActivity.this, "Item removed Successfully from Wishlist.",Toast.LENGTH_SHORT).show();
+                                    builder.setItems(options, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            if (i == 0) {
+                                                cartListRef.child(mAuth.getCurrentUser().getUid())
+                                                        .child("Products")
+                                                        .child(model.getPid())
+                                                        .removeValue()
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                                                if (task.isSuccessful()) {
+                                                                    Toast.makeText(WishListActivity.this, "Item removed Successfully from Wishlist.", Toast.LENGTH_SHORT).show();
 
-                                                    }
-                                                }
-                                            });
+                                                                }
+                                                            }
+                                                        });
 
+
+                                            }
+                                        }
+                                    });
+                                    builder.show();
 
                                 }
-                            }
-                        });
-                        builder.show();
+                            });
 
-                    }
-                });
+                        }
 
+
+                        @NotNull
+                        @Override
+                        public CartViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+                            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout2, parent, false);
+                            CartViewHolder holder = new CartViewHolder(view);
+                            return holder;
+
+
+                        }
+                    };
+
+                    recyclerView.setAdapter(adapter);
+                    adapter.startListening();
+
+                } else {
+                    Toast.makeText(WishListActivity.this, "Nothing to show Please add some items to your wishlist.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(WishListActivity.this, MainActivity.class);
+                    startActivity(intent);
+
+
+                }
             }
 
-
-            @NotNull
             @Override
-            public CartViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout2,parent,false);
-                CartViewHolder holder = new CartViewHolder(view);
-                return holder;
-
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
             }
-        };
-
-        recyclerView.setAdapter(adapter);
-        adapter.startListening();
-
-
+        });
 
     }
 }

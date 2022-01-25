@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity
     private void loadCalculatorstoRecyclerView() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
 
-        Query query  =reference.orderByChild("category").equalTo(categoryCalculators).limitToFirst(5);
+        Query query  =reference.orderByChild("category").equalTo(categoryCalculators).limitToFirst(10);
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(query,Products.class)
@@ -407,7 +407,7 @@ public class MainActivity extends AppCompatActivity
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
 
-        Query query  =reference.orderByChild("category").equalTo(categoryPencils).limitToFirst(6);
+        Query query  =reference.orderByChild("category").equalTo(categoryPencils).limitToFirst(10);
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(query,Products.class)

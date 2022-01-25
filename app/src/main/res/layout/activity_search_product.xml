@@ -103,7 +103,8 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     app:drawableTint="@color/white"
-                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_alignParentEnd="false"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/search_product_name"
                     android:src="@drawable/search_icon" />
