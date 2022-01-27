@@ -18,9 +18,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.usersapp.AllProductsActivity;
 import com.example.usersapp.CartActivity;
 import com.example.usersapp.MainActivity;
 import com.example.usersapp.Model.Products;
+import com.example.usersapp.NewSearchActivity;
 import com.example.usersapp.ProductDetailsActivity;
 import com.example.usersapp.R;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
@@ -168,7 +170,9 @@ public class CategoryTape extends AppCompatActivity {
 //                Intent intent = new Intent(MainActivity.this, CartActivity.class);
 //                startActivity(intent);
                 return true;
-
+            case R.id.app_bar_search:
+                Intent intent = new Intent(CategoryTape.this, NewSearchActivity.class);
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -178,49 +182,6 @@ public class CategoryTape extends AppCompatActivity {
     }
 
 
-//    private void loadCalculatorstoRecyclerView() {
-//
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
-//
-//        Query query  =reference.orderByChild("category").equalTo(categoryCalculators);
-//
-//        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
-//                .setQuery(query,Products.class)
-//                .build();
-//
-//        FirebaseRecyclerAdapter<Products, ProductViewHolder>
-//                adapterPencils = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
-//            @Override
-//            protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder holder, int i, @NonNull @NotNull Products model) {
-//
-//                holder.txtProductName.setText(model.getPname());
-////                holder.txtProductDescription.setText(model.getDescription());
-//                holder.txtProductPrice.setText("UGX " + model.getPrice());
-//                Picasso.get().load(model.getImage()).into(holder.imageView);
-//
-//                holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Intent intent = new Intent(Categorycalculators.this, ProductDetailsActivity.class);
-//                        intent.putExtra("pid", model.getPid());
-//                        startActivity(intent);
-//                    }
-//                });
-//            }
-//
-//            @NonNull
-//            @NotNull
-//            @Override
-//            public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-//
-//                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout1, parent, false);
-//                ProductViewHolder holder = new ProductViewHolder(view);
-//                return holder;
-//            }
-//        };
-//        calculators.setAdapter(adapterPencils);
-//        adapterPencils.startListening();
-//    }
 
     private void loadTapetoRecyclerView() {
 
@@ -334,7 +295,7 @@ public class CategoryTape extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(reference.orderByChild("pname"),Products.class).build();
+                .setQuery(reference.orderByChild("pname").limitToFirst(8),Products.class).build();
 
         FirebaseRecyclerAdapter<Products, ProductViewHolder>
                 adapter = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {

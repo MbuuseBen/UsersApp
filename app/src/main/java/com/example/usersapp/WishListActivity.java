@@ -87,7 +87,7 @@ public class WishListActivity extends AppCompatActivity {
                             holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
                             Picasso.get().load(model.getImage()).into(holder.imageView);
                             holder.txtProductName.setText(model.getPname());
-                            // holder.txtSellerName.setText("Seller : " +model.getSellerName());
+                            holder.txtSellerName.setText("Seller : " +model.getSellerName());
 
                             holder.itemView.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -144,7 +144,7 @@ public class WishListActivity extends AppCompatActivity {
                         @NotNull
                         @Override
                         public CartViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
-                            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout2, parent, false);
+                            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout3, parent, false);
                             CartViewHolder holder = new CartViewHolder(view);
                             return holder;
 

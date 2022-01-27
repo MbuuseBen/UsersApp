@@ -37,10 +37,10 @@
             android:icon="@drawable/ic_baseline_share_24"
             android:title="Share App" />
 
-        <item
-            android:id="@+id/nav_info"
-            android:icon="@drawable/ic_baseline_info_24"
-            android:title="About" />
+<!--        <item-->
+<!--            android:id="@+id/nav_info"-->
+<!--            android:icon="@drawable/ic_baseline_info_24"-->
+<!--            android:title="About" />-->
 
         <item
             android:id="@+id/nav_privacy"

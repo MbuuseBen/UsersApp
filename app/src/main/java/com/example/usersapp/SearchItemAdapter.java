@@ -55,7 +55,6 @@ public void onBindViewHolder(@NonNull SearchItemAdapter.ViewHolder holder, int p
     Picasso.get().load(modal.getImage()).into(holder.productImage);
         holder.productPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(modal.getPrice())));
 
-
         }
 
 @Override

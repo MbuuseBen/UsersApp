@@ -590,7 +590,7 @@ public class MainActivity extends AppCompatActivity
                 return true;
 
             case R.id.app_bar_search:
-                Intent intent = new Intent(MainActivity.this, SearchProductActivity.class);
+                Intent intent = new Intent(MainActivity.this, NewSearchActivity.class);
                 startActivity(intent);
 //
 //            case R.id.wishlist:
@@ -643,6 +643,20 @@ public class MainActivity extends AppCompatActivity
 
                 Intent intent = new Intent(MainActivity.this, Terms.class);
                 startActivity(intent);
+
+
+            }
+
+            else if (id == R.id.nav_share)
+            {
+
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                String shareSubText = "JanzyStore - The One Stop Stationery Shop, Download it to check it out ";
+                String shareBodyText = "https://drive.google.com/file/d/1WZRJ2bGMtefIRbSl_-wSr6NSe2BdW7CJ/view?usp=sharing";
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubText);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareBodyText);
+                startActivity(Intent.createChooser(shareIntent, "Share With"));
 
 
             }

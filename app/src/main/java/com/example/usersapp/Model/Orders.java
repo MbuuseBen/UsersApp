@@ -1,14 +1,14 @@
 package com.example.usersapp.Model;
 
 public class Orders {
-    private String firstname, lastname, phone, address, city, State, date, time,orderid;
+    private String firstname, lastname, phone, address, city, State, date, time,orderid,specialText;
     private int  totalAmount;
 
 
     public Orders() {
     }
 
-    public Orders(String firstname, String lastname, String phone, String address, String city, String state, String date, String time, String orderid, int totalAmount) {
+    public Orders(String firstname, String lastname, String phone, String address, String city, String state, String date, String time, String orderid, String specialText, int totalAmount) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
@@ -18,6 +18,7 @@ public class Orders {
         this.date = date;
         this.time = time;
         this.orderid = orderid;
+        this.specialText = specialText;
         this.totalAmount = totalAmount;
     }
 
@@ -91,6 +92,14 @@ public class Orders {
 
     public void setOrderid(String orderid) {
         this.orderid = orderid;
+    }
+
+    public String getSpecialText() {
+        return specialText;
+    }
+
+    public void setSpecialText(String specialText) {
+        this.specialText = specialText;
     }
 
     public int getTotalAmount() {

@@ -118,7 +118,7 @@
             android:parentActivityName=".CartActivity" />
         <activity
             android:name=".CartActivity"
-            android:parentActivityName=".ProductDetailsActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".UserLoginActivity" />
         <activity android:name=".UserRegisterActivity" />
         <activity android:name=".MainActivity" />

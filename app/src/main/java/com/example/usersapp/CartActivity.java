@@ -239,7 +239,7 @@ public class CartActivity extends AppCompatActivity {
                             overTotalPrice = overTotalPrice + oneTypeProductTPrice;
 
                             holder.txtProductName.setText(model.getPname());
-                            holder.txtSellerName.setText("Seller : " +model.getSellerName());
+                            holder.txtSellerName1.setText("Seller : " +model.getSellerName());
                             holder.txtSubTotal.setText("Sub Total : UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(subTotal)));
 
                             holder.itemView.setOnClickListener(new View.OnClickListener() {

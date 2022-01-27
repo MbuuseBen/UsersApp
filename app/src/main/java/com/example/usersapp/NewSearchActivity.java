@@ -165,6 +165,8 @@ public class NewSearchActivity extends AppCompatActivity {
 //
 ////                    productsModalArrayList = new ArrayList<>();
 ////
+
+
 //
 //                    if(products!=null){
 //

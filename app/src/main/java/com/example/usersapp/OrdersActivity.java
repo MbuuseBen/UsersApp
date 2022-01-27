@@ -81,6 +81,7 @@ public class OrdersActivity extends AppCompatActivity {
                         holder.userShippingAddress.setText("Address : "+model.getAddress());
                         holder.orderId.setText("OrderId :"+model.getOrderid());
                         holder.State.setText("Order State : "+model.getState());
+                        holder.specialText.setText("Special Text : "+model.getSpecialText());
 
 
 //                        holder.ShowOrdersBtn.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +141,7 @@ public class OrdersActivity extends AppCompatActivity {
 
     public  static  class OrdersViewHolder extends  RecyclerView.ViewHolder{
 
-        public TextView userFirstName, userPhoneNumber, userTotalPrice, userDateTime,userShippingAddress,orderId,State;
+        public TextView userFirstName, userPhoneNumber, userTotalPrice, userDateTime,userShippingAddress,orderId,State,specialText;
         public Button ShowOrdersBtn;
 
 
@@ -156,7 +157,7 @@ public class OrdersActivity extends AppCompatActivity {
         //    ShowOrdersBtn = itemView.findViewById(R.id.show_all_products_btn);
             orderId= itemView.findViewById(R.id.order_id);
             State=itemView.findViewById(R.id.order_state);
-
+            specialText = itemView.findViewById(R.id.order_user_specialText);
 
 
         }

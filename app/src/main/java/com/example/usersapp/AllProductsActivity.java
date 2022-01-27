@@ -117,7 +117,7 @@ import io.paperdb.Paper;
             public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
-                    Intent intent = new Intent(AllProductsActivity.this, NewSearchActivity.class);
+                    Intent intent = new Intent(AllProductsActivity.this, CartActivity.class);
                     startActivity(intent);
 
 
@@ -151,6 +151,10 @@ import io.paperdb.Paper;
 //                Intent intent = new Intent(MainActivity.this, CartActivity.class);
 //                startActivity(intent);
                 return true;
+
+            case R.id.app_bar_search:
+                Intent intent = new Intent(AllProductsActivity.this, NewSearchActivity.class);
+                startActivity(intent);
 
             default:
                 return super.onOptionsItemSelected(item);

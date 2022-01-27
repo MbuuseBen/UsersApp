@@ -21,6 +21,7 @@ import com.example.usersapp.AllProductsActivity;
 import com.example.usersapp.CartActivity;
 import com.example.usersapp.MainActivity;
 import com.example.usersapp.Model.Products;
+import com.example.usersapp.NewSearchActivity;
 import com.example.usersapp.ProductDetailsActivity;
 import com.example.usersapp.R;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
@@ -162,7 +163,9 @@ public class CategoryPunch extends AppCompatActivity {
 //                Intent intent = new Intent(MainActivity.this, CartActivity.class);
 //                startActivity(intent);
                 return true;
-
+            case R.id.app_bar_search:
+                Intent intent = new Intent(CategoryPunch.this, NewSearchActivity.class);
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -369,7 +372,7 @@ public class CategoryPunch extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(reference.orderByChild("pname"),Products.class).build();
+                .setQuery(reference.orderByChild("pname").limitToFirst(8),Products.class).build();
 
         FirebaseRecyclerAdapter<Products, ProductViewHolder>
                 adapter = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {

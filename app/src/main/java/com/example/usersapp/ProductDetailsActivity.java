@@ -280,7 +280,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 return true;
 
             case R.id.app_bar_search:
-                Intent intent = new Intent(ProductDetailsActivity.this, SearchProductActivity.class);
+                Intent intent = new Intent(ProductDetailsActivity.this, NewSearchActivity.class);
                 startActivity(intent);
 
             default:

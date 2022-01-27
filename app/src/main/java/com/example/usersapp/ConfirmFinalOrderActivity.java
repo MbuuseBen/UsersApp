@@ -39,7 +39,7 @@ import java.util.UUID;
 
 public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
-    private EditText nameEditText,phoneEditText, addressEditText, cityEditText;
+    private EditText nameEditText,phoneEditText, addressEditText, cityEditText,specialText;
     private TextView f_Name,lName,userphone,useraddress,useremail ,editDetailsBtn,viewTotal;
     private String first_Name,last_Name,userPhone,userAddress,userEmail;
     private String cartItems;
@@ -62,7 +62,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
         Button confirmOrderBtn = (Button) findViewById(R.id.place_order_btn);
         editDetailsBtn = findViewById(R.id.address_change);
-
+        specialText = findViewById(R.id.special_txt);
         viewSum();
 //        CheckAddress();
         viewUserDetails();
@@ -213,7 +213,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                 Toast.makeText(this, "ERROR " + message, Toast.LENGTH_LONG).show();
             }
             else if (resultCode == RavePayActivity.RESULT_CANCELLED) {
-                Toast.makeText(this, "CANCELLED " + message, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "CANCELLED ", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -253,6 +253,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     private void ConfirmOrder() {
 
+        final String specialTxt = specialText.getText().toString();
+
         final String saveCurrentDate, saveCurrentTime;
         Calendar callForDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
@@ -281,6 +283,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("State", "not Shipped");
         ordersMap.put("products",cartItems);
         ordersMap.put("orderid", productRandomKey);
+        ordersMap.put("specialText", specialTxt);
 
 
 
