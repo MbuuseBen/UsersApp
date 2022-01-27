@@ -2,7 +2,7 @@ package com.example.usersapp.Model;
 
 public class Products
 {
-    private String pname, description, image, category, pid, date, time, productState,sellerName,sellerEmail,sellerAddress;
+    private String pname, description, image, category, pid, date, time, productState,sellerName,sellerEmail,sellerAddress,title;
     private int price,quantity;
 
     public Products()
@@ -10,7 +10,7 @@ public class Products
 
     }
 
-    public Products(String pname, String description, String image, String category, String pid, String date, String time, String productState, String sellerName, String sellerEmail, String sellerAddress, int price, int quantity) {
+    public Products(String pname, String description, String image, String category, String pid, String date, String time, String productState, String sellerName, String sellerEmail, String sellerAddress, String title, int price, int quantity) {
         this.pname = pname;
         this.description = description;
         this.image = image;
@@ -22,9 +22,15 @@ public class Products
         this.sellerName = sellerName;
         this.sellerEmail = sellerEmail;
         this.sellerAddress = sellerAddress;
+        this.title = title;
         this.price = price;
         this.quantity = quantity;
     }
+
+    public Products(String currentString) {
+    }
+
+
 
     public String getPname() {
         return pname;
@@ -112,6 +118,14 @@ public class Products
 
     public void setSellerAddress(String sellerAddress) {
         this.sellerAddress = sellerAddress;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getPrice() {

@@ -18,9 +18,13 @@
         android:theme="@style/Theme.UsersApp.NoActionBar"
         tools:replace="android:theme">
         <activity
+            android:name=".NewSearchActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".Categories.CategotyScissors"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ResetPasswordActivity"
             android:exported="false" />

@@ -117,13 +117,11 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/r5"
-        android:scrollbars="vertical">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:scrollbars="vertical"></androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

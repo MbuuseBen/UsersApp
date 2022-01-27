@@ -117,7 +117,7 @@ import io.paperdb.Paper;
             public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
-                    Intent intent = new Intent(AllProductsActivity.this, CartActivity.class);
+                    Intent intent = new Intent(AllProductsActivity.this, NewSearchActivity.class);
                     startActivity(intent);
 
 
@@ -161,29 +161,29 @@ import io.paperdb.Paper;
 
     }
 
-    private void incrementCounter() {
-        def.runTransaction(new Transaction.Handler() {
-            @NonNull
-            @NotNull
-            @Override
-            public Transaction.Result doTransaction(@NonNull @NotNull MutableData currentData) {
-                if (currentData.getValue()== null){
-                    currentData.setValue(1);
-                }else {
-                    currentData.setValue((Long) currentData.getValue()+1);
-                }
-                return Transaction.success(currentData);
-            }
-
-            @Override
-            public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, boolean committed, @Nullable @org.jetbrains.annotations.Nullable DataSnapshot currentData) {
-
-
-            }
-        });
-
-    }
-
+//    private void incrementCounter() {
+//        def.runTransaction(new Transaction.Handler() {
+//            @NonNull
+//            @NotNull
+//            @Override
+//            public Transaction.Result doTransaction(@NonNull @NotNull MutableData currentData) {
+//                if (currentData.getValue()== null){
+//                    currentData.setValue(1);
+//                }else {
+//                    currentData.setValue((Long) currentData.getValue()+1);
+//                }
+//                return Transaction.success(currentData);
+//            }
+//
+//            @Override
+//            public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, boolean committed, @Nullable @org.jetbrains.annotations.Nullable DataSnapshot currentData) {
+//
+//
+//            }
+//        });
+//
+//    }
+//
 
 
 
@@ -379,26 +379,26 @@ import io.paperdb.Paper;
         adapter.startListening();
     }
 
-     private void checkCartStatus() {
-         DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView").child(mAuth.getCurrentUser().getUid());
-         productsRef.child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
-             @Override
-             public void onDataChange(DataSnapshot snapshot) {
-                 if (snapshot.exists()) {
-
-                     Toast.makeText(AllProductsActivity.this, "Adding To cart", Toast.LENGTH_SHORT).show();
-                 } else {
-                     Toast.makeText(AllProductsActivity.this, "Nothing to Show", Toast.LENGTH_SHORT).show();
-
-                 }
-             }
-
-             @Override
-             public void onCancelled( DatabaseError error) {
-
-             }
-         });
-
-
-     }
+//     private void checkCartStatus() {
+//         DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView").child(mAuth.getCurrentUser().getUid());
+//         productsRef.child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
+//             @Override
+//             public void onDataChange(DataSnapshot snapshot) {
+//                 if (snapshot.exists()) {
+//
+//                     Toast.makeText(AllProductsActivity.this, "Adding To cart", Toast.LENGTH_SHORT).show();
+//                 } else {
+//                     Toast.makeText(AllProductsActivity.this, "Nothing to Show", Toast.LENGTH_SHORT).show();
+//
+//                 }
+//             }
+//
+//             @Override
+//             public void onCancelled( DatabaseError error) {
+//
+//             }
+//         });
+//
+//
+//     }
  }
