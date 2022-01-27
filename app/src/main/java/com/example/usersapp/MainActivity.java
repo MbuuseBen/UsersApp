@@ -442,6 +442,7 @@ public class MainActivity extends AppCompatActivity
                         int prdctPrice = model.getPrice();
                       //  String initQty = "1";
                         String imageUrl = model.getImage();
+                        String sellerName1 = model.getSellerName();
 
                         String saveCurrentTime, saveCurrentDate;
                         Calendar callForDate = Calendar.getInstance();
@@ -463,6 +464,7 @@ public class MainActivity extends AppCompatActivity
                         cartMap.put("image",imageUrl);
                         cartMap.put("quantity",add.increment(1));
                         cartMap.put("discount", "");
+                        cartMap.put("sellerName",sellerName1);
 
                         cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
                                 .child(productID).updateChildren(cartMap)
