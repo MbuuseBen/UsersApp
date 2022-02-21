@@ -1,5 +1,8 @@
 package com.example.usersapp;
 
+import static android.content.ContentValues.TAG;
+//import static com.nsiimbi.easypay.Request.EP_REQUEST_CODE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -7,7 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,12 +23,15 @@ import android.widget.Toast;
 import com.example.usersapp.Model.CartList;
 import com.example.usersapp.Model.CartTotal;
 import com.example.usersapp.Model.Users;
-import com.flutterwave.raveandroid.RaveConstants;
+//import com.flutterwave.raveandroid.RaveConstants;
 import com.flutterwave.raveandroid.RavePayActivity;
-import com.flutterwave.raveandroid.RavePayManager;
+//import com.flutterwave.raveandroid.RavePayManager;
+import com.flutterwave.raveandroid.RaveUiManager;
+import com.flutterwave.raveandroid.rave_java_commons.RaveConstants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,17 +40,33 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+//port okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+
+//import com.hover.sdk.actions.HoverAction;
+//import com.hover.sdk.api.Hover;
+//import com.hover.sdk.api.HoverParameters;
+//import com.hover.sdk.permissions.PermissionActivity;
+//import com.nsiimbi.easypay.Request;
 
 public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     private EditText nameEditText,phoneEditText, addressEditText, cityEditText,specialText;
     private TextView f_Name,lName,userphone,useraddress,useremail ,editDetailsBtn,viewTotal;
-    private String first_Name,last_Name,userPhone,userAddress,userEmail;
+    private String emailAddress,first_Name,last_Name,userPhone,userAddress,userEmail;
     private String cartItems;
     private int productTotal;
     private String productRandomKey;
@@ -67,6 +92,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 //        CheckAddress();
         viewUserDetails();
         getOrderDetails();
+        obtaindetail();
    //     getDetails();
         viewTotal = (TextView) findViewById(R.id.total_price);
         //   getCartItems();
@@ -94,7 +120,10 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                // ConfirmOrder();
-                makePayment();
+
+                    makePayment();
+
+
             }
         });
 
@@ -112,6 +141,25 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
 
+    }
+
+
+    private void obtaindetail() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+           // String name = user.getDisplayName();
+             emailAddress = user.getEmail();
+          //  Uri photoUrl = user.getPhotoUrl();
+
+            // Check if user's email is verified
+          //  boolean emailVerified = user.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getIdToken() instead.
+         //   String uid = user.getUid();
+        }
     }
 
     private void viewSum() {
@@ -168,36 +216,62 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     }
 
-
     private void makePayment() {
 
         UUID uuid = UUID.randomUUID();
 
-        // txRef =  UUID.randomUUID().toString();
-        new RavePayManager(this)
-                //.setAmount(Double.parseDouble("500"))
+        new RaveUiManager(ConfirmFinalOrderActivity.this)
                 .setAmount(Double.valueOf(totalAmount))
-                .setEmail("mbuusebeng@gmail.com")
-                .setCountry("KE")
-                //.setCountry("UG")
-                .setCurrency("KES")
-                // .setCurrency("UGX")
+                .setEmail(emailAddress)
+                .setCountry("UG")
+                .setCurrency("UGX")
                 .setfName(first_Name)
                 .setlName(last_Name)
-                .setNarration("Purchase Goods")
+                .setNarration("Purchase of JanzyStore Goods")
                 .setPublicKey("FLWPUBK_TEST-4fe17da3cf824a6c097c8c2fccc54899-X")
                 .setEncryptionKey("FLWSECK_TEST6cbcb474d3f7")
                 .setTxRef(uuid.toString())
                 .acceptAccountPayments(true)
                 .acceptCardPayments(true)
-                .acceptMpesaPayments(true)
+               // .acceptMpesaPayments(true)
                 .acceptUgMobileMoneyPayments(true)
-                .onStagingEnv(false)
+                .onStagingEnv(true)
                 .shouldDisplayFee(true)
                 .showStagingLabel(true)
                 .initialize();
 
     }
+
+//    private void makePayment() {
+//
+//        UUID uuid = UUID.randomUUID();
+//
+//        // txRef =  UUID.randomUUID().toString();
+//        new RavePayManager(this)
+//                //.setAmount(Double.parseDouble("500"))
+//                .setAmount(Double.valueOf(totalAmount))
+//                .setEmail(emailAddress)
+//                .setCountry("KE")
+//                //.setCountry("UG")
+//                .setCurrency("KES")
+//                // .setCurrency("UGX")
+//                .setfName(first_Name)
+//                .setlName(last_Name)
+//                .setNarration("Purchase Goods")
+//                .setPublicKey("FLWPUBK_TEST-4fe17da3cf824a6c097c8c2fccc54899-X")
+//                .setEncryptionKey("FLWSECK_TEST6cbcb474d3f7")
+//                .setTxRef("uuid.toString()")
+//                .acceptAccountPayments(true)
+//                .acceptCardPayments(true)
+//                .acceptMpesaPayments(true)
+//                .acceptUgMobileMoneyPayments(true)
+//                .onStagingEnv(false)
+//                .shouldDisplayFee(true)
+//                .showStagingLabel(true)
+//
+//                .initialize();
+//
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -218,6 +292,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         }
     }
 
+
+
     private void viewUserDetails() {
 
         DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
@@ -228,6 +304,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             {
                 if (dataSnapshot.exists())
                 {
+                    dataSnapshot.getChildrenCount();
+
                     String firstname = dataSnapshot.child("firstname").getValue().toString();
                     String lastname = dataSnapshot.child("lastname").getValue().toString();
                     String phone = dataSnapshot.child("Phone").getValue().toString();
@@ -264,11 +342,11 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         saveCurrentTime = currentTime.format(callForDate.getTime());
 
 
-        productRandomKey = saveCurrentDate + saveCurrentTime;
-
+      //  productRandomKey = saveCurrentDate + saveCurrentTime;
+        UUID uuid = UUID.randomUUID();
 
         final DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference().child("Orders")
-                .child(mAuth.getCurrentUser().getUid()).child(productRandomKey);
+                .child(mAuth.getCurrentUser().getUid()).child(String.valueOf(uuid));
 
 
         HashMap<String, Object> ordersMap = new HashMap<>();
@@ -280,7 +358,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("email",userEmail);
         ordersMap.put("date",saveCurrentDate);
         ordersMap.put("time",saveCurrentTime);
-        ordersMap.put("State", "not Shipped");
+        ordersMap.put("State", "confirmed");
         ordersMap.put("products",cartItems);
         ordersMap.put("orderid", productRandomKey);
         ordersMap.put("specialText", specialTxt);

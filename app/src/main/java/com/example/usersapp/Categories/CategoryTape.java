@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -56,7 +57,7 @@ public class CategoryTape extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.LayoutManager layoutTape;
     private FirebaseAuth mAuth;
-
+    private TextView seeAllProducts;
     private String productID = "";
 
     private String categoryTape="tape";
@@ -101,7 +102,15 @@ public class CategoryTape extends AppCompatActivity {
 //        mToolbar.setTitle("Details");
 //        setSupportActionBar(mToolbar);
 
-
+        seeAllProducts = findViewById(R.id.see_all_products);
+        seeAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CategoryTape.this, AllProductsActivity.class);
+//                intent.putExtra("pid", model.getPid());
+                startActivity(intent);
+            }
+        });
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
 

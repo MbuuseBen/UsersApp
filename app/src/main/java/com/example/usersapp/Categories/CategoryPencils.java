@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.example.usersapp.CartActivity;
@@ -55,7 +56,7 @@ public class CategoryPencils extends AppCompatActivity {
     RecyclerView.LayoutManager layoutPencils;
     private FirebaseAuth mAuth;
 
-
+    private TextView seeAllProducts;
     private String productID = "";
 
     private String categoryPencils="pencil";
@@ -76,7 +77,15 @@ public class CategoryPencils extends AppCompatActivity {
         recyclerView = findViewById(R.id.search_list1);
         recyclerViewPencils = findViewById(R.id.category_pencils);
 
-
+        seeAllProducts = findViewById(R.id.see_all_products);
+        seeAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CategoryPencils.this, AllProductsActivity.class);
+//                intent.putExtra("pid", model.getPid());
+                startActivity(intent);
+            }
+        });
 
         productID = getIntent().getStringExtra("pid");
 
@@ -118,15 +127,12 @@ public class CategoryPencils extends AppCompatActivity {
     private void checkCart() {
 
         DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView");
-        productsRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        productsRef.child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.getResult().exists()) {
                     Intent intent = new Intent(CategoryPencils.this, CartActivity.class);
                     startActivity(intent);
-
-
                 }else {
                     Toast.makeText(CategoryPencils.this, "Please add some items to your cart.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(CategoryPencils.this, MainActivity.class);
@@ -135,12 +141,31 @@ public class CategoryPencils extends AppCompatActivity {
 
                 }
             }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
         });
+
+//                .addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()) {
+//
+//                    Intent intent = new Intent(CategoryPencils.this, CartActivity.class);
+//                    startActivity(intent);
+//
+//
+//                }else {
+//                    Toast.makeText(CategoryPencils.this, "Please add some items to your cart.", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(CategoryPencils.this, MainActivity.class);
+//                    startActivity(intent);
+//
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
 
 
     }

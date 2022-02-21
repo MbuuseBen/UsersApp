@@ -1,6 +1,7 @@
 package com.example.usersapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,15 @@ public void onBindViewHolder(@NonNull SearchItemAdapter.ViewHolder holder, int p
         holder.productName.setText(modal.getPname());
     Picasso.get().load(modal.getImage()).into(holder.productImage);
         holder.productPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(modal.getPrice())));
+holder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(view.getContext(),ProductDetailsActivity.class);
+        intent.putExtra("pid", modal.getPid());
+        view.getContext().startActivity(intent);
+
+    }
+});
 
         }
 

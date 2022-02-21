@@ -133,11 +133,12 @@ public class NewSearchActivity extends AppCompatActivity {
                 for(DataSnapshot ds:snapshot.getChildren()){
 
                     String name = ds.child("pname").getValue().toString();
+                    String pId = ds.child("pid").getValue().toString();
 
                    // String image = ds.child("pname").getValue().toString();
                     String imageUrl = ds.child("image").getValue().toString();
                     String price = ds.child("price").getValue().toString();
-                    Produ product = new Produ(name,imageUrl,Integer.valueOf(price));
+                    Produ product = new Produ(pId,name,imageUrl,Integer.valueOf(price));
                     productsModalArrayList.add(product);
                 }
 

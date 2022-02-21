@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -61,7 +62,7 @@ public class CategoryClips extends AppCompatActivity {
 
     private String categoryClips="paperClip";
     private ServerValue add;
-
+    private TextView seeAllProducts;
 
 
 
@@ -89,7 +90,15 @@ public class CategoryClips extends AppCompatActivity {
         loadClipstoRecyclerView();
         loadAllProductstoRecyclerview();
 
-
+        seeAllProducts = findViewById(R.id.see_all_products);
+        seeAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CategoryClips.this, AllProductsActivity.class);
+//                intent.putExtra("pid", model.getPid());
+                startActivity(intent);
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
         toolbar.setTitle("Clips");

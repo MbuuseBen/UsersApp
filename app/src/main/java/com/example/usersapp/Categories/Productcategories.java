@@ -15,8 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.usersapp.AllProductsActivity;
 import com.example.usersapp.CartActivity;
 import com.example.usersapp.MainActivity;
 import com.example.usersapp.Model.Products;
@@ -42,7 +44,7 @@ public class Productcategories extends AppCompatActivity {
     private RecyclerView searchList,recyclerView;
     RecyclerView.LayoutManager layoutManager;
     private FirebaseAuth mAuth;
-
+    private TextView seeAllProducts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +67,16 @@ public class Productcategories extends AppCompatActivity {
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
 
-
-        viewPencils = findViewById(R.id.product_image_calculator);
+        seeAllProducts = findViewById(R.id.see_all_products);
+        seeAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Productcategories.this, AllProductsActivity.class);
+//                intent.putExtra("pid", model.getPid());
+                startActivity(intent);
+            }
+        });
+        viewPencils = findViewById(R.id.product_image_pencil);
         viewPencils.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +85,7 @@ public class Productcategories extends AppCompatActivity {
             }
         });
 
-        viewCalculators = findViewById(R.id.product_image_pencil);
+        viewCalculators = findViewById(R.id.product_image_calculator);
         viewCalculators.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

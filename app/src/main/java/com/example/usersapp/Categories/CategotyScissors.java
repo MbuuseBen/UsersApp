@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usersapp.AllProductsActivity;
@@ -54,7 +55,7 @@ public class CategotyScissors extends AppCompatActivity {
     RecyclerView.LayoutManager layoutScissors;
     private FirebaseAuth mAuth;
 
-
+    private TextView seeAllProducts;
     private String productID = "";
 
     private String categoryPunch="scissors";
@@ -95,7 +96,15 @@ public class CategotyScissors extends AppCompatActivity {
         toolbar.showOverflowMenu();
         setSupportActionBar(toolbar);
 
-
+        seeAllProducts = findViewById(R.id.see_all_products);
+        seeAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CategotyScissors.this, AllProductsActivity.class);
+//                intent.putExtra("pid", model.getPid());
+                startActivity(intent);
+            }
+        });
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
 

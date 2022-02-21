@@ -51,6 +51,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -111,8 +112,8 @@ public class MainActivity extends AppCompatActivity
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         mAuth = FirebaseAuth.getInstance();
-
-    //    profileImageView = (ImageView) findViewById(R.id.user_profile_image);
+       // Hover.initialize(this);
+        //    profileImageView = (ImageView) findViewById(R.id.user_profile_image);
 
         Paper.init(this);
 
@@ -267,7 +268,7 @@ public class MainActivity extends AppCompatActivity
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
-        toolbar.setTitle("Janzzy Store");
+        toolbar.setTitle("Janzy Store");
         setSupportActionBar(toolbar);
 
 
@@ -576,7 +577,12 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
 
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -655,7 +661,7 @@ public class MainActivity extends AppCompatActivity
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 String shareSubText = "JanzyStore - The One Stop Stationery Shop, Download it to check it out ";
-                String shareBodyText = "https://drive.google.com/file/d/1WZRJ2bGMtefIRbSl_-wSr6NSe2BdW7CJ/view?usp=sharing";
+                String shareBodyText = "https://drive.google.com/drive/folders/1_z5wvW02rjidCkBTHOgMQEBjZF1rWPKn?usp=sharing";
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubText);
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareBodyText);
                 startActivity(Intent.createChooser(shareIntent, "Share With"));

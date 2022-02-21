@@ -43,6 +43,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
@@ -119,11 +120,81 @@ public class ProductDetailsActivity extends AppCompatActivity {
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+          //      CheckOrderState();
                 addingToCartList();
 
             }
         });
 
+    }
+    //    private void CheckOrderState() {
+//        DatabaseReference ordersRef;
+//        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+//                .child(mAuth.getCurrentUser().getUid());
+//        ordersRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                if (snapshot.exists()){
+//                    String shippingState = snapshot.child("State").getValue().toString();
+//                    String userName = snapshot.child("firstname").getValue().toString();
+//
+//                    if (shippingState.equals("shipped")){
+//                        txtTotalAmount.setText("Dear " + userName+ "\n Your Order has been Shipped successfully.");
+//                        recyclerView.setVisibility(View.GONE);
+//                        txtmsg1.setVisibility(View.VISIBLE);
+//                        txtmsg1.setText("Congratulations,Your Order was shipped successfully,Soon To be verified");
+//                        NextProcessBtn.setVisibility(View.GONE);
+//
+//                        Toast.makeText(CartActivity.this, "You can Purchase more Products",Toast.LENGTH_SHORT);
+//
+//
+//                    }else  if(shippingState.equals("not shipped")){
+//
+//                        txtTotalAmount.setText("Shipping State = Not Shipped");
+//                        recyclerView.setVisibility(View.GONE);
+//                        txtmsg1.setVisibility(View.VISIBLE);
+//                        NextProcessBtn.setVisibility(View.GONE);
+//
+//                        Toast.makeText(CartActivity.this, "You can Purchase more Products",Toast.LENGTH_SHORT);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//    }
+    private void CheckOrderState() {
+
+        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Orders");
+        productsRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String orderState = snapshot.child("State").getValue().toString();
+                    if (orderState.equals("confirmed")){
+                       // addingToCartList();
+                       // finish();
+                    }
+                    else {
+
+                        addingToCartList();
+                    }
+
+
+                } else {
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void addToWishList() {
@@ -300,6 +371,56 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
 
+//    private void addingToCartList() {
+//        String saveCurrentTime, saveCurrentDate;
+//        Calendar callForDate = Calendar.getInstance();
+//        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+//        saveCurrentDate = currentDate.format(callForDate.getTime());
+//
+//        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+//        saveCurrentTime = currentTime.format(callForDate.getTime());
+//
+//        UUID uuid = UUID.randomUUID();
+//
+//        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+//
+//        //final HashMap<String, object> cartMap = new HashMap<>();
+//        final HashMap<String, Object> cartMap = new HashMap<>();
+//        cartMap.put("pid", productID);
+//        cartMap.put("pname", productName);
+//        cartMap.put("price", productPrice);
+//        cartMap.put("date", saveCurrentDate);
+//        cartMap.put("time", saveCurrentTime);
+//        cartMap.put("image",imageUrl);
+//        cartMap.put("quantity",add.increment((Integer.parseInt(numberButton.getNumber()))));
+//        cartMap.put("discount", "");
+//        cartMap.put("sellerName",sellerName1);
+//
+//
+//        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
+//                .child(productID).updateChildren(cartMap)
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                        if (task.isSuccessful()) {
+//                            cartListRef.child("Orders").child(mAuth.getCurrentUser().getUid()).child(String.valueOf(uuid))
+//                                    .child("Products").child(productID)
+//                                    .updateChildren(cartMap)
+//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                                            if (task.isSuccessful()) {
+//                                                Toast.makeText(ProductDetailsActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
+////                                                Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
+////                                                startActivity(intent);
+//                                            }
+//                                         }
+//                                    });
+//                        }
+//                    }
+//                });
+//    }
+
     private void addingToCartList() {
         String saveCurrentTime, saveCurrentDate;
         Calendar callForDate = Calendar.getInstance();
@@ -343,14 +464,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //                                                Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
 //                                                startActivity(intent);
                                             }
-                                         }
+                                        }
                                     });
                         }
                     }
                 });
     }
-
-
 
     private void getProductDetails(String productID) {
 
