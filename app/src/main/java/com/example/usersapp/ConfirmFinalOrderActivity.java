@@ -331,6 +331,24 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     private void ConfirmOrder() {
 
+        DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    HashMap<String, Object> products = new HashMap<>();
+                    products.putAll((HashMap) task.getResult().getValue());
+                    AddOrderInfo(products);
+                } else {
+                    Toast.makeText(ConfirmFinalOrderActivity.this,"It dint work",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
+    private void AddOrderInfo(HashMap products) {
+
         final String specialTxt = specialText.getText().toString();
 
         final String saveCurrentDate, saveCurrentTime;
@@ -362,7 +380,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("products",cartItems);
         ordersMap.put("orderid", productRandomKey);
         ordersMap.put("specialText", specialTxt);
-
+        ordersMap.put("products", products);
 
 
         orderRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
