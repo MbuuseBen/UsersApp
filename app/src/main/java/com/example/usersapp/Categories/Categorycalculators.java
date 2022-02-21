@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.example.usersapp.CartActivity;
@@ -63,7 +64,7 @@ public class Categorycalculators extends AppCompatActivity {
     private String categoryCalculators="calculator";
     private ServerValue add;
 
-
+    private TextView seeAllProducts;
 
 
     @Override
@@ -109,7 +110,15 @@ public class Categorycalculators extends AppCompatActivity {
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
 
-
+        seeAllProducts = findViewById(R.id.see_all_products);
+        seeAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Categorycalculators.this, AllProductsActivity.class);
+//                intent.putExtra("pid", model.getPid());
+                startActivity(intent);
+            }
+        });
     }
 
 

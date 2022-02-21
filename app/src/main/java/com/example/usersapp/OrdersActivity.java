@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -70,7 +71,7 @@ public class OrdersActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<Orders, OrdersViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Orders, OrdersViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull @NotNull OrdersViewHolder holder, int position, @NonNull @NotNull Orders model) {
+                    protected void onBindViewHolder(@NonNull @NotNull OrdersViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull @NotNull Orders model) {
 
 
 

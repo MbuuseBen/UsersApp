@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -53,7 +54,7 @@ public class CategoryPunch extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.LayoutManager layoutPunch;
     private FirebaseAuth mAuth;
-
+    private TextView seeAllProducts;
 
     private String productID = "";
 
@@ -95,7 +96,15 @@ public class CategoryPunch extends AppCompatActivity {
         toolbar.showOverflowMenu();
         setSupportActionBar(toolbar);
 
-
+        seeAllProducts = findViewById(R.id.see_all_products);
+        seeAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CategoryPunch.this, AllProductsActivity.class);
+//                intent.putExtra("pid", model.getPid());
+                startActivity(intent);
+            }
+        });
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
 

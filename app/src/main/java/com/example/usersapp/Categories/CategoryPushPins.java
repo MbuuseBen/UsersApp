@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -53,7 +54,7 @@ public class CategoryPushPins extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.LayoutManager layoutPushpins;
     private FirebaseAuth mAuth;
-
+    private TextView seeAllProducts;
 
     private String productID = "";
 
@@ -85,7 +86,15 @@ public class CategoryPushPins extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
 
-
+        seeAllProducts = findViewById(R.id.see_all_products);
+        seeAllProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CategoryPushPins.this, AllProductsActivity.class);
+//                intent.putExtra("pid", model.getPid());
+                startActivity(intent);
+            }
+        });
         loadTextbookstoRecyclerView();
         loadAllProductstoRecyclerview();
 

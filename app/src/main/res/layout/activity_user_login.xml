@@ -6,7 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".UserLoginActivity">
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:isScrollContainer="true" >
     <ImageView
         android:id="@+id/img_user"
         android:layout_width="match_parent"
@@ -101,5 +109,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20dp" />
 
+        </RelativeLayout>
 
+    </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

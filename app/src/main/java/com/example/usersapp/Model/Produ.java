@@ -2,7 +2,7 @@ package com.example.usersapp.Model;
 
 public class Produ
 {
-    private String pname,image;
+    private String pid,pname,image;
     private int price;
 
     public Produ()
@@ -10,10 +10,19 @@ public class Produ
 
     }
 
-    public Produ(String pname, String image, int price) {
+    public Produ(String pid, String pname, String image, int price) {
+        this.pid = pid;
         this.pname = pname;
         this.image = image;
         this.price = price;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 
     public String getPname() {

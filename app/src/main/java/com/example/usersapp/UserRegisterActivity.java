@@ -123,12 +123,13 @@ public class UserRegisterActivity extends AppCompatActivity {
 
         if (isNameValid && isEmailValid && isPhoneValid && isPasswordValid) {
             registerUser();
-            Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
         }
 
     }
 
     private void registerUser() {
+
 
         String f_name = firstnameInput.getText().toString();
         String l_name = lastnameInput.getText().toString();
@@ -148,7 +149,21 @@ public class UserRegisterActivity extends AppCompatActivity {
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
+
+                           // Toast.makeText(UserRegisterActivity.this, "Error Signing you up ", Toast.LENGTH_SHORT).show();
+                            // If sign in fails, display a message to the user. If sign in succeeds
+                            // the auth state listener will be notified and logic to handle the
+                            // signed in user can be handled in the listener.
+                            if (!task.isSuccessful()) {
+                                Toast.makeText(UserRegisterActivity.this, "Authentication failed. Email already exists",
+                                        Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(UserRegisterActivity.this, UserRegisterActivity.class);
+
+                                startActivity(intent);
+
+                                finish();
+                            } else {
+                                //Do something here
                                 final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
                                 String uid = mAuth.getCurrentUser().getUid();
 
@@ -165,11 +180,13 @@ public class UserRegisterActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull @NotNull Task<Void> task) {
                                                 loadingBar.dismiss();
-                                                Toast.makeText(UserRegisterActivity.this, "You are Registered Successfully , Please Login",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(UserRegisterActivity.this, "Registered Successfully",Toast.LENGTH_SHORT).show();
 
                                                 Intent intent = new Intent(UserRegisterActivity.this, MainActivity.class);
 
                                                 startActivity(intent);
+
+                                                finish();
 
                                             }
                                         });
@@ -177,10 +194,15 @@ public class UserRegisterActivity extends AppCompatActivity {
                             }
                         }
                     });
-
-
-        }else {
-            Toast.makeText(UserRegisterActivity.this, "Please Complete Registration",Toast.LENGTH_SHORT).show();
-        }
+//                            if(task.isSuccessful()){
+//
+//                            }
+//                        }
+//                    });
+//
+//
+//        }else {
+//            Toast.makeText(UserRegisterActivity.this, "Please Complete Registration",Toast.LENGTH_SHORT).show();
+       }
     }
 }
