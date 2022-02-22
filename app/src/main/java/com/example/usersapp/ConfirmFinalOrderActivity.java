@@ -378,7 +378,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("time",saveCurrentTime);
         ordersMap.put("State", "confirmed");
         ordersMap.put("products",cartItems);
-        ordersMap.put("orderid", productRandomKey);
+        ordersMap.put("orderid", String.valueOf(uuid));
         ordersMap.put("specialText", specialTxt);
         ordersMap.put("products", products);
 

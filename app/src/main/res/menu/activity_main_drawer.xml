@@ -37,20 +37,16 @@
             android:icon="@drawable/ic_baseline_share_24"
             android:title="Share App" />
 
-<!--        <item-->
-<!--            android:id="@+id/nav_info"-->
-<!--            android:icon="@drawable/ic_baseline_info_24"-->
-<!--            android:title="About" />-->
 
         <item
             android:id="@+id/nav_privacy"
-            android:icon="@drawable/ic_baseline_notifications_active_24"
+            android:icon="@drawable/ic_baseline_policy_24"
             android:title="Privacy Policy" />
 
         <item
             android:id="@+id/nav_terms"
             android:icon="@drawable/ic_baseline_info_24"
-            android:title="Terms n Conditions" />
+            android:title="Terms &amp; Conditions" />
 
 
         <item
@@ -58,6 +54,10 @@
             android:icon="@drawable/ic_settings_icon1"
             android:title="Settings"/>
 
+        <item
+            android:id="@+id/nav_reset"
+            android:icon="@drawable/ic_baseline_info_24"
+            android:title="Reset Password" />
 
     <item
         android:id="@+id/nav_logout"

@@ -15,27 +15,11 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar1"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
-            >
-            <TextView
-                android:id="@+id/r2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Products"
-                android:textSize="20dp"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="10dp"
-                />
-
-
-        </com.google.android.material.appbar.MaterialToolbar>
-
-
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
-
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/products_list"

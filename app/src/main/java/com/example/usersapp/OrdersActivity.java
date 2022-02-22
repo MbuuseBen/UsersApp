@@ -48,7 +48,7 @@ public class OrdersActivity extends AppCompatActivity {
         ordersList.setLayoutManager(new LinearLayoutManager(this));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
-        //toolbar.setTitle("Details");
+        toolbar.setTitle("Orders");
         setSupportActionBar(toolbar);
 
         // Get a support ActionBar corresponding to this toolbar
@@ -59,6 +59,7 @@ public class OrdersActivity extends AppCompatActivity {
 
 
     }
+
 
     @Override
     protected void onStart() {
@@ -78,50 +79,50 @@ public class OrdersActivity extends AppCompatActivity {
                         holder.userFirstName.setText("Name : "+model.getFirstname()+ " "+ model.getLastname());
                         holder.userPhoneNumber.setText("Phone : "+model.getPhone());
                         holder.userTotalPrice.setText("Total Amount : "+ (new DecimalFormat("#,###")).format(Integer.valueOf(model.getTotalAmount())));
-                        holder.userDateTime.setText("Orders at : "+model.getDate() + ""+ model.getTime());
+                        holder.userDateTime.setText("Placed on : "+model.getDate() + "at " +model.getTime());
                         holder.userShippingAddress.setText("Address : "+model.getAddress());
-                        holder.orderId.setText("OrderId :"+model.getOrderid());
+                        holder.orderId.setText("Order #"+model.getOrderid());
                         holder.State.setText("Order State : "+model.getState());
                         holder.specialText.setText("Special Text : "+model.getSpecialText());
 
 
-//                        holder.ShowOrdersBtn.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                String uID = getRef(position).getKey();
-//
-//                                Intent intent = new Intent(OrdersActivity.this, OrderProductsActivity.class);
-//                                intent.putExtra("uid", uID);
-//                                startActivity(intent);
-//                            }
-//                        });
-
-                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                        holder.ShowOrdersBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                CharSequence options[] = new CharSequence[]{
-                                        "Yes",
-                                        "No"
-                                };
+                              //  String uID = getRef(position).getKey();
 
-                                AlertDialog.Builder builder = new AlertDialog.Builder(OrdersActivity.this);
-                                builder.setTitle("Have You Shipped these ordered products?");
-                                builder.setItems(options, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        if(i==0){
-
-                                            String uID = getRef(position).getKey();
-                                            RemoveOrder(uID);
-                                        }else {
-                                            finish();
-                                        }
-                                    }
-                                });
-
-                                builder.show();
+                                Intent intent = new Intent(OrdersActivity.this, OrderProductsActivity.class);
+                                intent.putExtra("orderID", model.getOrderid());
+                                startActivity(intent);
                             }
                         });
+
+//                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//                                CharSequence options[] = new CharSequence[]{
+//                                        "Yes",
+//                                        "No"
+//                                };
+//
+//                                AlertDialog.Builder builder = new AlertDialog.Builder(OrdersActivity.this);
+//                                builder.setTitle("Have You Shipped these ordered products?");
+//                                builder.setItems(options, new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialogInterface, int i) {
+//                                        if(i==0){
+//
+//                                            String uID = getRef(position).getKey();
+//                                            RemoveOrder(uID);
+//                                        }else {
+//                                            finish();
+//                                        }
+//                                    }
+//                                });
+//
+//                                builder.show();
+//                            }
+//                        });
 
                     }
 
@@ -130,7 +131,7 @@ public class OrdersActivity extends AppCompatActivity {
                     @Override
                     public OrdersViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout,parent,false);
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout1,parent,false);
                         return  new OrdersViewHolder(view);
                     }
                 };
@@ -155,7 +156,7 @@ public class OrdersActivity extends AppCompatActivity {
             userTotalPrice = itemView.findViewById(R.id.order_total_price);
             userDateTime = itemView.findViewById(R.id.order_date_time);
             userShippingAddress= itemView.findViewById(R.id.order_address_city);
-        //    ShowOrdersBtn = itemView.findViewById(R.id.show_all_products_btn);
+            ShowOrdersBtn = itemView.findViewById(R.id.show_order_products_btn);
             orderId= itemView.findViewById(R.id.order_id);
             State=itemView.findViewById(R.id.order_state);
             specialText = itemView.findViewById(R.id.order_user_specialText);
@@ -165,9 +166,9 @@ public class OrdersActivity extends AppCompatActivity {
 
     }
 
-    private void RemoveOrder(String uID) {
-
-        orderRef.child(uID).removeValue();
-    }
+//    private void RemoveOrder(String uID) {
+//
+//        orderRef.child(uID).removeValue();
+//    }
 
 }

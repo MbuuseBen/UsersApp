@@ -305,7 +305,25 @@ public class MainActivity extends AppCompatActivity
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
 
-            userNameTextView.setText(mAuth.getCurrentUser().getEmail());
+        DatabaseReference userInfoRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        userInfoRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Users users = snapshot.getValue(Users.class);
+                   // String username = users.getFirstname();
+                    userNameTextView.setText(users.getFirstname() + " " + users.getLastname());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        userNameTextView.setText(mAuth.getCurrentUser().getEmail());
+         //   userNameTextView.setText(mAuth.getCurrentUser().getEmail());
 
         Picasso.get().load(mAuth.getCurrentUser().getPhotoUrl()).into(profileImageView);
 
@@ -650,6 +668,15 @@ public class MainActivity extends AppCompatActivity
             {
 
                 Intent intent = new Intent(MainActivity.this, Terms.class);
+                startActivity(intent);
+
+
+            }
+
+            else if (id == R.id.nav_reset)
+            {
+
+                Intent intent = new Intent(MainActivity.this, ResetPasswordInActivity.class);
                 startActivity(intent);
 
 

@@ -114,7 +114,7 @@ public class UserRegisterActivity extends AppCompatActivity {
         if (passwordInput.getText().toString().isEmpty()) {
             passwordInput.setError(getResources().getString(R.string.password_error));
             isPasswordValid = false;
-        } else if (passwordInput.getText().length() < 10) {
+        } else if (passwordInput.getText().length() < 6) {
             passwordInput.setError(getResources().getString(R.string.error_invalid_password));
             isPasswordValid = false;
         } else  {

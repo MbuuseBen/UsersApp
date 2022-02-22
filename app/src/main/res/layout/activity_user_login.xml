@@ -51,19 +51,19 @@
         android:inputType="textEmailAddress"
         android:padding="20dp" />
 
-    <EditText
-        android:id="@+id/user_login_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/user_login_email"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/input_design1"
-        android:drawableStart="@drawable/ic_baseline_lock_open_24"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="20dp" />
+            <EditText
+                android:id="@+id/user_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_login_email"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/input_design1"
+                android:drawableStart="@drawable/ic_baseline_lock_open_24"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="20dp" />
 
     <Button
         android:id="@+id/user_login_btn"

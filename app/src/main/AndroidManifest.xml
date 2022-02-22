@@ -28,6 +28,10 @@
         <activity
             android:name=".ResetPasswordActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ResetPasswordInActivity"
+            android:exported="false" />
         <activity
             android:name=".Terms"
             android:exported="false"
