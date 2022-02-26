@@ -48,7 +48,7 @@ import io.paperdb.Paper;
 
  public class AllProductsActivity extends AppCompatActivity {
 
-    private DatabaseReference ProductsRef,reference,def;
+    private DatabaseReference reference,def;
     private RecyclerView recyclerView;
     private SearchView inputText;
     RecyclerView.LayoutManager layoutManager;
@@ -64,7 +64,7 @@ import io.paperdb.Paper;
      private String productRandomKey;
     private ServerValue add;
 //    private String initialQty = "1";
-
+private String productId = "";
 
 
     @Override
@@ -72,9 +72,10 @@ import io.paperdb.Paper;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_products);
 
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
-        reference = FirebaseDatabase.getInstance().getReference().child("Products");
-
+       // ProductsRef = FirebaseDatabase.getInstance().getReference().child("products");
+       // String key = ProductsRef.push().getKey();
+        reference = FirebaseDatabase.getInstance().getReference().child("products");
+        //String key = reference.push().getKey();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -107,6 +108,25 @@ import io.paperdb.Paper;
     public boolean onPrepareOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.top_app_bar,menu);
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    public void cartCount(){
+        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView");
+        productsRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    HashMap<String, Object> products = new HashMap<>();
+                    products.putAll((HashMap) snapshot.getValue());
+                    int cartCount = products.size();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void checkCart() {
@@ -217,8 +237,10 @@ import io.paperdb.Paper;
                             @Override
                             public void onClick(View view) {
 
+                                reference = FirebaseDatabase.getInstance().getReference().child("Products");
+                               // String key = ProductsRef.getKey();
                                     Intent intent = new Intent(AllProductsActivity.this, ProductDetailsActivity.class);
-                                    intent.putExtra("pid", model.getPid());
+                                    intent.putExtra("pid",model.getPid());
                                     startActivity(intent);
                                 }
 

@@ -195,9 +195,9 @@ public class CategorySets extends AppCompatActivity {
 
     private void loadSetstoRecyclerView() {
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
-        Query query  =reference.orderByChild("category").equalTo(categorySets).limitToFirst(6);
+        Query query  =reference.orderByChild("category").equalTo(categorySets);
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(query,Products.class)
@@ -254,14 +254,14 @@ public class CategorySets extends AppCompatActivity {
                         cartMap.put("quantity",add.increment(1));
                         cartMap.put("discount", "");
 
-                        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
+                        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("products")
                                 .child(productID).updateChildren(cartMap)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
-                                                    .child("Products").child(productID)
+                                                    .child("products").child(productID)
                                                     .updateChildren(cartMap)
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
@@ -302,7 +302,7 @@ public class CategorySets extends AppCompatActivity {
     protected void loadAllProductstoRecyclerview() {
 
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(reference.orderByChild("pname").limitToFirst(8),Products.class).build();

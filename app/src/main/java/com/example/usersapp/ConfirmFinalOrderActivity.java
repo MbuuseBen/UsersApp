@@ -332,7 +332,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private void ConfirmOrder() {
 
         DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
-        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("products").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {

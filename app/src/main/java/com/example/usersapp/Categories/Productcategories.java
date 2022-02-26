@@ -267,7 +267,7 @@ public class Productcategories extends AppCompatActivity {
     protected void loadAllProductstoRecyclerview() {
 
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(reference.orderByChild("pname").limitToFirst(8),Products.class).build();

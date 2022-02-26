@@ -57,7 +57,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private int productPrice;
     private String productDescription;
     private String productName,sellerName1,itemID;
-    private Button addToCartButton;
+    private Button addToCartButton,migrateButton;
     private Toolbar mToolbar;
     private DatabaseReference ProductsRef;
 
@@ -86,7 +86,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productName1 = (TextView) findViewById(R.id.product_name_details);
         productDescription1 = (TextView) findViewById(R.id.product_description_details);
         productPrice1 = (TextView) findViewById(R.id.product_price_details);
-
+    //    migrateButton = (Button) findViewById(R.id.migrate_btn);
 
         wishlistBtn = (ImageView)findViewById(R.id.wishlist);
         wishlistBtn.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +117,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
 
+//        migrateButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                migrateItem();
+//            }
+//        });
+
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,6 +135,77 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
 
     }
+
+//    private void migrateItem() {
+//
+//       // FirebaseDatabase database = FirebaseDatabase.getInstance();
+//      //  String key = database.getReference("products").push().getKey();
+//                // UUID uuid = UUID.randomUUID();
+//        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+//       // String key =
+//        productsRef.child(productID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    HashMap<String, Object> products = new HashMap<>();
+//                    products.putAll((HashMap) task.getResult().getValue());
+//                    AddNewProductInfo(products);
+//                } else {
+//                    Toast.makeText(ProductDetailsActivity.this,"It dint work",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//
+//    }
+
+//    private void AddNewProductInfo(HashMap<String, Object> products) {
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        String key = database.getReference("products").push().getKey();
+//
+//       // UUID uuid = UUID.randomUUID();
+//        final DatabaseReference ItemsRef = FirebaseDatabase.getInstance().getReference().child("products").child(key);
+//
+//        HashMap<String, Object> productsMap = new HashMap<>();
+//
+//        productsMap.putAll(products);
+//
+//        ItemsRef.updateChildren(productsMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                FirebaseDatabase.getInstance().getReference().child("Products")
+//                        .child(productID)
+//                        .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()) {
+//                            final DatabaseReference newRef = FirebaseDatabase.getInstance().getReference().child("products").child(key);
+//                            HashMap<String, Object> productMap = new HashMap<>();
+//                            // productMap.put("pid", String.valueOf(uuid));
+//                            productMap.put("pid", key);
+//                            newRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    if(task.isSuccessful()){
+//                                        Toast.makeText(ProductDetailsActivity.this, "successful", Toast.LENGTH_SHORT).show();
+//                                        Intent intent = new Intent(ProductDetailsActivity.this, AllProductsActivity.class);
+//                                        startActivity(intent);
+//                                    }
+//                                }
+//                            });
+//
+//
+//
+//                          //  Toast.makeText(ProductDetailsActivity.this, "successful", Toast.LENGTH_SHORT).show();
+////                            Intent intent = new Intent(ProductDetailsActivity.this, AllProductsActivity.class);
+////                            startActivity(intent);
+//
+//                        }
+//                    }
+//                });
+//            }
+//        });
+//    }
+
     //    private void CheckOrderState() {
 //        DatabaseReference ordersRef;
 //        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
@@ -209,7 +287,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
                 DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("WishList").child(mAuth.getCurrentUser().getUid());
-                productsRef.child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
+                productsRef.child("products").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -225,7 +303,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             cartMap.put("image",imageUrl);
                             cartMap.put("discount", "");
 
-                            productsRef.child("Products")
+                            productsRef.child("products")
                                     .child(productID).updateChildren(cartMap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -248,7 +326,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             cartMap.put("image",imageUrl);
                             cartMap.put("discount", "");
 
-                            productsRef.child("Products")
+                            productsRef.child("products")
                                     .child(productID).updateChildren(cartMap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -273,7 +351,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private void viewProductDetails(String productID) {
 
-        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("products");
         productsRef.child(productID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
@@ -447,14 +525,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("sellerName",sellerName1);
 
 
-        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
+        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("products")
                 .child(productID).updateChildren(cartMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
-                                    .child("Products").child(productID)
+                                    .child("products").child(productID)
                                     .updateChildren(cartMap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -473,7 +551,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private void getProductDetails(String productID) {
 
-        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("products");
         productsRef.child(productID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
@@ -500,7 +578,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     protected void loadAllProductstoRecyclerview() {
 
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(reference.orderByChild("pname"),Products.class).build();

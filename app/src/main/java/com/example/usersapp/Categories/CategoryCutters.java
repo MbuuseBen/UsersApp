@@ -180,7 +180,7 @@ public class CategoryCutters extends AppCompatActivity {
 
     private void loadCutterstoRecyclerView() {
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         Query query  =reference.orderByChild("category").equalTo(categoryCutters);
 
@@ -227,7 +227,7 @@ public class CategoryCutters extends AppCompatActivity {
     protected void loadAllProductstoRecyclerview() {
 
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(reference.orderByChild("pname").limitToFirst(8),Products.class).build();

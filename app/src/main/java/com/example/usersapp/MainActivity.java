@@ -60,6 +60,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity
             type = getIntent().getExtras().get("Admin").toString();
         }
 
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child("products");
         mAuth = FirebaseAuth.getInstance();
        // Hover.initialize(this);
         //    profileImageView = (ImageView) findViewById(R.id.user_profile_image);
@@ -379,7 +380,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private void loadCalculatorstoRecyclerView() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         Query query  =reference.orderByChild("category").equalTo(categoryCalculators).limitToFirst(10);
 
@@ -423,8 +424,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void loadPencilstoRecyclerView() {
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        UUID uuid = UUID.randomUUID();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         Query query  =reference.orderByChild("category").equalTo(categoryPencils).limitToFirst(10);
 
@@ -485,14 +486,14 @@ public class MainActivity extends AppCompatActivity
                         cartMap.put("discount", "");
                         cartMap.put("sellerName",sellerName1);
 
-                        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
+                        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("products")
                                 .child(productID).updateChildren(cartMap)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
-                                                    .child("Products").child(productID)
+                                                    .child("products").child(productID)
                                                     .updateChildren(cartMap)
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
@@ -534,7 +535,7 @@ public class MainActivity extends AppCompatActivity
         super.onStart();
 
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(reference.orderByChild("pname").limitToFirst(4),Products.class).build();

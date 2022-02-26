@@ -2,19 +2,19 @@ package com.example.usersapp.Model;
 
 public class Produ
 {
-    private String pid,pname,image;
-    private int price;
+    private String pid,pname,price,image;
+   // private int price;
 
     public Produ()
     {
 
     }
 
-    public Produ(String pid, String pname, String image, int price) {
+    public Produ(String pid, String pname, String price, String image) {
         this.pid = pid;
         this.pname = pname;
-        this.image = image;
         this.price = price;
+        this.image = image;
     }
 
     public String getPid() {
@@ -33,19 +33,19 @@ public class Produ
         this.pname = pname;
     }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 }
