@@ -13,10 +13,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -109,6 +111,7 @@ private String productId = "";
         getMenuInflater().inflate(R.menu.top_app_bar,menu);
         return super.onPrepareOptionsMenu(menu);
     }
+
 
     public void cartCount(){
         DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView");

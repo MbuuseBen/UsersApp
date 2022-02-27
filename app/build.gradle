@@ -73,7 +73,7 @@ dependencies {
 
    // compile 'com.github.YO-Uganda:YoPaymentsAndroidAPI:1.0.0'
 
-
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
    // implementation 'com.github.wagaana:EasyPay-API:0.02'
    // implementation 'com.hover:android-sdk:1.7.2'
 }

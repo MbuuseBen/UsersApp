@@ -138,7 +138,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 //    private void migrateItem() {
 //
-//       // FirebaseDatabase database = FirebaseDatabase.getInstance();
+//       //
+
+
 //      //  String key = database.getReference("products").push().getKey();
 //                // UUID uuid = UUID.randomUUID();
 //        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.usersapp.Model.Users;
 import com.example.usersapp.Prevalent.Prevalent;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
 
         mAuth = FirebaseAuth.getInstance();
+
 
 
         Paper.init(this);
