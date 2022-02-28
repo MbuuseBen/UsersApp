@@ -194,7 +194,6 @@ public class Categorycalculators extends AppCompatActivity {
 
 
 
-
     private void loadCalculatorstoRecyclerView() {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");

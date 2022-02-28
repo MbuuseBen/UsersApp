@@ -1,6 +1,7 @@
 package com.example.usersapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -273,7 +274,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -305,6 +305,8 @@ public class MainActivity extends AppCompatActivity
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
+        Uri photourl = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl();
+        Picasso.get().load(String.valueOf(photourl)).fit().into(profileImageView);
 
         DatabaseReference userInfoRef = FirebaseDatabase.getInstance().getReference().child("Users");
         userInfoRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
@@ -326,7 +328,8 @@ public class MainActivity extends AppCompatActivity
         userNameTextView.setText(mAuth.getCurrentUser().getEmail());
          //   userNameTextView.setText(mAuth.getCurrentUser().getEmail());
 
-        Picasso.get().load(mAuth.getCurrentUser().getPhotoUrl()).into(profileImageView);
+      //  Picasso.get().load(mAuth.getCurrentUser().getPhotoUrl()).into(profileImageView);
+
 
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
         userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
@@ -334,8 +337,6 @@ public class MainActivity extends AppCompatActivity
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Users user = snapshot.getValue(Users.class);
-
-
                     Picasso.get().load(user.getImage()).placeholder(R.drawable.profile).into(profileImageView);
                 }
             }
