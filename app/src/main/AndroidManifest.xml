@@ -148,11 +148,6 @@
             android:name="com.hover.ApiKey"
             android:value="a518c084f2c24590179f43840bd642b5" />
 
-        <service android:name=".FirebaseMessageReceiver">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
 
     </application>
 
