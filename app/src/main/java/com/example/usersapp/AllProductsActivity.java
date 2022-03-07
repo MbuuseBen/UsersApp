@@ -188,30 +188,6 @@ private String productId = "";
 
     }
 
-//    private void incrementCounter() {
-//        def.runTransaction(new Transaction.Handler() {
-//            @NonNull
-//            @NotNull
-//            @Override
-//            public Transaction.Result doTransaction(@NonNull @NotNull MutableData currentData) {
-//                if (currentData.getValue()== null){
-//                    currentData.setValue(1);
-//                }else {
-//                    currentData.setValue((Long) currentData.getValue()+1);
-//                }
-//                return Transaction.success(currentData);
-//            }
-//
-//            @Override
-//            public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, boolean committed, @Nullable @org.jetbrains.annotations.Nullable DataSnapshot currentData) {
-//
-//
-//            }
-//        });
-//
-//    }
-//
-
 
 
 

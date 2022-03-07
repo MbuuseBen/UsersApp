@@ -119,15 +119,6 @@ public class MainActivity extends AppCompatActivity
 
         Paper.init(this);
 
-//        addToCartButton = (Button) findViewById(R.id.add_to_cart_btn1);
-//
-//        addToCartButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                addToCartList();
-//            }
-//        });
-
         searchList = findViewById(R.id.search_list1);
         pencils = findViewById(R.id.category_pencils);
         calculators = findViewById(R.id.category_calculators);
@@ -268,9 +259,8 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
-        toolbar.setTitle("Janzy Store");
+        toolbar.setTitle("MASS");
         setSupportActionBar(toolbar);
 
 
@@ -670,6 +660,15 @@ public class MainActivity extends AppCompatActivity
             {
 
                 Intent intent = new Intent(MainActivity.this, Terms.class);
+                startActivity(intent);
+
+
+            }
+
+            else if (id == R.id.nav_feedback)
+            {
+
+                Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
                 startActivity(intent);
 
 

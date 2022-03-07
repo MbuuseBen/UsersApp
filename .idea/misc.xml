@@ -94,6 +94,7 @@
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_cart.xml" value="0.275" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_category_punch.xml" value="0.275" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_category_sets.xml" value="0.275" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_category_tape.xml" value="0.241015625" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_category_textbooks.xml" value="0.1" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_categoty_scissors.xml" value="0.275" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_confirm_final_order.xml" value="0.2" />
@@ -112,6 +113,7 @@
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_search_product.xml" value="0.25234375" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_splash_screen.xml" value="0.22" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_terms.xml" value="0.275" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_user_feedback.xml" value="0.275" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_user_login.xml" value="0.25" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_user_register.xml" value="0.25" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/activity_wish_list.xml" value="0.55" />
@@ -128,6 +130,7 @@
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/item_search.xml" value="0.210546875" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/nav_header_main.xml" value="0.275" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/nav_header_main2.xml" value="0.275" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/notification.xml" value="0.39799846035411857" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/order_items_layout.xml" value="0.275" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/orders_layout.xml" value="0.275" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects1/UsersApp3/app/src/main/res/layout/orders_layout1.xml" value="0.275" />

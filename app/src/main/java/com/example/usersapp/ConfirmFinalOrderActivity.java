@@ -242,36 +242,6 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     }
 
-//    private void makePayment() {
-//
-//        UUID uuid = UUID.randomUUID();
-//
-//        // txRef =  UUID.randomUUID().toString();
-//        new RavePayManager(this)
-//                //.setAmount(Double.parseDouble("500"))
-//                .setAmount(Double.valueOf(totalAmount))
-//                .setEmail(emailAddress)
-//                .setCountry("KE")
-//                //.setCountry("UG")
-//                .setCurrency("KES")
-//                // .setCurrency("UGX")
-//                .setfName(first_Name)
-//                .setlName(last_Name)
-//                .setNarration("Purchase Goods")
-//                .setPublicKey("FLWPUBK_TEST-4fe17da3cf824a6c097c8c2fccc54899-X")
-//                .setEncryptionKey("FLWSECK_TEST6cbcb474d3f7")
-//                .setTxRef("uuid.toString()")
-//                .acceptAccountPayments(true)
-//                .acceptCardPayments(true)
-//                .acceptMpesaPayments(true)
-//                .acceptUgMobileMoneyPayments(true)
-//                .onStagingEnv(false)
-//                .shouldDisplayFee(true)
-//                .showStagingLabel(true)
-//
-//                .initialize();
-//
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

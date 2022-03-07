@@ -5,17 +5,6 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-<!--        <item-->
-<!--            android:id="@+id/nav_cart"-->
-<!--            android:icon="@drawable/nav_cart"-->
-<!--            android:title="Cart" />-->
-
-<!--        <item-->
-<!--            android:id="@+id/nav_search"-->
-<!--            android:icon="@drawable/ic_search_icon"-->
-<!--            android:title="Search" />-->
-
-
 
         <item
             android:id="@+id/nav_orders"
@@ -59,7 +48,13 @@
             android:icon="@drawable/ic_baseline_info_24"
             android:title="Reset Password" />
 
-    <item
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@drawable/ic_baseline_help_outline_24"
+            android:title="Contact Us" />
+
+
+        <item
         android:id="@+id/nav_logout"
         android:icon="@drawable/logout"
         android:title="Logout" />
