@@ -48,7 +48,7 @@
                             android:layout_below="@+id/cart_list1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
-                            app:cardElevation="5dp"
+                            app:cardElevation="15dp"
                             android:layout_marginTop="3dp">
 
                                 <LinearLayout
@@ -60,7 +60,7 @@
                                             android:id='@+id/total_price'
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginTop="0dp"
+                                            android:layout_marginTop="5dp"
                                             android:gravity="center"
                                             android:padding="17dp"
                                             android:text="Total"

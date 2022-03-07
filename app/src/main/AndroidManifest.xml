@@ -28,6 +28,10 @@
         <activity
             android:name=".ResetPasswordActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ResetPasswordInActivity"
+            android:exported="false" />
         <activity
             android:name=".Terms"
             android:exported="false"
@@ -90,6 +94,9 @@
             android:name=".OrderProductsActivity"
             android:parentActivityName=".OrdersActivity" />
         <activity
+            android:name=".FeedbackActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".Categories.Productcategories"
             android:parentActivityName=".MainActivity" />
         <activity
@@ -140,6 +147,7 @@
         <meta-data
             android:name="com.hover.ApiKey"
             android:value="a518c084f2c24590179f43840bd642b5" />
+
 
     </application>
 

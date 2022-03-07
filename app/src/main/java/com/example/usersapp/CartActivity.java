@@ -116,7 +116,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void viewMoreProducts() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(reference.orderByChild("pname").limitToFirst(4),Products.class).build();
@@ -222,7 +222,7 @@ public class CartActivity extends AppCompatActivity {
                     FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions
                             .Builder<Cart>()
                             .setQuery(cartListRef.child("UserView")
-                                    .child(mAuth.getCurrentUser().getUid()).child("Products"), Cart.class)
+                                    .child(mAuth.getCurrentUser().getUid()).child("products"), Cart.class)
                             .build();
 
                     FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
@@ -260,7 +260,7 @@ public class CartActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("WishList").child(mAuth.getCurrentUser().getUid());
-                                    productsRef.child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    productsRef.child("products").addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             if (snapshot.exists()) {
@@ -339,7 +339,7 @@ public class CartActivity extends AppCompatActivity {
                                                 cartMap.put("sellerName",sellerName);
                                                 cartMap.put("discount", "");
 
-                                                cartListRef.child(mAuth.getCurrentUser().getUid()).child("Products")
+                                                cartListRef.child(mAuth.getCurrentUser().getUid()).child("products")
                                                         .child(productID).updateChildren(cartMap)
                                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                             @Override
@@ -385,7 +385,7 @@ public class CartActivity extends AppCompatActivity {
                                             if (i==1){
                                                 cartListRef.child("UserView")
                                                         .child(mAuth.getCurrentUser().getUid())
-                                                        .child("Products")
+                                                        .child("products")
                                                         .child(model.getPid())
                                                         .removeValue()
                                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -402,7 +402,7 @@ public class CartActivity extends AppCompatActivity {
 
                                                 cartListRef.child("Admin View")
                                                         .child(mAuth.getCurrentUser().getUid())
-                                                        .child("Products")
+                                                        .child("products")
                                                         .child(model.getPid())
                                                         .removeValue()
                                                         .addOnCompleteListener(new OnCompleteListener<Void>() {

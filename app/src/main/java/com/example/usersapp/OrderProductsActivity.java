@@ -32,7 +32,7 @@ public class OrderProductsActivity extends AppCompatActivity {
     private DatabaseReference cartListRef;
     private String userID = "";
     private FirebaseAuth mAuth;
-
+    private String OrderId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +42,21 @@ public class OrderProductsActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         userID = getIntent().getStringExtra("uid");
 
+
+        OrderId =  getIntent().getStringExtra("orderID");
+
         productsList = findViewById(R.id.products_list);
         productsList.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         productsList.setLayoutManager(layoutManager);
 
 
-        cartListRef  = FirebaseDatabase.getInstance().getReference().child("Cart List")
-                .child("Orders View").child(mAuth.getCurrentUser().getUid()).child("Products");
+        cartListRef  = FirebaseDatabase.getInstance().getReference().child("Orders")
+                .child(mAuth.getCurrentUser().getUid()).child(OrderId).child("products");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
-        //toolbar.setTitle("Details");
+        toolbar.setTitle("Order Details");
         setSupportActionBar(toolbar);
 
         // Get a support ActionBar corresponding to this toolbar
@@ -91,7 +94,7 @@ public class OrderProductsActivity extends AppCompatActivity {
             @NotNull
             @Override
             public CartViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_items_layout,parent,false);
                 CartViewHolder holder = new CartViewHolder(view);
                 return holder;
             }

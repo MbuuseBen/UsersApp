@@ -12,13 +12,14 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 public class Users {
-    private String firstname, lastname, email, Phone, password, image, address;
+    private String sid,firstname, lastname, email, Phone, password, image, address;
 
     public Users() {
 
     }
 
-    public Users(String firstname, String lastname, String email, String phone, String password, String image, String address) {
+    public Users(String sid, String firstname, String lastname, String email, String phone, String password, String image, String address) {
+        this.sid = sid;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -26,6 +27,14 @@ public class Users {
         this.password = password;
         this.image = image;
         this.address = address;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 
     public String getFirstname() {
@@ -84,26 +93,3 @@ public class Users {
         this.address = address;
     }
 }
-
-
-
-
-//    private void getUserInfo() {
-//        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
-//        userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    Users user = snapshot.getValue(Users.class);
-//
-//                    //Picasso.get().load(user.getImage()).into(profileImageView);
-//                    Picasso.get().load(user.getImage()).into(profileImageView);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//        });
-//    }

@@ -1,6 +1,7 @@
 package com.example.usersapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -60,6 +61,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
@@ -110,21 +112,12 @@ public class MainActivity extends AppCompatActivity
             type = getIntent().getExtras().get("Admin").toString();
         }
 
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child("products");
         mAuth = FirebaseAuth.getInstance();
        // Hover.initialize(this);
         //    profileImageView = (ImageView) findViewById(R.id.user_profile_image);
 
         Paper.init(this);
-
-//        addToCartButton = (Button) findViewById(R.id.add_to_cart_btn1);
-//
-//        addToCartButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                addToCartList();
-//            }
-//        });
 
         searchList = findViewById(R.id.search_list1);
         pencils = findViewById(R.id.category_pencils);
@@ -266,11 +259,9 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
-        toolbar.setTitle("Janzy Store");
+        toolbar.setTitle("MASS");
         setSupportActionBar(toolbar);
-
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -304,10 +295,31 @@ public class MainActivity extends AppCompatActivity
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
+        Uri photourl = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl();
+        Picasso.get().load(String.valueOf(photourl)).fit().into(profileImageView);
 
-            userNameTextView.setText(mAuth.getCurrentUser().getEmail());
+        DatabaseReference userInfoRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        userInfoRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Users users = snapshot.getValue(Users.class);
+                   // String username = users.getFirstname();
+                    userNameTextView.setText(users.getFirstname() + " " + users.getLastname());
+                }
+            }
 
-        Picasso.get().load(mAuth.getCurrentUser().getPhotoUrl()).into(profileImageView);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        userNameTextView.setText(mAuth.getCurrentUser().getEmail());
+         //   userNameTextView.setText(mAuth.getCurrentUser().getEmail());
+
+      //  Picasso.get().load(mAuth.getCurrentUser().getPhotoUrl()).into(profileImageView);
+
 
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
         userRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
@@ -315,8 +327,6 @@ public class MainActivity extends AppCompatActivity
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Users user = snapshot.getValue(Users.class);
-
-
                     Picasso.get().load(user.getImage()).placeholder(R.drawable.profile).into(profileImageView);
                 }
             }
@@ -361,7 +371,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private void loadCalculatorstoRecyclerView() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         Query query  =reference.orderByChild("category").equalTo(categoryCalculators).limitToFirst(10);
 
@@ -405,8 +415,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void loadPencilstoRecyclerView() {
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        UUID uuid = UUID.randomUUID();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         Query query  =reference.orderByChild("category").equalTo(categoryPencils).limitToFirst(10);
 
@@ -467,14 +477,14 @@ public class MainActivity extends AppCompatActivity
                         cartMap.put("discount", "");
                         cartMap.put("sellerName",sellerName1);
 
-                        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products")
+                        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("products")
                                 .child(productID).updateChildren(cartMap)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
-                                                    .child("Products").child(productID)
+                                                    .child("products").child(productID)
                                                     .updateChildren(cartMap)
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
@@ -516,7 +526,7 @@ public class MainActivity extends AppCompatActivity
         super.onStart();
 
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(reference.orderByChild("pname").limitToFirst(4),Products.class).build();
@@ -650,6 +660,24 @@ public class MainActivity extends AppCompatActivity
             {
 
                 Intent intent = new Intent(MainActivity.this, Terms.class);
+                startActivity(intent);
+
+
+            }
+
+            else if (id == R.id.nav_feedback)
+            {
+
+                Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+                startActivity(intent);
+
+
+            }
+
+            else if (id == R.id.nav_reset)
+            {
+
+                Intent intent = new Intent(MainActivity.this, ResetPasswordInActivity.class);
                 startActivity(intent);
 
 

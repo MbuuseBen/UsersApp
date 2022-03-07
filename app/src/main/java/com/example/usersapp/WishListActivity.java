@@ -68,7 +68,7 @@ public class WishListActivity extends AppCompatActivity {
         super.onStart();
 
         DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("WishList").child(mAuth.getCurrentUser().getUid());
-        productsRef.child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
+        productsRef.child("products").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -76,7 +76,7 @@ public class WishListActivity extends AppCompatActivity {
                     final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("WishList");
                     FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions
                             .Builder<Cart>()
-                            .setQuery(cartListRef.child(mAuth.getCurrentUser().getUid()).child("Products"), Cart.class)
+                            .setQuery(cartListRef.child(mAuth.getCurrentUser().getUid()).child("products"), Cart.class)
                             .build();
 
                     FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
@@ -116,7 +116,7 @@ public class WishListActivity extends AppCompatActivity {
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             if (i == 0) {
                                                 cartListRef.child(mAuth.getCurrentUser().getUid())
-                                                        .child("Products")
+                                                        .child("products")
                                                         .child(model.getPid())
                                                         .removeValue()
                                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -156,7 +156,7 @@ public class WishListActivity extends AppCompatActivity {
                     adapter.startListening();
 
                 } else {
-                    Toast.makeText(WishListActivity.this, "Nothing to show Please add some items to your wishlist.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WishListActivity.this, "Nothing to show Please add some items to your wishlist.", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(WishListActivity.this, MainActivity.class);
                     startActivity(intent);
 

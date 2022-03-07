@@ -30,6 +30,7 @@ public class NewSearchActivity extends AppCompatActivity {
     // creating variables for
     // our ui components.
     private RecyclerView searchview;
+    //private DatabaseReference reference;
     private DatabaseReference reference;
     // variable for our adapter
     // class and array list
@@ -50,7 +51,7 @@ public class NewSearchActivity extends AppCompatActivity {
 
         //getProducts();
 
-         reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        reference = FirebaseDatabase.getInstance().getReference().child("products");
         Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
         toolbar.setTitle("Search for Products here ");
         setSupportActionBar(toolbar);
@@ -123,22 +124,22 @@ public class NewSearchActivity extends AppCompatActivity {
     private void buildRecyclerView() {
 
         // below line we are creating a new array list
-       // productsModalArrayList = new ArrayList<>();
+        productsModalArrayList = new ArrayList<>();
 
-        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
-        productsRef.addValueEventListener(new ValueEventListener() {
+        reference = FirebaseDatabase.getInstance().getReference().child("products");
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for(DataSnapshot ds:snapshot.getChildren()){
 
-                    String name = ds.child("pname").getValue().toString();
+                    String pname = (String) ds.child("pname").getValue();
                     String pId = ds.child("pid").getValue().toString();
 
                    // String image = ds.child("pname").getValue().toString();
-                    String imageUrl = ds.child("image").getValue().toString();
-                    String price = ds.child("price").getValue().toString();
-                    Produ product = new Produ(pId,name,imageUrl,Integer.valueOf(price));
+                    String imageUrl = (String) ds.child("image").getValue();
+                    Long price = (Long) ds.child("price").getValue();
+                    Produ product = new Produ(pId,String.valueOf(pname),String.valueOf(price),imageUrl);
                     productsModalArrayList.add(product);
                 }
 
@@ -160,12 +161,12 @@ public class NewSearchActivity extends AppCompatActivity {
 //                    Produ products = snapshot.getValue(Produ.class);
 //                    //itemID = products.getPid();
 //                   String productName = products.getPname();
-////                    int productPrice = products.getPrice();
+//                    int productPrice = products.getPrice();
 //                    //  String productDescription = products.getDescription();
 //                    // String imageUrl = products.getImage();
 //
-////                    productsModalArrayList = new ArrayList<>();
-////
+//                    productsModalArrayList = new ArrayList<>();
+//
 
 
 //
@@ -174,7 +175,7 @@ public class NewSearchActivity extends AppCompatActivity {
 //                      //  productsModalArrayList.add(products);
 //                        productsModalArrayList.add(new Produ(productName));
 //                    }
-////                    // below line is to add data to our array list.
+//                    // below line is to add data to our array list.
 //                    productsModalArrayList.add(new Products(productName));
             //    }
 

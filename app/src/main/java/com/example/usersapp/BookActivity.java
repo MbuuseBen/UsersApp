@@ -111,7 +111,7 @@ public class BookActivity extends AppCompatActivity {
     }
 
     private void loadCalculatorstoRecyclerView() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         Query query  =reference.orderByChild("category").equalTo(categoryCalculators);
 
@@ -156,7 +156,7 @@ public class BookActivity extends AppCompatActivity {
 
     private void loadPencilstoRecyclerView() {
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         Query query  =reference.orderByChild("category").equalTo(categoryPencils);
 
@@ -207,7 +207,7 @@ public class BookActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(reference.orderByChild("pname").startAt(SearchInput),Products.class).build();

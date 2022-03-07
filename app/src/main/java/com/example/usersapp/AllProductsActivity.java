@@ -13,10 +13,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +50,7 @@ import io.paperdb.Paper;
 
  public class AllProductsActivity extends AppCompatActivity {
 
-    private DatabaseReference ProductsRef,reference,def;
+    private DatabaseReference reference,def;
     private RecyclerView recyclerView;
     private SearchView inputText;
     RecyclerView.LayoutManager layoutManager;
@@ -64,7 +66,7 @@ import io.paperdb.Paper;
      private String productRandomKey;
     private ServerValue add;
 //    private String initialQty = "1";
-
+private String productId = "";
 
 
     @Override
@@ -72,9 +74,10 @@ import io.paperdb.Paper;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_products);
 
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
-        reference = FirebaseDatabase.getInstance().getReference().child("Products");
-
+       // ProductsRef = FirebaseDatabase.getInstance().getReference().child("products");
+       // String key = ProductsRef.push().getKey();
+        reference = FirebaseDatabase.getInstance().getReference().child("products");
+        //String key = reference.push().getKey();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -107,6 +110,26 @@ import io.paperdb.Paper;
     public boolean onPrepareOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.top_app_bar,menu);
         return super.onPrepareOptionsMenu(menu);
+    }
+
+
+    public void cartCount(){
+        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView");
+        productsRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    HashMap<String, Object> products = new HashMap<>();
+                    products.putAll((HashMap) snapshot.getValue());
+                    int cartCount = products.size();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void checkCart() {
@@ -165,30 +188,6 @@ import io.paperdb.Paper;
 
     }
 
-//    private void incrementCounter() {
-//        def.runTransaction(new Transaction.Handler() {
-//            @NonNull
-//            @NotNull
-//            @Override
-//            public Transaction.Result doTransaction(@NonNull @NotNull MutableData currentData) {
-//                if (currentData.getValue()== null){
-//                    currentData.setValue(1);
-//                }else {
-//                    currentData.setValue((Long) currentData.getValue()+1);
-//                }
-//                return Transaction.success(currentData);
-//            }
-//
-//            @Override
-//            public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, boolean committed, @Nullable @org.jetbrains.annotations.Nullable DataSnapshot currentData) {
-//
-//
-//            }
-//        });
-//
-//    }
-//
-
 
 
 
@@ -217,8 +216,10 @@ import io.paperdb.Paper;
                             @Override
                             public void onClick(View view) {
 
+                                reference = FirebaseDatabase.getInstance().getReference().child("Products");
+                               // String key = ProductsRef.getKey();
                                     Intent intent = new Intent(AllProductsActivity.this, ProductDetailsActivity.class);
-                                    intent.putExtra("pid", model.getPid());
+                                    intent.putExtra("pid",model.getPid());
                                     startActivity(intent);
                                 }
 

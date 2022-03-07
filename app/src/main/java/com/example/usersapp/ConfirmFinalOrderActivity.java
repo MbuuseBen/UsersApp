@@ -242,36 +242,6 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     }
 
-//    private void makePayment() {
-//
-//        UUID uuid = UUID.randomUUID();
-//
-//        // txRef =  UUID.randomUUID().toString();
-//        new RavePayManager(this)
-//                //.setAmount(Double.parseDouble("500"))
-//                .setAmount(Double.valueOf(totalAmount))
-//                .setEmail(emailAddress)
-//                .setCountry("KE")
-//                //.setCountry("UG")
-//                .setCurrency("KES")
-//                // .setCurrency("UGX")
-//                .setfName(first_Name)
-//                .setlName(last_Name)
-//                .setNarration("Purchase Goods")
-//                .setPublicKey("FLWPUBK_TEST-4fe17da3cf824a6c097c8c2fccc54899-X")
-//                .setEncryptionKey("FLWSECK_TEST6cbcb474d3f7")
-//                .setTxRef("uuid.toString()")
-//                .acceptAccountPayments(true)
-//                .acceptCardPayments(true)
-//                .acceptMpesaPayments(true)
-//                .acceptUgMobileMoneyPayments(true)
-//                .onStagingEnv(false)
-//                .shouldDisplayFee(true)
-//                .showStagingLabel(true)
-//
-//                .initialize();
-//
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -332,7 +302,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private void ConfirmOrder() {
 
         DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
-        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("Products").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("products").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -378,7 +349,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("time",saveCurrentTime);
         ordersMap.put("State", "confirmed");
         ordersMap.put("products",cartItems);
-        ordersMap.put("orderid", productRandomKey);
+        ordersMap.put("orderid", String.valueOf(uuid));
         ordersMap.put("specialText", specialTxt);
         ordersMap.put("products", products);
 
