@@ -53,6 +53,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -98,11 +101,23 @@ public class MainActivity extends AppCompatActivity
 
     private String categoryPencils="pencil", categoryCalculators="calculator",categoryNovels="novels";
 
+//    SliderView sliderViewHome;
+//    int[] images = {
+//            R.drawable.one,
+//            R.drawable.two,
+//            R.drawable.three};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        SliderAdapterHome sliderAdapterHome = new SliderAdapterHome(images);
+//        sliderViewHome.setSliderAdapter(sliderAdapterHome);
+//        sliderViewHome.setIndicatorAnimation(IndicatorAnimationType.DROP);
+//        sliderViewHome.setSliderTransformAnimation(SliderAnimations.VERTICALFLIPTRANSFORMATION);
+//        sliderViewHome.startAutoCycle();
+
 
         productID = getIntent().getStringExtra("pid");
 //        getProductDetails(productID);

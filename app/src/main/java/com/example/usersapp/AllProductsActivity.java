@@ -84,7 +84,7 @@ private String productId = "";
 //        Paper.init(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("All Products");
+        toolbar.setTitle("Products");
         setSupportActionBar(toolbar);
 
 
