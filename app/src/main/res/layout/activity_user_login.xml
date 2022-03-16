@@ -37,19 +37,19 @@
         android:textStyle="bold"
         android:gravity="center" />
 
-    <EditText
-        android:id="@+id/user_login_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title_user"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/input_design1"
-        android:drawableStart="@drawable/ic_baseline_email_icon1"
-        android:hint="Email Address"
-        android:inputType="textEmailAddress"
-        android:padding="20dp" />
+            <EditText
+                android:id="@+id/user_login_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_user"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/input_design1"
+                android:drawableStart="@drawable/ic_baseline_email_icon1"
+                android:hint="Email Address"
+                android:inputType="textEmailAddress"
+                android:padding="20dp" />
 
             <EditText
                 android:id="@+id/user_login_password"
@@ -94,19 +94,19 @@
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/register_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/signInWithGoogle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="15dp"
-        android:text="Don't have an account? Sign up now"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20dp" />
+            <TextView
+                android:id="@+id/register_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/signInWithGoogle"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="15dp"
+                android:text="Don't have an account? Sign up now"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20dp" />
 
     <TextView
         android:id="@+id/forgot_password_link"
