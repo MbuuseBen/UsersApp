@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.usersapp.Model.Orders;
+import com.example.usersapp.Orders.OrderDetailsActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,12 +79,12 @@ public class OrdersActivity extends AppCompatActivity {
 
                         holder.userFirstName.setText("Name : "+model.getFirstname()+ " "+ model.getLastname());
                         holder.userPhoneNumber.setText("Phone : "+model.getPhone());
-                        holder.userTotalPrice.setText("Total Amount : "+ (new DecimalFormat("#,###")).format(Integer.valueOf(model.getTotalAmount())));
+                      //  holder.userTotalPrice.setText("Total Amount : "+ (new DecimalFormat("#,###")).format(Integer.valueOf(model.getTotalAmount())));
                         holder.userDateTime.setText("Placed on : "+model.getDate() + "at " +model.getTime());
-                        holder.userShippingAddress.setText("Address : "+model.getAddress());
-                        holder.orderId.setText("Order #"+model.getOrderid());
-                        holder.State.setText("Order State : "+model.getState());
-                        holder.specialText.setText("Special Text : "+model.getSpecialText());
+                       // holder.userShippingAddress.setText("Address : "+model.getAddress());
+                        holder.orderId.setText("Order ID :#"+model.getOrderid());
+                     //   holder.State.setText("Order State : "+model.getState());
+                      //  holder.specialText.setText("Special Text : "+model.getSpecialText());
 
 
                         holder.ShowOrdersBtn.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +92,7 @@ public class OrdersActivity extends AppCompatActivity {
                             public void onClick(View view) {
                               //  String uID = getRef(position).getKey();
 
-                                Intent intent = new Intent(OrdersActivity.this, OrderProductsActivity.class);
+                                Intent intent = new Intent(OrdersActivity.this, OrderDetailsActivity.class);
                                 intent.putExtra("orderID", model.getOrderid());
                                 startActivity(intent);
                             }

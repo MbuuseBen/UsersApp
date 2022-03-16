@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.usersapp">
 
+    <uses-sdk tools:overrideLibrary="com.hover.sdk" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.Manifest.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-sdk tools:overrideLibrary="com.hover.sdk" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,6 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UsersApp.NoActionBar"
         tools:replace="android:theme">
+        <activity
+            android:name=".Orders.OrderDetailsActivity"
+            android:parentActivityName=".OrdersActivity"
+            android:exported="false" />
         <activity
             android:name=".NewSearchActivity"
             android:exported="false"
@@ -28,7 +34,6 @@
         <activity
             android:name=".ResetPasswordActivity"
             android:exported="false" />
-
         <activity
             android:name=".ResetPasswordInActivity"
             android:exported="false" />
@@ -109,10 +114,10 @@
         <activity
             android:name=".MaintainProductsActivity"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".SearchProductActivity"
-            android:parentActivityName=".SearchProductActivity"
-            android:theme="@style/Theme.UsersApp.NoActionBar" />
+<!--        <activity-->
+<!--            android:name=".SearchProductActivity"-->
+<!--            android:parentActivityName=".SearchProductActivity"-->
+<!--            android:theme="@style/Theme.UsersApp.NoActionBar" />-->
         <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".ViewSettingsActivity" />
@@ -147,8 +152,6 @@
         <meta-data
             android:name="com.hover.ApiKey"
             android:value="a518c084f2c24590179f43840bd642b5" />
-
-
     </application>
 
 </manifest>

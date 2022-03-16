@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
     private DatabaseReference ProductsRef;
-    private RecyclerView searchList,pencils,calculators;
+    private RecyclerView searchList,pencils,calculators,notebooks;
     private FirebaseAuth mAuth;
     private boolean isMembersVisible= false;
     NavigationView navigationView;
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView recyclerView,recyclerViewPencils,recyclerViewCalculators,recyclerViewNotebooks,recyclerViewSets,recyclerViewTextbooks;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.LayoutManager layoutPencils;
-    RecyclerView.LayoutManager layoutNovels;
+    RecyclerView.LayoutManager layoutNotebooks;
     RecyclerView.LayoutManager layoutSets;
     RecyclerView.LayoutManager layoutCalculators;
     private ServerValue add;
@@ -96,27 +96,29 @@ public class MainActivity extends AppCompatActivity
     private ImageView viewClips,viewPushpins,viewStaplers;
 
     private TextView seeAllProducts,seeAllCategories;
-    private  TextView seeAllPencils,seeAllCalculators,seeAllNovels;
+    private  TextView seeAllPencils,seeAllCalculators,seeAllNotebooks;
 
 
-    private String categoryPencils="pencil", categoryCalculators="calculator",categoryNovels="novels";
+    private String categoryPencils="pencil", categoryCalculators="calculator",categoryNotebooks="notebook";
 
-//    SliderView sliderViewHome;
-//    int[] images = {
-//            R.drawable.one,
-//            R.drawable.two,
-//            R.drawable.three};
+    SliderView sliderViewHome;
+    int[] images = {
+            R.drawable.z,
+            R.drawable.x,
+            R.drawable.y};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        SliderAdapterHome sliderAdapterHome = new SliderAdapterHome(images);
-//        sliderViewHome.setSliderAdapter(sliderAdapterHome);
-//        sliderViewHome.setIndicatorAnimation(IndicatorAnimationType.DROP);
-//        sliderViewHome.setSliderTransformAnimation(SliderAnimations.VERTICALFLIPTRANSFORMATION);
-//        sliderViewHome.startAutoCycle();
+        sliderViewHome = findViewById(R.id.imageSliderHome);
+
+        SliderAdapterHome sliderAdapterHome = new SliderAdapterHome(images);
+        sliderViewHome.setSliderAdapter(sliderAdapterHome);
+        sliderViewHome.setIndicatorAnimation(IndicatorAnimationType.DROP);
+        sliderViewHome.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderViewHome.startAutoCycle();
 
 
         productID = getIntent().getStringExtra("pid");
@@ -137,11 +139,12 @@ public class MainActivity extends AppCompatActivity
         searchList = findViewById(R.id.search_list1);
         pencils = findViewById(R.id.category_pencils);
         calculators = findViewById(R.id.category_calculators);
+        notebooks = findViewById(R.id.category_notebook);
 
         recyclerView = findViewById(R.id.search_list1);
         recyclerViewPencils = findViewById(R.id.category_pencils);
         recyclerViewCalculators = findViewById(R.id.category_calculators);
-        recyclerViewNotebooks = findViewById(R.id.category_novels);
+        recyclerViewNotebooks = findViewById(R.id.category_notebook);
        // recyclerViewSets = findViewById(R.id.category_sets);
 
         layoutManager = new GridLayoutManager(this,2);
@@ -156,9 +159,12 @@ public class MainActivity extends AppCompatActivity
         layoutCalculators = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerViewCalculators.setLayoutManager(layoutCalculators);
 
+        layoutNotebooks = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerViewNotebooks.setLayoutManager(layoutNotebooks);
+
         loadPencilstoRecyclerView();
         loadCalculatorstoRecyclerView();
-
+        loadNotebookstoRecyclerView();
 
 
         seeAllCategories = findViewById(R.id.see_all_categories);
@@ -195,6 +201,15 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Categorycalculators.class);
+                startActivity(intent);
+            }
+        });
+
+        seeAllNotebooks = findViewById(R.id.see_all_notebooks);
+        seeAllNotebooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CategoryNotebooks.class);
                 startActivity(intent);
             }
         });
@@ -419,7 +434,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layouthorizontal1, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout3, parent, false);
                 ProductViewHolder holder = new ProductViewHolder(view);
                 return holder;
             }
@@ -428,6 +443,51 @@ public class MainActivity extends AppCompatActivity
         adapterCalculators.startListening();
 
     }
+
+    private void loadNotebookstoRecyclerView() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
+
+        Query query  =reference.orderByChild("category").equalTo(categoryNotebooks).limitToFirst(10);
+
+        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
+                .setQuery(query,Products.class)
+                .build();
+
+        FirebaseRecyclerAdapter<Products, ProductViewHolder>
+                adapterCalculators = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder holder, int i, @NonNull @NotNull Products model) {
+
+                holder.txtProductName.setText(model.getPname());
+//                holder.txtProductDescription.setText(model.getDescription());
+                holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
+                Picasso.get().load(model.getImage()).into(holder.imageView);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(MainActivity.this, ProductDetailsActivity.class);
+                        intent.putExtra("pid", model.getPid());
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            @NonNull
+            @NotNull
+            @Override
+            public ProductViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layouthorizontal1, parent, false);
+                ProductViewHolder holder = new ProductViewHolder(view);
+                return holder;
+            }
+        };
+        notebooks.setAdapter(adapterCalculators);
+        adapterCalculators.startListening();
+
+    }
+
 
     private void loadPencilstoRecyclerView() {
         UUID uuid = UUID.randomUUID();

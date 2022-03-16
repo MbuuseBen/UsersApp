@@ -40,7 +40,7 @@ public class OrderProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_products);
 
         mAuth = FirebaseAuth.getInstance();
-        userID = getIntent().getStringExtra("uid");
+      //  userID = getIntent().getStringExtra("uid");
 
 
         OrderId =  getIntent().getStringExtra("orderID");
