@@ -168,12 +168,12 @@
             <TextView
                 android:id="@+id/product_name"
                 android:layout_width="wrap_content"
-                android:inputType="textMultiLine"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/product_image"
                 android:layout_toRightOf="@+id/product_image"
+                android:inputType="textMultiLine"
                 android:text="Product Name"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textSize="15sp" />

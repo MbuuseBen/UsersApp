@@ -172,8 +172,8 @@ private void viewCartNumber(String orderId) {
             @Override
             protected void onBindViewHolder(@NonNull @NotNull CartViewHolder holder, int i, @NonNull @NotNull Cart model) {
 
-                holder.txtProductQuantity.setText("Quantity : " + model.getQuantity());
-                holder.txtProductPrice.setText("Price: " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
+                holder.txtProductQuantity.setText("Qty : " + model.getQuantity());
+                holder.txtProductPrice.setText("Price: UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
                 holder.txtProductName.setText(model.getPname());
 
                 Picasso.get().load(model.getImage()).into(holder.imageView);
