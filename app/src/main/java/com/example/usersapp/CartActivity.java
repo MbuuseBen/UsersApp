@@ -231,7 +231,7 @@ public class CartActivity extends AppCompatActivity {
 
 
                 }else {
-                    Toast.makeText(CartActivity.this, "Please add some items to your cart.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this, "", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(CartActivity.this, EmptyCartActivity.class);
                     startActivity(intent);
                     finish();

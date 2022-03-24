@@ -614,7 +614,7 @@ public class MainActivity extends AppCompatActivity
                                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                                                 Toast.makeText(MainActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
-finish();
+
 //                                                Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
 //                                                startActivity(intent);
                                                             }

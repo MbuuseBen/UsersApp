@@ -194,7 +194,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="25dp"
                     android:layout_marginBottom="15dp"
-                    android:text="Already registered? Login"
+                    android:text="Already registered? Sign in"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16dp" />
 
