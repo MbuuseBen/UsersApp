@@ -20,9 +20,15 @@
         android:theme="@style/Theme.UsersApp.NoActionBar"
         tools:replace="android:theme">
         <activity
-            android:name=".Orders.OrderDetailsActivity"
-            android:parentActivityName=".OrdersActivity"
+            android:name=".EmptyCartActivity"
             android:exported="false" />
+        <activity
+            android:name=".FinishOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Orders.OrderDetailsActivity"
+            android:exported="false"
+            android:parentActivityName=".OrdersActivity" />
         <activity
             android:name=".NewSearchActivity"
             android:exported="false"
@@ -113,11 +119,10 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MaintainProductsActivity"
-            android:parentActivityName=".MainActivity" />
-<!--        <activity-->
-<!--            android:name=".SearchProductActivity"-->
-<!--            android:parentActivityName=".SearchProductActivity"-->
-<!--            android:theme="@style/Theme.UsersApp.NoActionBar" />-->
+            android:parentActivityName=".MainActivity" /> <!-- <activity -->
+        <!-- android:name=".SearchProductActivity" -->
+        <!-- android:parentActivityName=".SearchProductActivity" -->
+        <!-- android:theme="@style/Theme.UsersApp.NoActionBar" /> -->
         <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".ViewSettingsActivity" />

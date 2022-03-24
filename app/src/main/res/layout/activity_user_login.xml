@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".UserLoginActivity">
 
-
     <ImageView
         android:id="@+id/img_user"
         android:layout_width="match_parent"
@@ -26,9 +25,9 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/product_image_card_view_details"
+            style="@style/MyCardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            style="@style/MyCardView"
             android:layout_gravity="end"
             android:layout_marginStart="1dp"
             android:layout_marginTop="5dp"

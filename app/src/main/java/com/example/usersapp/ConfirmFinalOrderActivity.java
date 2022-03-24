@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -75,29 +76,33 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     private int totalAmount;
     private FirebaseAuth mAuth;
-
+    private String cartTotal = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_final_order);
+        cartTotal = getIntent().getStringExtra("TotalAmount");
 
-
+        //int finalAmount = Integer.valueOf(cartTotal);
         mAuth = FirebaseAuth.getInstance();
 
         Button confirmOrderBtn = (Button) findViewById(R.id.place_order_btn);
         editDetailsBtn = findViewById(R.id.address_change);
         specialText = findViewById(R.id.special_txt);
-        viewSum();
+       // viewSum(cartTotal);
 //        CheckAddress();
         viewUserDetails();
         getOrderDetails();
         obtaindetail();
    //     getDetails();
-        viewTotal = (TextView) findViewById(R.id.total_price);
+        viewTotal = (TextView) findViewById(R.id.total_amt);
         //   getCartItems();
+       // viewTotal.setText(cartTotal);
 
         totalAmount = getIntent().getIntExtra("TotalAmount",0);
+
+        viewTotal.setText("Total :   UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(totalAmount)));
 
         f_Name = findViewById(R.id.first_name);
         lName = findViewById(R.id.last_name);
@@ -120,7 +125,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                // ConfirmOrder();
-
+               // addTotaltoCart();
                     makePayment();
 
 
@@ -129,10 +134,14 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
 
 
+//        Toolbar mToolbar = (Toolbar) findViewById(R.id.topAppBar);
+//        mToolbar.setTitle("Payments");
+//        setSupportActionBar(mToolbar);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
+        toolbar.setTitle("Payments");
         toolbar.showOverflowMenu();
         setSupportActionBar(toolbar);
-
 
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
@@ -141,6 +150,27 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
 
+    }
+
+    private void addTotaltoCart() {
+        final DatabaseReference preOrderRef = FirebaseDatabase.getInstance().getReference().child("Cart List")
+                .child("UserView").child(mAuth.getCurrentUser().getUid());
+
+        final HashMap<String, Object> cartMap = new HashMap<>();
+        cartMap.put("total", cartTotal);
+
+        preOrderRef.child("CartTotal")
+                .updateChildren(cartMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                        //  Toast.makeText(CartActivity.this, "Total Added Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ConfirmFinalOrderActivity.this,ConfirmFinalOrderActivity.class);
+                        intent.putExtra("TotalAmount", cartTotal);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
     }
 
 
@@ -162,28 +192,31 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         }
     }
 
-    private void viewSum() {
-        DatabaseReference CartTotal = FirebaseDatabase.getInstance().getReference().child("Cart List");
-        CartTotal.child("UserView").child(mAuth.getCurrentUser().getUid()).child("CartTotal")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            CartTotal cart = dataSnapshot.getValue(CartTotal.class);
+    @SuppressLint("SetTextI18n")
+    private void viewSum(String cartTotal) {
+//        DatabaseReference CartTotal = FirebaseDatabase.getInstance().getReference().child("Cart List");
+//        CartTotal.child("UserView").child(mAuth.getCurrentUser().getUid()).child("CartTotal")
+//                .addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+//                        if (dataSnapshot.exists()) {
+//                            CartTotal cart = dataSnapshot.getValue(CartTotal.class);
+//
+//                            viewTotal.setText("Total :   UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(cartTotal)));
+//
+//                            productTotal = cart.getTotal();
+//                            //  Picasso.get().load(products.getImage()).into(productImage1);
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//                    }
+//                });
 
-                            viewTotal.setText("Total :   UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(cart.getTotal())));
-
-                            productTotal = cart.getTotal();
-                            //  Picasso.get().load(products.getImage()).into(productImage1);
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                    }
-                });
+        viewTotal.setText(String.valueOf(cartTotal));
     }
 
 
@@ -367,7 +400,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                                 if (task.isSuccessful()){
                                     Toast.makeText(ConfirmFinalOrderActivity.this, "Your Final Order has been placed successfully", Toast.LENGTH_SHORT).show();
 
-                                    Intent intent =  new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
+                                    Intent intent =  new Intent(ConfirmFinalOrderActivity.this, FinishOrderActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                     finish();
