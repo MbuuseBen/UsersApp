@@ -24,13 +24,17 @@ import com.example.usersapp.Categories.Categorycalculators;
 import com.example.usersapp.Categories.Productcategories;
 import com.example.usersapp.Model.Products;
 import com.example.usersapp.Model.Users;
+import com.example.usersapp.Orders.OrdersActivity;
+import com.example.usersapp.Products.AllProductsActivity;
+import com.example.usersapp.Products.ProductDetailsActivity;
+import com.example.usersapp.Terms.Privacy;
+import com.example.usersapp.Terms.Terms;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -103,9 +107,11 @@ public class MainActivity extends AppCompatActivity
 
     SliderView sliderViewHome;
     int[] images = {
-            R.drawable.z,
-            R.drawable.x,
-            R.drawable.y};
+            R.drawable.twenty_two,
+            R.drawable.twenty_four,
+            R.drawable.twenty_nine,
+
+               };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

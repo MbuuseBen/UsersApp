@@ -1,15 +1,13 @@
-package com.example.usersapp;
+package com.example.usersapp.Orders;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,7 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.usersapp.Model.Orders;
-import com.example.usersapp.Orders.OrderDetailsActivity;
+import com.example.usersapp.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,13 +26,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.DecimalFormat;
-
 public class OrdersActivity extends AppCompatActivity {
 
 
     private RecyclerView ordersList;
-    private DatabaseReference orderRef;
+    private DatabaseReference orderRef,orderRef1;
     private FirebaseAuth mAuth;
 
     @Override
@@ -43,8 +39,8 @@ public class OrdersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_orders);
 
         mAuth = FirebaseAuth.getInstance();
-        orderRef= FirebaseDatabase.getInstance().getReference().child("Orders").child(mAuth.getCurrentUser().getUid());
-
+        orderRef= FirebaseDatabase.getInstance().getReference().child("Orders");
+        orderRef1= FirebaseDatabase.getInstance().getReference().child("Orders").child(mAuth.getCurrentUser().getUid());
         ordersList = findViewById(R.id.orders_list);
         ordersList.setLayoutManager(new LinearLayoutManager(this));
 
@@ -68,7 +64,7 @@ public class OrdersActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<Orders> options=
                 new FirebaseRecyclerOptions.Builder<Orders>()
-                        .setQuery(orderRef, Orders.class)
+                        .setQuery(orderRef1, Orders.class)
                         .build();
         FirebaseRecyclerAdapter<Orders, OrdersViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Orders, OrdersViewHolder>(options) {

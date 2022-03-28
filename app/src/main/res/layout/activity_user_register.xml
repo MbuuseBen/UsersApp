@@ -98,26 +98,48 @@
                     android:hint="PhoneNumber"
                     android:inputType="number"
                     android:padding="10dp" />
-
-                <EditText
-                    android:id="@+id/seller_email"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/seller_login_pw"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/seller_phone"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/input_design3"
-                    android:drawableStart="@drawable/ic_baseline_email_icon1"
-                    android:hint="Email Address"
-                    android:inputType="textEmailAddress"
-                    android:padding="10dp" />
+                    android:layout_width="match_parent"
+                    app:boxBackgroundMode="outline"
+                    app:passwordToggleEnabled="true"
+                    android:layout_below="@+id/seller_phone">
+
+
+                    <EditText
+                        android:id="@+id/seller_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/seller_phone"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/input_design3"
+                        android:drawableStart="@drawable/ic_baseline_email_icon1"
+                        android:hint="Email Address"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+<!--                <EditText-->
+<!--                    android:id="@+id/seller_email"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/seller_phone"-->
+<!--                    android:layout_marginLeft="15dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginRight="15dp"-->
+<!--                    android:background="@drawable/input_design3"-->
+<!--                    android:drawableStart="@drawable/ic_baseline_email_icon1"-->
+<!--                    android:hint="Email Address"-->
+<!--                    android:inputType="textEmailAddress"-->
+<!--                    android:padding="10dp" />-->
 
                 <EditText
                     android:id="@+id/seller_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/seller_email"
+                    android:layout_below="@+id/seller_login_pw"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"

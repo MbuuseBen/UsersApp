@@ -82,8 +82,10 @@ private TextView order_id, Date,total_amount,Additional_text,item_count,orderSta
 
         orderDetailsRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(mAuth.getCurrentUser().getUid());
 
-        cartListRef  = FirebaseDatabase.getInstance().getReference().child("Orders")
-                .child(mAuth.getCurrentUser().getUid()).child(orderId).child("products");
+//        cartListRef  = FirebaseDatabase.getInstance().getReference().child("Orders")
+//                .child(mAuth.getCurrentUser().getUid()).child(orderId).child("products");
+
+        pickItems(orderId);
     }
 
     private void viewOrderdetails(String orderId) {
@@ -160,9 +162,12 @@ private void viewCartNumber(String orderId) {
     });
 }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+
+    private void pickItems(String orderId) {
+
+        DatabaseReference  cartListRef  = FirebaseDatabase.getInstance().getReference().child("Orders")
+                .child(mAuth.getCurrentUser().getUid()).child(orderId).child("products");
+
         FirebaseRecyclerOptions<Cart> options =
                 new FirebaseRecyclerOptions.Builder<Cart>()
                         .setQuery(cartListRef, Cart.class)

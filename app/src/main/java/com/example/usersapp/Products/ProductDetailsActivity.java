@@ -1,4 +1,4 @@
-package com.example.usersapp;
+package com.example.usersapp.Products;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -20,9 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
-import com.example.usersapp.Categories.CategorySets;
+import com.example.usersapp.CartActivity;
+import com.example.usersapp.MainActivity;
 import com.example.usersapp.Model.Products;
-import com.example.usersapp.Prevalent.Prevalent;
+import com.example.usersapp.NewSearchActivity;
+import com.example.usersapp.R;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -43,7 +45,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 

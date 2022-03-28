@@ -1,4 +1,4 @@
-package com.example.usersapp;
+package com.example.usersapp.Terms;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
+
+import com.example.usersapp.R;
 
 public class Privacy extends AppCompatActivity {
     WebView web;

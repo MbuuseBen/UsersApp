@@ -154,6 +154,7 @@ public class UserRegisterActivity extends AppCompatActivity {
 
                                     Intent intent = new Intent(UserRegisterActivity.this, MainActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 }
                             });
 

@@ -1,4 +1,4 @@
-package com.example.usersapp;
+package com.example.usersapp.Terms;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.webkit.WebView;
+
+import com.example.usersapp.R;
 
 public class Terms extends AppCompatActivity {
 

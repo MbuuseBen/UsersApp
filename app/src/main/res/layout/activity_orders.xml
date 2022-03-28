@@ -23,11 +23,24 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
+
+    <RelativeLayout
+        android:id="@+id/r3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/r5"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentTop="true">
+
+
+    </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orders_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/r5"
+        android:layout_below="@+id/r3"
         >
     </androidx.recyclerview.widget.RecyclerView>
 

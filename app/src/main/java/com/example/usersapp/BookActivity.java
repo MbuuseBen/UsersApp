@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.SearchView;
 
 import com.example.usersapp.Model.Products;
+import com.example.usersapp.Products.ProductDetailsActivity;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

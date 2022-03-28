@@ -1,7 +1,9 @@
 package com.example.usersapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -46,7 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
     private CircleImageView profileImageView,addImageBtn;
     private EditText firstNameEditText,lastNameEditText, userPhoneEditText,userEmailAddress, addressEditText;
     private TextView profileChangeTextBtn,  closeTextBtn, saveTextButton;
-    private Button securityQuestionsBtn;
+    private Button securityQuestionsBtn,save_info_btn;
     private static final int GalleryPick = 1;
     private Uri imageUri;
     private String myUrl = "";
@@ -81,8 +83,8 @@ public class SettingsActivity extends AppCompatActivity {
         addressEditText = (EditText) findViewById(R.id.settings_address);
 
         profileChangeTextBtn = (TextView) findViewById(R.id.profile_image_change_btn);
-        closeTextBtn = (TextView) findViewById(R.id.close_settings_btn);
-        saveTextButton = (TextView) findViewById(R.id.update_account_settings_btn);
+        //closeTextBtn = (TextView) findViewById(R.id.close_settings_btn);
+        save_info_btn = (Button) findViewById(R.id.save_info_btn);
 
 
         getUserInformation();
@@ -90,16 +92,16 @@ public class SettingsActivity extends AppCompatActivity {
         userInfoDisplay(profileImageView, firstNameEditText,lastNameEditText, userPhoneEditText, addressEditText,userEmailAddress);
 
 
-        closeTextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                finish();
-            }
-        });
+//        closeTextBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view)
+//            {
+//                finish();
+//            }
+//        });
 
 
-        saveTextButton.setOnClickListener(new View.OnClickListener() {
+        save_info_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -124,6 +126,19 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
+
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.topAppBar);
+        mToolbar.setTitle("Update Profile");
+        setSupportActionBar(mToolbar);
+
+        // viewCartNumber(orderId);
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+
     }
 
     private void OpenGallery() {
@@ -196,7 +211,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error, Please Try Again", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(SettingsActivity.this,SettingsActivity.class);
                startActivity(intent);

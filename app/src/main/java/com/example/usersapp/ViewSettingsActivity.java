@@ -1,7 +1,9 @@
 package com.example.usersapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,20 +47,20 @@ public class ViewSettingsActivity extends AppCompatActivity {
         Address = findViewById(R.id.settings_address);
         Email = findViewById(R.id.settings_email_address);
         editDetails = findViewById(R.id.edit_settings_btn);
-        closeTextBtn= findViewById(R.id.close_settings_btn);
+        //closeTextBtn= findViewById(R.id.close_settings_btn);
 //        BackHomeButton = findViewById(R.id.home_page_btn);
 
 
         getUserInfo();
 
 
-        closeTextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                finish();
-            }
-        });
+//        closeTextBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view)
+//            {
+//                finish();
+//            }
+//        });
 
         editDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +70,16 @@ public class ViewSettingsActivity extends AppCompatActivity {
             }
         });
 
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.topAppBar);
+        mToolbar.setTitle("Profile");
+        setSupportActionBar(mToolbar);
+
+        // viewCartNumber(orderId);
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -82,10 +94,10 @@ public class ViewSettingsActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     Users user = dataSnapshot.getValue(Users.class);
 
-                    fName.setText("First Name : " +user.getFirstname());
-                    lName.setText("Last Name : "+ user.getLastname());
-                    Phone.setText("Phone : "+user.getPhone());
-                    Email.setText("Email : "+user.getEmail());
+                    fName.setText(user.getFirstname());
+                    lName.setText(user.getLastname());
+                    Phone.setText(""+user.getPhone());
+                    Email.setText(user.getEmail());
                     Address.setText(user.getAddress());
                     Picasso.get().load(user.getImage()).into(profileImageView);
 

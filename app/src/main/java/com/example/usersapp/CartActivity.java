@@ -13,7 +13,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,9 +20,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.usersapp.Cart.EmptyCartActivity;
 import com.example.usersapp.Model.Cart;
 import com.example.usersapp.Model.Products;
-import com.example.usersapp.Prevalent.Prevalent;
+import com.example.usersapp.Orders.ConfirmFinalOrderActivity;
+import com.example.usersapp.Products.ProductDetailsActivity;
 import com.example.usersapp.ViewHolder.CartViewHolder;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -52,7 +53,7 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private Button NextProcessBtn,checkOutBtn;
     private ImageView productImage1,deleteBtn;
-    private TextView txtTotalAmount,txtmsg1,sellername;
+    private TextView txtTotalAmount,txtmsg1,sellername,item_count;
     private int overTotalPrice = 0;
 
     private RecyclerView searchList;
@@ -85,9 +86,9 @@ public class CartActivity extends AppCompatActivity {
         moreView.setLayoutManager(layoutManager1);
 
         sellername  = findViewById(R.id.seller_name);
-
+        item_count= findViewById(R.id.number_of_items);
         productImage1 = (ImageView) findViewById(R.id.cart_product_image);
-
+        viewCartNumber();
         NextProcessBtn = findViewById(R.id.next_process_btn);
         NextProcessBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +104,7 @@ public class CartActivity extends AppCompatActivity {
         mToolbar.setTitle("Cart");
         setSupportActionBar(mToolbar);
 
-
+       // viewCartNumber(orderId);
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
 
@@ -161,6 +162,43 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
+    private void viewCartNumber() {
+
+        // FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        DatabaseReference orderDetailsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView");
+
+        orderDetailsRef.child(mAuth.getCurrentUser().getUid()).child("products").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    //     Orders orders = dataSnapshot.getValue(Orders.class);
+                    // getOrderInfo();
+//                        order_id.setText(ID);
+//                        Date.setText("Placed on : "+date);
+//                        total_amount.setText(("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(amount))));
+//                        Additional_text.setText("Special Text : "+text);
+
+                    HashMap<String, Object> products = new HashMap<>();
+                    products.putAll((HashMap) dataSnapshot.getValue());
+                    int cartCount = products.size();
+
+//                order_id.setText("Order ID:#"+orders.getOrderid());
+//                Date.setText("Placed on : "+orders.getDate());
+//                total_amount.setText(("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(orders.getTotalAmount()))));
+//                Additional_text.setText("Special Text : "+orders.getSpecialText());
+                    item_count.setText("Items : (" +(String.valueOf(cartCount))+")");
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
 
 //    private void addTotaltoCart() {
 //        final DatabaseReference preOrderRef = FirebaseDatabase.getInstance().getReference().child("Cart List")
@@ -195,7 +233,7 @@ public class CartActivity extends AppCompatActivity {
 //                    finish();
           //          addTotaltoCart();
 
-                    Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
+                    Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
                         intent.putExtra("TotalAmount", overTotalPrice);
                         startActivity(intent);
                         finish();
@@ -248,6 +286,48 @@ public class CartActivity extends AppCompatActivity {
 
 
     }
+
+
+//    private void viewCartNumber(String orderId) {
+//
+//        // FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//
+//        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//        DatabaseReference orderDetailsRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(mAuth.getCurrentUser().getUid());
+//
+//        orderDetailsRef.child(orderId).child("products").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()) {
+//                    //     Orders orders = dataSnapshot.getValue(Orders.class);
+//                    // getOrderInfo();
+////                        order_id.setText(ID);
+////                        Date.setText("Placed on : "+date);
+////                        total_amount.setText(("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(amount))));
+////                        Additional_text.setText("Special Text : "+text);
+//
+//                    HashMap<String, Object> products = new HashMap<>();
+//                    products.putAll((HashMap) dataSnapshot.getValue());
+//                    int cartCount = products.size();
+//
+////                order_id.setText("Order ID:#"+orders.getOrderid());
+////                Date.setText("Placed on : "+orders.getDate());
+////                total_amount.setText(("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(orders.getTotalAmount()))));
+////                Additional_text.setText("Special Text : "+orders.getSpecialText());
+//                    item_count.setText("Items : " +(String.valueOf(cartCount)));
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
+
+
+
 
     private void startCartactivities() {
         DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView");

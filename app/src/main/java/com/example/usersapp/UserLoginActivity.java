@@ -173,6 +173,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
                                     Intent intent = new Intent(UserLoginActivity.this, MainActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 }
                             });
 
@@ -211,7 +212,7 @@ public class UserLoginActivity extends AppCompatActivity {
         if (passwordInput.getText().toString().isEmpty()) {
             passwordInput.setError(getResources().getString(R.string.password_error));
             isPasswordValid = false;
-        } else if (passwordInput.getText().length() < 10) {
+        } else if (passwordInput.getText().length() < 6) {
             passwordInput.setError(getResources().getString(R.string.error_invalid_password));
             isPasswordValid = false;
         } else  {
@@ -251,12 +252,14 @@ public class UserLoginActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
 
-
+                            }
+                            else {
+                                Toast.makeText(UserLoginActivity.this, "Access Denied, Wrong Credentials", Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
 
                             }
                         }
                     });
-
 
         }else {
             Toast.makeText(UserLoginActivity.this, "Please Complete The Login Form", Toast.LENGTH_SHORT).show();

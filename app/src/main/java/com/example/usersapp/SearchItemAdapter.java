@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.usersapp.Model.Produ;
-import com.example.usersapp.Model.Products;
+import com.example.usersapp.Products.ProductDetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -58,7 +58,7 @@ public void onBindViewHolder(@NonNull SearchItemAdapter.ViewHolder holder, int p
 holder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(view.getContext(),ProductDetailsActivity.class);
+        Intent intent = new Intent(view.getContext(), ProductDetailsActivity.class);
         intent.putExtra("pid", modal.getPid());
         view.getContext().startActivity(intent);
 

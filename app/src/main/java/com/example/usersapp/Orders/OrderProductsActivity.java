@@ -1,4 +1,4 @@
-package com.example.usersapp;
+package com.example.usersapp.Orders;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.usersapp.Model.Cart;
+import com.example.usersapp.R;
 import com.example.usersapp.ViewHolder.CartViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

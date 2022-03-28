@@ -89,20 +89,20 @@
             />
 
         <TextView
+            android:id="@+id/see_all_categories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:text="View All"
             android:layout_below="@+id/cardview1"
-            android:textStyle="bold"
-            android:layout_marginRight="10dp"
-            android:id="@+id/see_all_categories"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_gravity="end"
             android:layout_alignParentEnd="true"
-            android:textSize="15sp"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
             android:gravity="right"
+            android:text="View All"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp"
+            android:textStyle="bold"
 
             />
 
@@ -123,7 +123,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="225dp"
+            android:layout_height="258dp"
             android:layout_marginTop="5dp"
             android:id="@+id/cardview3"
             android:layout_below="@+id/cardview2"
@@ -136,7 +136,7 @@
                 android:layout_below="@+id/picture_frame"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/z"
+                android:src="@drawable/twenty_one"
                 />
 
         </androidx.cardview.widget.CardView>
@@ -270,7 +270,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="225dp"
+            android:layout_height="210dp"
             android:layout_marginTop="5dp"
             android:id="@+id/cardview7"
             android:layout_below="@+id/cardview6"
@@ -282,8 +282,8 @@
                 android:layout_width="match_parent"
                 android:layout_below="@+id/picture_frame"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/offer"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/thirty_one"
                 />
 
         </androidx.cardview.widget.CardView>
@@ -348,7 +348,7 @@
             android:id="@+id/cardview9"
             android:layout_below="@+id/cardview8"
             android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp">
+            android:layout_marginEnd="0dp">
 
             <ImageView
                 android:id="@+id/ad1_img6"
@@ -356,7 +356,7 @@
                 android:layout_below="@+id/picture_frame"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/b"
+                android:src="@drawable/z"
                 />
 
         </androidx.cardview.widget.CardView>

@@ -34,24 +34,22 @@
             android:layout_height="match_parent"
             android:isScrollContainer="true" >
 
-    <TextView
-        android:id="@+id/address_details_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ADDRESS DETAILS"
-        android:textSize="15sp"
-        android:icon="@drawable/ic_search_icon"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="14dp"
-        android:textColor="@android:color/black"
-        android:layout_marginStart="15dp"
-        />
+            <TextView
+                android:id="@+id/address_details_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="10dp"
+                android:icon="@drawable/ic_search_icon"
+                android:text="ADDRESS DETAILS"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/address_change"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="14dp"
@@ -59,6 +57,7 @@
                 android:layout_marginRight="80dp"
                 android:icon="@drawable/ic_search_icon"
                 android:text="Change"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"
 
                 />
@@ -115,47 +114,44 @@
                     android:id="@+id/phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:layout_below="@+id/last_name"
-                    android:text="PHONE"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:layout_marginTop="1dp"
+                    android:layout_marginRight="5dp"
                     android:padding="10dp"
+                    android:text="PHONE"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
                     />
 
 
                 <TextView
                     android:id="@+id/address"
                     android:layout_width="match_parent"
-                    android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/phone_number"
-                    android:text="ADDRESS"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:layout_marginTop="1dp"
+                    android:layout_marginRight="5dp"
                     android:padding="10dp"
-                    />
+                    android:text="ADDRESS"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                     />
 
                 <TextView
                     android:id="@+id/email_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:layout_below="@+id/address"
-                    android:text="EMAIL ADDRESS"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:layout_marginTop="1dp"
+                    android:layout_marginRight="5dp"
                     android:padding="10dp"
-                    />
+                    android:text="EMAIL ADDRESS"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                     />
 
 
             </RelativeLayout>
@@ -189,19 +185,39 @@
             android:id="@+id/product_image_card_view_details"
             >
 
-
-            <TextView
-                android:id='@+id/total_amt'
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Total  "
-                android:textSize="18dp"
-                android:padding="7dp"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/black"
-                />
+                android:id="@+id/product_item_layout"
+                android:orientation="vertical">
 
+
+                <TextView
+                    android:id='@+id/total_txt'
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:padding="7dp"
+                    android:text="Total  "
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id='@+id/total_amt'
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:padding="7dp"
+                    android:text="Total  "
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                  />
+
+            </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
 
@@ -310,18 +326,37 @@
         >
 
 
-        <EditText
-            android:id='@+id/special_txt'
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Add Special Text such as Name Labelling"
-            android:textSize="18dp"
-            android:padding="7dp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"
-            />
+            android:orientation="vertical">
 
+
+            <TextView
+                android:id='@+id/additional_txt'
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="7dp"
+                android:text="Additional Text"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id='@+id/special_txt'
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/additional_txt"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/textview_border"
+                android:hint="Add Special Text e.g Name Labelling"
+                android:padding="7dp"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
 <!--            <Button-->

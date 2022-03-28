@@ -18,12 +18,12 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.usersapp.AllProductsActivity;
+import com.example.usersapp.Products.AllProductsActivity;
 import com.example.usersapp.CartActivity;
 import com.example.usersapp.MainActivity;
 import com.example.usersapp.Model.Products;
 import com.example.usersapp.NewSearchActivity;
-import com.example.usersapp.ProductDetailsActivity;
+import com.example.usersapp.Products.ProductDetailsActivity;
 import com.example.usersapp.R;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
