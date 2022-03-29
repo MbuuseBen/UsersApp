@@ -262,20 +262,12 @@ public class CategoryTextbooks extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull @NotNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
-                                                        cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
-                                                                .child("products").child(productID)
-                                                                .updateChildren(cartMap)
-                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                    @Override
-                                                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                                                        if (task.isSuccessful()) {
+
                                                                             Toast.makeText(CategoryTextbooks.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
 //                                                                                    Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
 //                                                                                    startActivity(intent);
 //                                                                                    finish();
-                                                                        }
-                                                                    }
-                                                                });
+
                                                     }
                                                 }
                                             });
@@ -323,20 +315,12 @@ public class CategoryTextbooks extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull @NotNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
-                                                        cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid()).child(productRandomKey)
-                                                                .child("products").child(productID)
-                                                                .updateChildren(cartMap)
-                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                    @Override
-                                                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                                                        if (task.isSuccessful()) {
+
                                                                             Toast.makeText(CategoryTextbooks.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
 //                                                                                    Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
 //                                                                                    startActivity(intent);
 //                                                                                    finish();
-                                                                        }
-                                                                    }
-                                                                });
+
                                                     }
                                                 }
                                             });

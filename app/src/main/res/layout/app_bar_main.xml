@@ -28,13 +28,13 @@
 
 <!--    <include layout="@layout/activity_book" />-->
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="20dp"
-        app:srcCompat="@drawable/nav_cart"
-        android:contentDescription="Cart" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:layout_margin="20dp"-->
+<!--        app:srcCompat="@drawable/nav_cart"-->
+<!--        android:contentDescription="Cart" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

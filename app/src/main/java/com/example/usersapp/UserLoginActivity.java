@@ -258,8 +258,6 @@ public class UserLoginActivity extends AppCompatActivity {
                     });
 
 
-
-
         }else {
             Toast.makeText(UserLoginActivity.this, "Please Complete The Login Form", Toast.LENGTH_SHORT).show();
         }

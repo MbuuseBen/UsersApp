@@ -294,19 +294,19 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-               checkCart();
-               
-//                    Intent intent = new Intent(MainActivity.this, CartActivity.class);
-//                    startActivity(intent);
-
-
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//               checkCart();
+//
+////                    Intent intent = new Intent(MainActivity.this, CartActivity.class);
+////                    startActivity(intent);
+//
+//
+//            }
+//        });
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -382,7 +382,7 @@ public class MainActivity extends AppCompatActivity
 
                     Intent intent = new Intent(MainActivity.this, CartActivity.class);
                     startActivity(intent);
-
+                    finish();
 
                 }else {
                     Toast.makeText(MainActivity.this, "Please add some items to your cart.", Toast.LENGTH_SHORT).show();
@@ -403,7 +403,7 @@ public class MainActivity extends AppCompatActivity
     private void loadCalculatorstoRecyclerView() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("products");
 
-        Query query  =reference.orderByChild("category").equalTo(categoryCalculators).limitToFirst(10);
+        Query query  = reference.orderByChild("category").equalTo(categoryCalculators).limitToFirst(10);
 
         FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(query,Products.class)
@@ -427,6 +427,61 @@ public class MainActivity extends AppCompatActivity
                         startActivity(intent);
                     }
                 });
+
+
+                holder.tapBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String productID = model.getPid();
+                        String prdctName = model.getPname();
+                        int prdctPrice = model.getPrice();
+                        //  String initQty = "1";
+                        String imageUrl = model.getImage();
+                        String sellerName1 = model.getSellerName();
+
+                        String saveCurrentTime, saveCurrentDate;
+                        Calendar callForDate = Calendar.getInstance();
+                        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+                        saveCurrentDate = currentDate.format(callForDate.getTime());
+
+                        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+                        saveCurrentTime = currentDate.format(callForDate.getTime());
+
+                        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+
+                        //final HashMap<String, object> cartMap = new HashMap<>();
+                        final HashMap<String, Object> cartMap = new HashMap<>();
+                        cartMap.put("pid", productID);
+                        cartMap.put("pname", prdctName);
+                        cartMap.put("price", prdctPrice);
+                        cartMap.put("date", saveCurrentDate);
+                        cartMap.put("time", saveCurrentTime);
+                        cartMap.put("image",imageUrl);
+                        cartMap.put("quantity",add.increment(1));
+                        cartMap.put("discount", "");
+                        cartMap.put("sellerName",sellerName1);
+
+                        cartListRef.child("UserView").child(mAuth.getCurrentUser().getUid()).child("products")
+                                .child(productID).updateChildren(cartMap)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(MainActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
+                                          //  finish();
+//                                                Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
+//                                                startActivity(intent);
+                                                            }
+                                                        }
+                                                    });
+                                        }
+
+
+                });
+
+
+
             }
 
             @NonNull
@@ -558,13 +613,6 @@ public class MainActivity extends AppCompatActivity
                                     @Override
                                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
-                                                    .child("products").child(productID)
-                                                    .updateChildren(cartMap)
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                                            if (task.isSuccessful()) {
                                                                 Toast.makeText(MainActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
 
 //                                                Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
@@ -573,9 +621,8 @@ public class MainActivity extends AppCompatActivity
                                                         }
                                                     });
                                         }
-                                    }
-                                });
-                    }
+
+
                 });
 
 

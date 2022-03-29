@@ -83,7 +83,7 @@ private String productId = "";
 
 //        Paper.init(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.topAppBar);
         toolbar.setTitle("Products");
         setSupportActionBar(toolbar);
 
@@ -112,25 +112,25 @@ private String productId = "";
         return super.onPrepareOptionsMenu(menu);
     }
 
-
-    public void cartCount(){
-        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView");
-        productsRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    HashMap<String, Object> products = new HashMap<>();
-                    products.putAll((HashMap) snapshot.getValue());
-                    int cartCount = products.size();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
+//
+//    public void cartCount(){
+//        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("UserView");
+//        productsRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    HashMap<String, Object> products = new HashMap<>();
+//                    products.putAll((HashMap) snapshot.getValue());
+//                    int cartCount = products.size();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 
     private void checkCart() {
 
@@ -142,13 +142,13 @@ private String productId = "";
 
                     Intent intent = new Intent(AllProductsActivity.this, CartActivity.class);
                     startActivity(intent);
-
+                    finish();
 
                 }else {
                     Toast.makeText(AllProductsActivity.this, "Please add some items to your cart.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(AllProductsActivity.this, MainActivity.class);
                     startActivity(intent);
-
+                    finish();
 
                 }
             }
@@ -221,6 +221,7 @@ private String productId = "";
                                     Intent intent = new Intent(AllProductsActivity.this, ProductDetailsActivity.class);
                                     intent.putExtra("pid",model.getPid());
                                     startActivity(intent);
+                                finish();
                                 }
 
 
@@ -275,20 +276,20 @@ private String productId = "";
                                                         @Override
                                                         public void onComplete(@NonNull @NotNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
-                                                                cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
-                                                                        .child("Products").child(productID)
-                                                                        .updateChildren(cartMap)
-                                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                            @Override
-                                                                            public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                                                                if (task.isSuccessful()) {
+//                                                                cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid())
+//                                                                        .child("Products").child(productID)
+//                                                                        .updateChildren(cartMap)
+//                                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                                            @Override
+//                                                                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                                                                                if (task.isSuccessful()) {
                                                                                     Toast.makeText(AllProductsActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
 //                                                                                    Intent intent = new Intent(AllProductsActivity.this, AllProductsActivity.class);
 //                                                                                    startActivity(intent);
-//                                                                                    finish();
-                                                                                }
-                                                                            }
-                                                                        });
+////                                                                                    finish();
+//                                                                                }
+//                                                                            }
+//                                                                        });
                                                             }
                                                         }
                                                     });
@@ -336,18 +337,18 @@ private String productId = "";
                                                         @Override
                                                         public void onComplete(@NonNull @NotNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
-                                                                cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid()).child(productRandomKey)
-                                                                        .child("Products").child(productID)
-                                                                        .updateChildren(cartMap)
-                                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                            @Override
-                                                                            public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                                                                if (task.isSuccessful()) {
+//                                                                cartListRef.child("Orders View").child(mAuth.getCurrentUser().getUid()).child(productRandomKey)
+//                                                                        .child("Products").child(productID)
+//                                                                        .updateChildren(cartMap)
+//                                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                                            @Override
+//                                                                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                                                                                if (task.isSuccessful()) {
                                                                                     Toast.makeText(AllProductsActivity.this, "Added to Cart Successfully", Toast.LENGTH_SHORT).show();
 
-                                                                                }
-                                                                            }
-                                                                        });
+//                                                                                }
+//                                                                            }
+//                                                                        });
                                                             }
                                                         }
                                                     });

@@ -9,7 +9,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_margin="4dp">
 
         <RelativeLayout
@@ -19,24 +19,26 @@
 
             android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/product_image"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:gravity="left"
-                        android:layout_marginTop="2dp"
-                        android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="2dp"
+                android:gravity="left"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:id="@+id/product_name"
                 android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="2dp"
                 android:layout_toEndOf="@+id/product_image"
                 android:layout_toRightOf="@+id/product_image"
+                android:lines="2"
+                android:maxLines="2"
                 android:text="Product Name"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textSize="15sp" />
@@ -46,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/product_name"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:layout_toEndOf="@+id/product_image"
                 android:layout_toRightOf="@+id/product_image"
                 android:text="Product Price"
@@ -72,13 +74,15 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/product_short_description"
                 android:layout_gravity="bottom|right"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="2dp"
                 android:layout_toEndOf="@+id/product_image"
                 android:layout_toRightOf="@+id/product_image"
                 android:text="Add to Cart"
-                android:textAllCaps="false"
-
-                />
+                android:textAllCaps="false" />
 
 
         </RelativeLayout>
