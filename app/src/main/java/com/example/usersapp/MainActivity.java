@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.usersapp.Authentication.ResetPasswordInActivity;
 import com.example.usersapp.Categories.CategoryClips;
 import com.example.usersapp.Categories.CategoryNotebooks;
 import com.example.usersapp.Categories.CategoryPushPins;
@@ -27,6 +28,8 @@ import com.example.usersapp.Model.Users;
 import com.example.usersapp.Orders.OrdersActivity;
 import com.example.usersapp.Products.AllProductsActivity;
 import com.example.usersapp.Products.ProductDetailsActivity;
+import com.example.usersapp.Search.NewSearchActivity;
+import com.example.usersapp.Settings.ViewSettingsActivity;
 import com.example.usersapp.Terms.Privacy;
 import com.example.usersapp.Terms.Terms;
 import com.example.usersapp.ViewHolder.ProductViewHolder;

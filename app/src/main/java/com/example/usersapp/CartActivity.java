@@ -25,6 +25,7 @@ import com.example.usersapp.Model.Cart;
 import com.example.usersapp.Model.Products;
 import com.example.usersapp.Orders.ConfirmFinalOrderActivity;
 import com.example.usersapp.Products.ProductDetailsActivity;
+import com.example.usersapp.Settings.SettingsActivity;
 import com.example.usersapp.ViewHolder.CartViewHolder;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;

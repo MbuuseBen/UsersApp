@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookActivity"
+    >
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.UsersApp.AppBarOverlay"
+        android:id="@+id/r5">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar"
+            style="@style/Widget.AppCompat.Light.ActionBar"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_below="@+id/r5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:isScrollContainer="true" >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="227dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/cardviewad4"
+
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp">
+
+                <ImageView
+                    android:id="@+id/ad1_img4"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/picture_frame"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/thirty_one"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/txtOthers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardviewad4"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="0dp"
+                android:gravity="left"
+                android:text="Seller : "
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/cardview2"
+                android:layout_below="@+id/txtOthers"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/other_seller_products"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical">
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/txt_others"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardview2"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="0dp"
+                android:gravity="left"
+                android:text="OTHER PRODUCTS"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/see_all_products"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardview2"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="10dp"
+                android:gravity="right"
+                android:text="SEE ALL"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/cardview1"
+                android:layout_below="@+id/see_all_products"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/all_products"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical">
+                </androidx.recyclerview.widget.RecyclerView>
+            </androidx.cardview.widget.CardView>
+
+
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

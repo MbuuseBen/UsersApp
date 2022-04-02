@@ -1,28 +1,18 @@
 package com.example.usersapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.usersapp.Model.Users;
-import com.example.usersapp.Prevalent.Prevalent;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.example.usersapp.Authentication.UserLoginActivity;
+import com.example.usersapp.Authentication.UserRegisterActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import io.paperdb.Paper;
 

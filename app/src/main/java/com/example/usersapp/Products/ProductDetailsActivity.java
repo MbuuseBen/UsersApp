@@ -23,7 +23,7 @@ import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.usersapp.CartActivity;
 import com.example.usersapp.MainActivity;
 import com.example.usersapp.Model.Products;
-import com.example.usersapp.NewSearchActivity;
+import com.example.usersapp.Search.NewSearchActivity;
 import com.example.usersapp.R;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -54,6 +54,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //    private TextView productPrice, productDescription, productName;
     private TextView productPrice1, productDescription1, productName1;
     private TextView sellerName,sellerEmail,sellerAddress;
+    private TextView sellerMore;
     private String productID = "", state = "Normal",imageUrl;
     private int productPrice;
     private String productDescription;
@@ -135,148 +136,20 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-//    private void migrateItem() {
-//
-//       //
-
-
-//      //  String key = database.getReference("products").push().getKey();
-//                // UUID uuid = UUID.randomUUID();
-//        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
-//       // String key =
-//        productsRef.child(productID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    HashMap<String, Object> products = new HashMap<>();
-//                    products.putAll((HashMap) task.getResult().getValue());
-//                    AddNewProductInfo(products);
-//                } else {
-//                    Toast.makeText(ProductDetailsActivity.this,"It dint work",Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//
-//    }
-
-//    private void AddNewProductInfo(HashMap<String, Object> products) {
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        String key = database.getReference("products").push().getKey();
-//
-//       // UUID uuid = UUID.randomUUID();
-//        final DatabaseReference ItemsRef = FirebaseDatabase.getInstance().getReference().child("products").child(key);
-//
-//        HashMap<String, Object> productsMap = new HashMap<>();
-//
-//        productsMap.putAll(products);
-//
-//        ItemsRef.updateChildren(productsMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//                FirebaseDatabase.getInstance().getReference().child("Products")
-//                        .child(productID)
-//                        .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()) {
-//                            final DatabaseReference newRef = FirebaseDatabase.getInstance().getReference().child("products").child(key);
-//                            HashMap<String, Object> productMap = new HashMap<>();
-//                            // productMap.put("pid", String.valueOf(uuid));
-//                            productMap.put("pid", key);
-//                            newRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    if(task.isSuccessful()){
-//                                        Toast.makeText(ProductDetailsActivity.this, "successful", Toast.LENGTH_SHORT).show();
-//                                        Intent intent = new Intent(ProductDetailsActivity.this, AllProductsActivity.class);
-//                                        startActivity(intent);
-//                                    }
-//                                }
-//                            });
-//
-//
-//
-//                          //  Toast.makeText(ProductDetailsActivity.this, "successful", Toast.LENGTH_SHORT).show();
-////                            Intent intent = new Intent(ProductDetailsActivity.this, AllProductsActivity.class);
-////                            startActivity(intent);
-//
-//                        }
-//                    }
-//                });
-//            }
-//        });
-//    }
-
-    //    private void CheckOrderState() {
-//        DatabaseReference ordersRef;
-//        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
-//                .child(mAuth.getCurrentUser().getUid());
-//        ordersRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                if (snapshot.exists()){
-//                    String shippingState = snapshot.child("State").getValue().toString();
-//                    String userName = snapshot.child("firstname").getValue().toString();
-//
-//                    if (shippingState.equals("shipped")){
-//                        txtTotalAmount.setText("Dear " + userName+ "\n Your Order has been Shipped successfully.");
-//                        recyclerView.setVisibility(View.GONE);
-//                        txtmsg1.setVisibility(View.VISIBLE);
-//                        txtmsg1.setText("Congratulations,Your Order was shipped successfully,Soon To be verified");
-//                        NextProcessBtn.setVisibility(View.GONE);
-//
-//                        Toast.makeText(CartActivity.this, "You can Purchase more Products",Toast.LENGTH_SHORT);
-//
-//
-//                    }else  if(shippingState.equals("not shipped")){
-//
-//                        txtTotalAmount.setText("Shipping State = Not Shipped");
-//                        recyclerView.setVisibility(View.GONE);
-//                        txtmsg1.setVisibility(View.VISIBLE);
-//                        NextProcessBtn.setVisibility(View.GONE);
-//
-//                        Toast.makeText(CartActivity.this, "You can Purchase more Products",Toast.LENGTH_SHORT);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//    }
-    private void CheckOrderState() {
-
-        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Orders");
-        productsRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        sellerMore = (TextView) findViewById(R.id.sellers_more);
+        sellerMore.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String orderState = snapshot.child("State").getValue().toString();
-                    if (orderState.equals("confirmed")){
-                       // addingToCartList();
-                       // finish();
-                    }
-                    else {
-
-                        addingToCartList();
-                    }
-
-
-                } else {
-
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onClick(View view) {
+                Intent intent = new Intent(ProductDetailsActivity.this, OtherSellerProductsActivity.class);
+                intent.putExtra("sellerName", sellerName1);
+                startActivity(intent);
+                finish();
             }
         });
+
     }
+
+
 
     private void addToWishList() {
 
@@ -334,7 +207,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                            Toast.makeText(ProductDetailsActivity.this, "Added to Wishlist ", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ProductDetailsActivity.this, "Added to Wishlist", Toast.LENGTH_SHORT).show();
 
                                         }
 
@@ -405,7 +278,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     Toast.makeText(ProductDetailsActivity.this, "Please add some items to your cart.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ProductDetailsActivity.this, MainActivity.class);
                     startActivity(intent);
-
+                    finish();
 
                 }
             }

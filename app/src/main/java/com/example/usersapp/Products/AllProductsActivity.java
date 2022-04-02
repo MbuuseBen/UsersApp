@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.example.usersapp.CartActivity;
 import com.example.usersapp.MainActivity;
 import com.example.usersapp.Model.Products;
-import com.example.usersapp.NewSearchActivity;
+import com.example.usersapp.Search.NewSearchActivity;
 import com.example.usersapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

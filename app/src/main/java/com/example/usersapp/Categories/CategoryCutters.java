@@ -22,7 +22,7 @@ import com.example.usersapp.Products.AllProductsActivity;
 import com.example.usersapp.CartActivity;
 import com.example.usersapp.MainActivity;
 import com.example.usersapp.Model.Products;
-import com.example.usersapp.NewSearchActivity;
+import com.example.usersapp.Search.NewSearchActivity;
 import com.example.usersapp.Products.ProductDetailsActivity;
 import com.example.usersapp.R;
 import com.example.usersapp.ViewHolder.ProductViewHolder;
@@ -38,6 +38,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.text.DecimalFormat;
 
 public class CategoryCutters extends AppCompatActivity {
 
@@ -195,7 +197,7 @@ public class CategoryCutters extends AppCompatActivity {
 
                 holder.txtProductName.setText(model.getPname());
 //                holder.txtProductDescription.setText(model.getDescription());
-                holder.txtProductPrice.setText("UGX " + model.getPrice());
+                holder.txtProductPrice.setText("UGX " + (new DecimalFormat("#,###")).format(Integer.valueOf(model.getPrice())));
                 Picasso.get().load(model.getImage()).into(holder.imageView);
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -20,9 +20,13 @@
         android:theme="@style/Theme.UsersApp.NoActionBar"
         tools:replace="android:theme">
         <activity
-            android:name=".Payment.PaymentSelection"
-            android:parentActivityName=".Orders.ConfirmFinalOrderActivity"
+            android:name=".Products.OtherSellerProductsActivity"
+            android:parentActivityName=".Products.AllProductsActivity"
             android:exported="false" />
+        <activity
+            android:name=".Payment.PaymentSelection"
+            android:exported="false"
+            android:parentActivityName=".Orders.ConfirmFinalOrderActivity" />
         <activity
             android:name=".Cart.EmptyCartActivity"
             android:exported="false" />
@@ -34,7 +38,7 @@
             android:exported="false"
             android:parentActivityName=".Orders.OrdersActivity" />
         <activity
-            android:name=".NewSearchActivity"
+            android:name=".Search.NewSearchActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
@@ -42,10 +46,10 @@
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".ResetPasswordActivity"
+            android:name=".Authentication.ResetPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".ResetPasswordInActivity"
+            android:name=".Authentication.ResetPasswordInActivity"
             android:exported="false" />
         <activity
             android:name=".Terms.Terms"
@@ -119,17 +123,14 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
-            android:name=".ViewSettingsActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".Products.MaintainProductsActivity"
+            android:name=".Settings.ViewSettingsActivity"
             android:parentActivityName=".MainActivity" /> <!-- <activity -->
         <!-- android:name=".SearchProductActivity" -->
         <!-- android:parentActivityName=".SearchProductActivity" -->
         <!-- android:theme="@style/Theme.UsersApp.NoActionBar" /> -->
         <activity
-            android:name=".SettingsActivity"
-            android:parentActivityName=".ViewSettingsActivity" />
+            android:name=".Settings.SettingsActivity"
+            android:parentActivityName=".Settings.ViewSettingsActivity" />
         <activity
             android:name=".Products.ProductDetailsActivity"
             android:parentActivityName=".MainActivity" />
@@ -140,8 +141,8 @@
         <activity
             android:name=".CartActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".UserLoginActivity" />
-        <activity android:name=".UserRegisterActivity" />
+        <activity android:name=".Authentication.UserLoginActivity" />
+        <activity android:name=".Authentication.UserRegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashScreenActivity"
